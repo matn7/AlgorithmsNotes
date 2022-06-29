@@ -3,6 +3,7 @@ package whiteboard;
 public class MonotonicArray {
 
     // O(n) time | O(1) space
+    // #2: 21/06/2022
     public static boolean isMonotonic(int[] array) {
         // Write your code here.
         boolean isIncreasing = true;

@@ -12,6 +12,8 @@ public class LargestRange {
         System.out.println();
     }
 
+    // O(n) time | O(n) space
+    // #2: 14/06/2022
     public static int[] largestRange(int[] array) {
         // Write your code here.
         if (array.length == 1) {

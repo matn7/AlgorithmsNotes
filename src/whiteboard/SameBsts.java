@@ -24,6 +24,7 @@ public class SameBsts {
     }
 
     // O(n^2) time | O(d) space
+    // #2: 21/06/2022
     public static boolean sameBsts(List<Integer> arrayOne, List<Integer> arrayTwo) {
         // Write your code here.
         if (arrayOne.size() != arrayTwo.size()) {

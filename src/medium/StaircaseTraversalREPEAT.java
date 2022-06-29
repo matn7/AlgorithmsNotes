@@ -66,48 +66,48 @@ public class StaircaseTraversalREPEAT {
 //    }
 
 //    // rec(4, 2)
-//    // O(n*k) time | O(n) space
-//    public int staircaseTraversal(int height, int maxSteps) {
-//        int[] waysToTop = new int[height + 1];
-//        waysToTop[0] = 1;
-//        waysToTop[1] = 1;
-//        // [1, 1, 2, 3, 5]
-//        //              c
-//        // step = 2
-//        for (int currentHeight = 2; currentHeight < height + 1; currentHeight++) {
-//            int step = 1;
-//            while (step <= maxSteps && step <= currentHeight) {
-//                waysToTop[currentHeight] = waysToTop[currentHeight] + waysToTop[currentHeight - step];
-//                step++;
-//            }
-//        }
-//        return waysToTop[height];
-//    }
-
-    // O(n) time | O(n) space (sliding window)
+    // O(n*k) time | O(n) space
     public int staircaseTraversal(int height, int maxSteps) {
-        int currentNumberOfWays = 0;
         int[] waysToTop = new int[height + 1];
         waysToTop[0] = 1;
-        int counter = 1; // 4
-        // -2 -1  0  1  2  3  4
-        //       [1, 1, 2, 3, 5]
-        //                    c
-        //           s     e
-        for (int currentHeight = 1; currentHeight < height + 1; currentHeight++) {
-            int startOfWindow = currentHeight - maxSteps - 1; // 3 - 2 - 1 = 0
-            int endOfWindow = currentHeight - 1;
-            if (startOfWindow >= 0) {
-                currentNumberOfWays -= waysToTop[startOfWindow]; // 2
+        waysToTop[1] = 1;
+        // [1, 1, 2, 3, 5]
+        //              c
+        // step = 2
+        for (int currentHeight = 2; currentHeight < height + 1; currentHeight++) {
+            int step = 1;
+            while (step <= maxSteps && step <= currentHeight) {
+                waysToTop[currentHeight] = waysToTop[currentHeight] + waysToTop[currentHeight - step];
+                step++;
             }
-
-            currentNumberOfWays += waysToTop[endOfWindow]; // 2 + 3 = 5
-            waysToTop[counter] = currentNumberOfWays;
-            counter++;
-            System.out.println(currentNumberOfWays);
         }
-
         return waysToTop[height];
     }
+
+    // O(n) time | O(n) space (sliding window)
+//    public int staircaseTraversal(int height, int maxSteps) {
+//        int currentNumberOfWays = 0;
+//        int[] waysToTop = new int[height + 1];
+//        waysToTop[0] = 1;
+//        int counter = 1; // 4
+//        // -2 -1  0  1  2  3  4
+//        //       [1, 1, 2, 3, 5]
+//        //                    c
+//        //           s     e
+//        for (int currentHeight = 1; currentHeight < height + 1; currentHeight++) {
+//            int startOfWindow = currentHeight - maxSteps - 1; // 3 - 2 - 1 = 0
+//            int endOfWindow = currentHeight - 1;
+//            if (startOfWindow >= 0) {
+//                currentNumberOfWays -= waysToTop[startOfWindow]; // 2
+//            }
+//
+//            currentNumberOfWays += waysToTop[endOfWindow]; // 2 + 3 = 5
+//            waysToTop[counter] = currentNumberOfWays;
+//            counter++;
+//            System.out.println(currentNumberOfWays);
+//        }
+//
+//        return waysToTop[height];
+//    }
 
 }

@@ -14,6 +14,8 @@ public class BalancedBrackets {
         System.out.println(balanced);
     }
 
+    // O(n) time | O(n) space
+    // #2: 16/06/2022
     public static boolean balancedBrackets(String str) {
         // Write your code here.
         if (str.length() == 1) {

@@ -12,7 +12,11 @@ public class BinarySearch  {
         if (left > right) {
             return -1;
         }
-        int middle = (left + right) / 2;
+//        int middle = (left + right) / 2;
+        // TO AVOID OVERFLOW for JAVA and C++
+        // Imagine right = Integer.MAX_VALUE
+        // right + start ---> OVERFLOW
+        int middle = left + (right - left) / 2;
         int value = array[middle];
         if (value == target) {
             return middle;

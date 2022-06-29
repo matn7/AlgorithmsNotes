@@ -18,6 +18,7 @@ public class MinHeightBst {
     }
 
     // O(n) time | O(n) space
+    // #2: 25/06/2022
     public static BST minHeightBst(List<Integer> array) {
         // Write your code here.
         BST bst = minHeightBstHelper(null, array, 0, array.size() - 1);
@@ -42,8 +43,8 @@ public class MinHeightBst {
             bst.right = newBst;
             bst = newBst;
         }
-        minHeightBstHelper(bst.left, array, start, mid - 1);
-        minHeightBstHelper(bst.right, array, mid + 1, end);
+        minHeightBstHelper(bst, array, start, mid - 1);
+        minHeightBstHelper(bst, array, mid + 1, end);
         return bst;
     }
 

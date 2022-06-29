@@ -14,6 +14,7 @@ public class ThreeNumberSum {
     }
 
     // O(n^2) time | O(n) space
+    // #2: 18/06/2022
     public static List<Integer[]> threeNumberSum(int[] array, int targetSum) {
         // Write your code here.
         if (array.length < 3) {

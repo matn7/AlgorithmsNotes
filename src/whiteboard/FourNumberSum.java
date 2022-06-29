@@ -12,6 +12,7 @@ public class FourNumberSum {
     }
 
     // O(n^2) time | O(n^2) space
+    // #2: 22/06/2022
     public static List<Integer[]> fourNumberSum(int[] array, int targetSum) {
         // Write your code here.
         if (array.length < 4) {

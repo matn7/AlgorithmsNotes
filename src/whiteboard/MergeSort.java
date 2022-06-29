@@ -8,6 +8,7 @@ public class MergeSort {
     }
 
     // O(nlog(n)) time | O(n) space
+    // #2: 19/06/2022
     public static int[] mergeSort(int[] array) {
         // Write your code here.
         if (array.length == 1) {

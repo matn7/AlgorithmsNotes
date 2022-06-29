@@ -14,6 +14,7 @@ public class MergeOverlappingIntervals {
     }
 
     // O(nlog(n)) time | O(n) space
+    // #2: 23/06/2022
     public int[][] mergeOverlappingIntervals(int[][] intervals) {
         // Write your code here.
         if (intervals.length == 0) {

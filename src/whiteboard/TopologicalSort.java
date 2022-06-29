@@ -23,6 +23,7 @@ public class TopologicalSort {
     }
 
     // O(j + d) time | O(j + d) space
+    // #2: 23/06/2022
     public static List<Integer> topologicalSort(List<Integer> jobs, List<Integer[]> deps) {
         // Write your code here.
         List<Integer> result = new ArrayList<>();

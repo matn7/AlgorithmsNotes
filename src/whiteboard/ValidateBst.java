@@ -18,6 +18,7 @@ public class ValidateBst {
     }
 
     // O(n) time | O(d) space
+    // #2: 27/06/2022
     public static boolean validateBst(BST tree) {
         // Write your code here.
         return validateBstHelper(tree, Integer.MIN_VALUE, Integer.MAX_VALUE);

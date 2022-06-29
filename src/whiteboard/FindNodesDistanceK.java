@@ -44,6 +44,8 @@ public class FindNodesDistanceK {
         }
     }
 
+    // O(n) time | O(n) space
+    // #2: 15/06/2022
     public ArrayList<Integer> findNodesDistanceK(BinaryTree tree, int target, int k) {
         // Write your code here.
         ArrayList<Integer> result = new ArrayList<>();

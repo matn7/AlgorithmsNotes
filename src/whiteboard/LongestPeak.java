@@ -10,6 +10,7 @@ public class LongestPeak {
     }
 
     // O(n) time | O(1) space
+    // #2: 20/06/2022
     public static int longestPeak(int[] array) {
         // Write your code here.
         int maxLen = 0;

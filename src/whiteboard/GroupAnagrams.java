@@ -10,6 +10,7 @@ public class GroupAnagrams {
     }
 
     // O(w * nlog(n)) time | O(wn) space
+    // #2: 16/06/2022
     public static List<List<String>> groupAnagrams(List<String> words) {
         // Write your code here.
         List<List<String>> result = new ArrayList<>();

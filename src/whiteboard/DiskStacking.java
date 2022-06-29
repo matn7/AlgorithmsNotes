@@ -25,6 +25,7 @@ public class DiskStacking {
     }
 
     // O(n^2) time | O(n) space
+    // #2: 25/06/2022
     public static List<Integer[]> diskStacking(List<Integer[]> disks) {
         // Write your code here.
         Integer[] sequence = new Integer[disks.size()];

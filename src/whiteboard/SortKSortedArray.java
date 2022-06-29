@@ -12,6 +12,7 @@ public class SortKSortedArray {
     }
 
     // O(nlog(k)) time | O(k) space
+    // #2: 20/06/2022
     public int[] sortKSortedArray(int[] array, int k) {
         // Write your code here.
         if (array.length == 0) {

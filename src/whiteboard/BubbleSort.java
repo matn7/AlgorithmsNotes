@@ -8,6 +8,8 @@ public class BubbleSort {
         bubbleSort(array);
     }
 
+    // O(n^2) time | O(1) space
+    // #2: 24/06/2022
     public static int[] bubbleSort(int[] array) {
         // Write your code here.
         int last = 0;
@@ -35,5 +37,29 @@ public class BubbleSort {
         array[i] = array[j];
         array[j] = temp;
     }
+
+//    // O(n^2) time | O(1) space
+//    public static int[] bubbleSort(int[] array) {
+//        // Write your code here.
+//        for (int i = 0; i < array.length; i++) {
+//            boolean swapped = false;
+//            for (int j = 1; j < array.length - i; j++) {
+//                if (array[j] < array[j-1]) {
+//                    swap(array, j, j - 1);
+//                    swapped = true;
+//                }
+//            }
+//            if (!swapped) {
+//                break;
+//            }
+//        }
+//        return array;
+//    }
+//
+//    private static void swap(int[] array, int i, int j) {
+//        int temp = array[i];
+//        array[i] = array[j];
+//        array[j] = temp;
+//    }
 
 }

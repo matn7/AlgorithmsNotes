@@ -17,6 +17,7 @@ public class Permutations {
     }
 
     // O(n * n!) time | O(n * n!) space
+    // #2: 26/06/2022
     public static List<List<Integer>> getPermutations(List<Integer> array) {
         // Write your code here.
         if (array.isEmpty()) {

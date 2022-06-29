@@ -19,6 +19,7 @@ public class LaptopRentals {
     }
 
     // O(nlog(n)) time | O(n) space
+    // #2: 22/06/2022
     public int laptopRentals(ArrayList<ArrayList<Integer>> times) {
         // Write your code here.
         PriorityQueue<Laptop> borrowedLaptops = new PriorityQueue<>();

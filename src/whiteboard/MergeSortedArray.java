@@ -9,6 +9,7 @@ public class MergeSortedArray {
     // O(nlog(k) + k) time | O(n + k) space
     // n - total number of array elements
     // k - number of arrays
+    // #2: 16/06/2022
     public static List<Integer> mergeSortedArrays(List<List<Integer>> arrays) {
         // Write your code here.
         List<Integer> result = new ArrayList<>();

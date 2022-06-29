@@ -20,7 +20,8 @@ public class RiverSizes {
         System.out.println(result);
     }
 
-    // O(n^2) time | O(n^2) space (to verify in future - 14.05.2022)
+    // O(wh) time | O(wh) space (to verify in future - 14.05.2022)
+    // #2: 15/06/2022
     public static List<Integer> riverSizes(int[][] matrix) {
         // Write your code here.
         List<Integer> result = new ArrayList<>();

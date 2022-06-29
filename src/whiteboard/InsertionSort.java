@@ -3,6 +3,7 @@ package whiteboard;
 public class InsertionSort {
 
     // O(n^2) time | O(1) space
+    // #2: 24/06/2022
     public static int[] insertionSort(int[] array) {
         // Write your code here.
         for (int i = 0; i < array.length; i++) {

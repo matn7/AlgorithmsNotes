@@ -6,6 +6,7 @@ import java.util.Map;
 public class ApartmentHunting {
 
     // O(br) time | O(br) space
+    // #2: 25/06/2022
     public static int apartmentHunting(List<Map<String, Boolean>> blocks, String[] reqs) {
         // Write your code here.
 

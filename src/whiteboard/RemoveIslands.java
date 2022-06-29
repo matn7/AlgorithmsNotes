@@ -22,6 +22,7 @@ public class RemoveIslands {
     }
 
     // O(wh) time | O(wh) space
+    // #2: 17/06/2022
     public int[][] removeIslands(int[][] matrix) {
         // Write your code here.
         boolean[][] visited = new boolean[matrix.length][matrix[0].length];

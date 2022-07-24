@@ -3,6 +3,7 @@ package whiteboard;
 public class BinarySearch  {
 
     // O(log(n)) time | O(log(n)) space
+    // #2: 01/07/2022
     public static int binarySearch(int[] array, int target) {
         // Write your code here.
         return binarySearchHelper(array, target, 0, array.length - 1);

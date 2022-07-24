@@ -9,28 +9,21 @@ public class SortedSquareArray {
         sortedSquareArray.sortedSquaredArray(array);
     }
 
-    // OK - repeated 04/03/2022
-    // [-7, -5, -4, 3, 6, 8, 9]
     // O(n) time | O(n) space
     public int[] sortedSquaredArray(int[] array) {
         int start = 0;
         int end = array.length - 1;
 
-        //                      se
-        // array  = [-7, -5, -4, 3, 6, 8, 9]
         int[] result = new int[array.length];
-        // result = [ 9,  16,  25, 36, 49, 64, 81]
         for (int i = array.length - 1; i >= 0; i--) {
-            if (Math.abs(array[start]) > Math.abs(array[end])) { // 3 > 3
+            if (Math.abs(array[start]) > Math.abs(array[end])) {
                 result[i] = array[start] * array[start];
                 start++;
             } else {
-                result[i] = array[end] * array[end]; // 64
+                result[i] = array[end] * array[end];
                 end--;
             }
         }
-        return result; // [ 9,  16,  25, 36, 49, 64, 81]
+        return result;
     }
-
-
 }

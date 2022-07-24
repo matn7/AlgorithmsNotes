@@ -3,6 +3,7 @@ package whiteboard;
 class ReverseLinkedList {
     // O(n) time | O(1) space
     // #2: 14/06/2022
+    // rand: 17/07/2022
     public static LinkedList reverseLinkedList(LinkedList head) {
         // Write your code here.
         LinkedList prev = null;

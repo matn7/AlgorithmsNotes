@@ -8,6 +8,8 @@ public class WaterArea {
         waterArea(heights);
     }
 
+    // O(n) time | O(n) space
+    // #2: 11/07/2022
     public static int waterArea(int[] heights) {
         // Write your code here.
         if (heights.length == 0) {

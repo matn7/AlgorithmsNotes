@@ -12,9 +12,6 @@ public class ValidateSequence {
         isValidSubsequence(array, sequence);
     }
 
-    // OK - repeated 03/03/2022
-    //                               a               s
-    // rec([5, 1, 22, 25, 6, -1, 8, 10], [1, 6, -1, 10])
     // O(n) time | O(1) space
     public static boolean isValidSubsequence(List<Integer> array, List<Integer> sequence) {
         // Write your code here.

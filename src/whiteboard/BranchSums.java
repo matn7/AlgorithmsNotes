@@ -19,6 +19,7 @@ public class BranchSums {
     }
 
     // O(n) time | O(n) space
+    // #2: 07/07/2022
     public static List<Integer> branchSums(BinaryTree root) {
         // Write your code here.
         List<Integer> result = new ArrayList<>();

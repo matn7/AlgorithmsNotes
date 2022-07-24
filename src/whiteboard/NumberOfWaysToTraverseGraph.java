@@ -3,6 +3,7 @@ package whiteboard;
 public class NumberOfWaysToTraverseGraph {
 
     // O(nm) time | O(nm) space
+    // #2: 13/07/2022
     public int numberOfWaysToTraverseGraph(int width, int height) {
         // Write your code here.
         int[][] ways = new int[height][width];

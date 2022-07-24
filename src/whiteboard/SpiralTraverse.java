@@ -22,6 +22,8 @@ public class SpiralTraverse {
         spiralTraverse(array);
     }
 
+    // O(n) time | O(n) space
+    // #2: 03/07/2022
     public static List<Integer> spiralTraverse(int[][] array) {
         // Write your code here.
         List<Integer> result = new ArrayList<>();

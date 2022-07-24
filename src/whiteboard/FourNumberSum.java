@@ -13,6 +13,7 @@ public class FourNumberSum {
 
     // O(n^2) time | O(n^2) space
     // #2: 22/06/2022
+    // rand: 17/07/2022
     public static List<Integer[]> fourNumberSum(int[] array, int targetSum) {
         // Write your code here.
         if (array.length < 4) {
@@ -40,6 +41,7 @@ public class FourNumberSum {
                 }
             }
 
+            // k chasing i, add stuff already visited by j
             for (int k = 0; k < i; k++) {
                 int kVal = array[k];
                 int iVal = array[i];

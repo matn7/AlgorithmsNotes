@@ -13,6 +13,8 @@ public class LongestCommonSubsequence {
     }
 
     // O(nm) time | O(nm) space
+    // #2: 02/07/2022
+    // rand: 20/07/2022
     public static List<Character> longestCommonSubsequence(String str1, String str2) {
         // Write your code here.
         String[][] lcs = new String[str1.length() + 1][str2.length() + 1];

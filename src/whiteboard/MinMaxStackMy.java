@@ -33,6 +33,7 @@ public class MinMaxStackMy {
         System.out.println(minMaxStack.peek());
     }
 
+    // #2: 05/07/2022
     // Feel free to add new properties and methods to the class.
     static class MinMaxStack {
         Stack<Element> stack = new Stack<>();

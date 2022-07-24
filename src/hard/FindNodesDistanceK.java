@@ -5,130 +5,20 @@ import java.util.*;
 public class FindNodesDistanceK {
 
     public static void main(String[] args) {
-        BinaryTree root = new BinaryTree(1);
-        root.left = new BinaryTree(2);
-        root.right = new BinaryTree(3);
-        root.left.left = new BinaryTree(4);
-        root.left.right = new BinaryTree(5);
-        root.right.right = new BinaryTree(6);
-        root.right.right.left = new BinaryTree(7);
-        root.right.right.right = new BinaryTree(8);
-//        root.left = new BinaryTree(2);
-//        root.left.left = new BinaryTree(3);
-//        root.left.left.left = new BinaryTree(4);
-//        root.left.left.left.left = new BinaryTree(5);
+        BinaryTree tree = new BinaryTree(1);
+        tree.left = new BinaryTree(2);
+        tree.right = new BinaryTree(3);
+        tree.left.left = new BinaryTree(4);
+        tree.left.right = new BinaryTree(5);
+        tree.right.right = new BinaryTree(6);
+        tree.right.right.left = new BinaryTree(7);
+        tree.right.right.right = new BinaryTree(8);
 
-        FindNodesDistanceK fndk = new FindNodesDistanceK();
-
-//        traverseBreadthFirst(root);
-        System.out.println();
-
-//        fndk.findNodesDistanceK(root, 2, 3);
-        fndk.findNodesDistanceK(root, 3, 2);
-
-        System.out.println();
+        FindNodesDistanceK findNodes = new FindNodesDistanceK();
+        findNodes.findNodesDistanceK(tree, 3, 2);
     }
 
-//                      1
-//                    /   \
-//                   2     3
-//                  / \     \
-//                 4   5     6
-//                          / \
-//                         7   8
-
-    public ArrayList<Integer> findNodesDistanceK(BinaryTree tree, int target, int k) {
-        // Write your code here.
-        ArrayList<Integer> result = new ArrayList<>();
-        LinkedList<BinaryTree> queue = new LinkedList<>();
-        queue.addLast(tree);
-        BinaryTree targetNode = findTargetNode(target, queue);
-
-        Map<Integer, BinaryTree> nodeParentMap = new HashMap<>();
-        populateParentNodesMap(tree, nodeParentMap);
-
-        Map<Integer, Boolean> nodeVisitedMap = new HashMap<>();
-        LinkedList<WithinDistanceNodes> queue2 = new LinkedList<>();
-        WithinDistanceNodes firstNode = new WithinDistanceNodes(targetNode, 0);
-        queue2.add(firstNode);
-        nodeVisitedMap.put(targetNode.value, true);
-
-        while (!queue2.isEmpty()) {
-            WithinDistanceNodes current = queue2.pollFirst();
-            System.out.println(current.tree.value + " : " + current.distance);
-
-            if (current.distance == k && current.tree.value != target) {
-                result.add(current.tree.value);
-            }
-
-            // visit parent
-            BinaryTree currentParent = nodeParentMap.get(current.tree.value);
-            if (currentParent != null && !nodeVisitedMap.containsKey(currentParent.value)) {
-                queue2.addLast(new WithinDistanceNodes(currentParent, current.distance + 1));
-                nodeVisitedMap.put(currentParent.value, true);
-            }
-
-            // visit left child
-            if (current.tree.left != null && !nodeVisitedMap.containsKey(current.tree.left.value)) {
-                queue2.addLast(new WithinDistanceNodes(current.tree.left, current.distance + 1));
-                nodeVisitedMap.put(current.tree.left.value, true);
-            }
-
-            // visit right child
-            if (current.tree.right != null && !nodeVisitedMap.containsKey(current.tree.right.value)) {
-                queue2.addLast(new WithinDistanceNodes(current.tree.right, current.distance + 1));
-                nodeVisitedMap.put(current.tree.right.value, true);
-            }
-        }
-
-        return result;
-    }
-
-    private void populateParentNodesMap(BinaryTree root, Map<Integer, BinaryTree> nodeParentMap) {
-        if (root == null) {
-            return;
-        }
-
-        if (root.left != null) {
-            nodeParentMap.put(root.left.value, root);
-        }
-        populateParentNodesMap(root.left, nodeParentMap);
-
-        if (root.right != null) {
-            nodeParentMap.put(root.right.value, root);
-        }
-        populateParentNodesMap(root.right, nodeParentMap);
-    }
-
-
-    private BinaryTree findTargetNode(int target, LinkedList<BinaryTree> queue) {
-        BinaryTree targetNode = null;
-        while (!queue.isEmpty()) {
-            BinaryTree current = queue.pollFirst();
-            if (current.value == target) {
-                targetNode = current;
-                break;
-            }
-            if (current.left != null) {
-                queue.addLast(current.left);
-            }
-            if (current.right != null) {
-                queue.addLast(current.right);
-            }
-        }
-        return targetNode;
-    }
-
-    class WithinDistanceNodes {
-        public BinaryTree tree;
-        public int distance;
-
-        public WithinDistanceNodes(BinaryTree tree, int distance) {
-            this.tree = tree;
-            this.distance = distance;
-        }
-    }
-
+    // This is an input class. Do not edit.
     static class BinaryTree {
         public int value;
         public BinaryTree left = null;
@@ -139,4 +29,92 @@ public class FindNodesDistanceK {
         }
     }
 
+//                      1
+//                    /   \
+//                   2     3
+//                  / \     \
+//                 4   5     6
+//                          / \
+//                         7   8
+
+    // O(n) time | O(n) space
+    // OK - repeated 29/01/2022
+    public ArrayList<Integer> findNodesDistanceK(BinaryTree tree, int target, int k) {
+        // Write your code here.
+        Map<Integer, BinaryTree> nodesToParents = new HashMap<>();
+        populateNodesToParents(tree, nodesToParents, null);
+        BinaryTree targetNode = getNodeFromValue(target, tree, nodesToParents);
+        return breadthFirstSearchForNodesDistanceK(targetNode, nodesToParents, k);
+    }
+
+    private void populateNodesToParents(BinaryTree node, Map<Integer, BinaryTree> nodesToParents,
+                                        BinaryTree parent) {
+        if (node != null) {
+            nodesToParents.put(node.value, parent);
+            populateNodesToParents(node.left, nodesToParents, node);
+            populateNodesToParents(node.right, nodesToParents, node);
+        }
+    }
+
+    private ArrayList<Integer> breadthFirstSearchForNodesDistanceK(BinaryTree targetNode,
+            Map<Integer, BinaryTree> nodesToParents, int k) {
+        Queue<TreeInfo> queue = new LinkedList<>();
+        queue.add(new TreeInfo(targetNode, 0));
+        Map<Integer, Boolean> seen = new HashMap<>();
+        ArrayList<Integer> nodesDistanceK = new ArrayList<>();
+
+        while (!queue.isEmpty()) {
+            TreeInfo currentNodeInfo = queue.poll();
+            if (currentNodeInfo.distance == k) {
+                while (!queue.isEmpty()) {
+                    int element = queue.poll().node.value;
+                    if (element != targetNode.value) {
+                        nodesDistanceK.add(element);
+                    }
+                }
+                nodesDistanceK.add(currentNodeInfo.node.value);
+                return nodesDistanceK;
+            }
+            List<BinaryTree> connectedNodes = new ArrayList<>();
+            connectedNodes.add(currentNodeInfo.node.left);
+            connectedNodes.add(currentNodeInfo.node.right);
+            connectedNodes.add(nodesToParents.get(currentNodeInfo.node.value));
+
+            for (BinaryTree node : connectedNodes) {
+                if (node == null) {
+                    continue;
+                }
+
+                if (seen.containsKey(node.value)) {
+                    continue;
+                }
+
+                seen.put(node.value, Boolean.TRUE);
+                queue.add(new TreeInfo(node, currentNodeInfo.distance + 1));
+            }
+        }
+        return new ArrayList<>();
+    }
+
+    private BinaryTree getNodeFromValue(int value, BinaryTree tree, Map<Integer, BinaryTree> nodesToParents) {
+        if (tree.value == value) {
+            return tree;
+        }
+        BinaryTree nodeParent = nodesToParents.get(value);
+        if (nodeParent.left != null && nodeParent.left.value == value) {
+            return nodeParent.left;
+        }
+
+        return nodeParent.right;
+    }
+
+    static class TreeInfo {
+        BinaryTree node;
+        int distance;
+
+        public TreeInfo(BinaryTree node, int distance) {
+            this.node = node;
+            this.distance = distance;
+        }
+    }
 }

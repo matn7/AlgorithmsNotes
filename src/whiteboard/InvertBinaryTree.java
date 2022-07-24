@@ -26,9 +26,10 @@ public class InvertBinaryTree {
 //    }
 
     // O(n) time | O(d) space
+    // #2: 06/07/2022
     public static void invertBinaryTree(BinaryTree tree) {
 
-        if (tree == null || tree == null) {
+        if (tree == null) {
             return;
         }
 

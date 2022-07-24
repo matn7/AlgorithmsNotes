@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class ArrayOfProducts {
 
     // O(n) time | O(n) space
+    // #2: 11/07/2022
     public int[] arrayOfProducts(int[] array) {
         // Write your code here.
         int[] result = new int[array.length];

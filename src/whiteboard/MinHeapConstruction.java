@@ -28,6 +28,7 @@ public class MinHeapConstruction {
         }
 
         // O(n) time | O(1) space
+        // #2: 10/07/2022
         public List<Integer> buildHeap(List<Integer> array) {
             // Write your code here.
             int parentIdx = (array.size() - 2) / 2;

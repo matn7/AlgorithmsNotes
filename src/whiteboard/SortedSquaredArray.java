@@ -3,6 +3,7 @@ package whiteboard;
 public class SortedSquaredArray {
 
     // O(n) time | O(n) space
+    // #2: 07/07/2022
     public int[] sortedSquaredArray(int[] array) {
         // Write your code here.
         int[] result = new int[array.length];

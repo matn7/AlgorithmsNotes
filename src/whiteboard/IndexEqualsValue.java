@@ -3,6 +3,7 @@ package whiteboard;
 public class IndexEqualsValue {
 
     // O(log(n)) time | O(1) space
+    // random: 14/07/2022
     public int indexEqualsValue(int[] array) {
         // Write your code here.
         int start = 0;

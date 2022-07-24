@@ -22,6 +22,7 @@ public class RiverSizes {
 
     // O(wh) time | O(wh) space (to verify in future - 14.05.2022)
     // #2: 15/06/2022
+    // random: 14/07/2022
     public static List<Integer> riverSizes(int[][] matrix) {
         // Write your code here.
         List<Integer> result = new ArrayList<>();

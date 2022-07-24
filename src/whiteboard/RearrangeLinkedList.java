@@ -15,6 +15,7 @@ public class RearrangeLinkedList {
     }
 
     // O(n) time | O(1) space
+    // rand: 16/07/2022
     public static LinkedList rearrangeLinkedList(LinkedList head, int k) {
         // Write your code here.
         LinkedList smallerHead = null;

@@ -11,6 +11,8 @@ public class SingleCycleCheck {
         System.out.println();
     }
 
+    // O(n) time | O(1) space
+    // #2: 05/07/2022
     public static boolean hasSingleCycle(int[] array) {
         // Write your code here.
         int i = 0;

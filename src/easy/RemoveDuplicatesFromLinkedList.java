@@ -28,13 +28,6 @@ public class RemoveDuplicatesFromLinkedList {
         }
     }
 
-    // 1 -> 1 -> 3 -> 4 -> 4 -> 4 -> 5 -> 6 -> 6
-    //
-    //                                    c        n
-    // 1    1 -> 3 -> 4    4 -> 4 -> 5 -> 6    6
-    // |         A    |              A    |
-    // +---------+    +--------------+    +----->
-    // OK - repeated 01/03/2022
     // O(n) time | O(1) space
     public LinkedList removeDuplicatesFromLinkedList(LinkedList linkedList) {
         // Write your code here.

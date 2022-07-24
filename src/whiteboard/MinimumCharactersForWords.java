@@ -14,6 +14,7 @@ public class MinimumCharactersForWords {
     }
 
     // O(n*l) time | O(c) space - n num of words, l - length of longest word, c - num of unique chars
+    // #2: 01/07/2022
     public char[] minimumCharactersForWords(String[] words) {
         // Write your code here.
         Map<Character, Integer> finalMap = new HashMap<>();

@@ -3,12 +3,13 @@ package whiteboard;
 public class SearchInSortedMatrix {
 
     // O(n + m) time | O(1) space
+    // #2: 30/06/2022
     public static int[] searchInSortedMatrix(int[][] matrix, int target) {
         // Write your code here.
         int row = 0;
         int col = matrix[row].length - 1;
 
-        while (row < matrix.length - 1 && col > 0) {
+        while (row < matrix.length && col >= 0) {
             int curr = matrix[row][col];
             if (curr > target) {
                 col--;

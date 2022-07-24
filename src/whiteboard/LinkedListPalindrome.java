@@ -14,6 +14,7 @@ public class LinkedListPalindrome {
     }
 
     // O(n) time | O(1) space
+    // #2: 02/07/2022
     public boolean linkedListPalindrome(LinkedList head) {
         // Write your code here.
         if (head.next == null) {

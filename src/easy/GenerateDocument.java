@@ -14,20 +14,13 @@ public class GenerateDocument {
         System.out.println(result);
     }
 
-    // OK - repeated 05/03/2022
-    // rec("abcabcabcacbcdaabc", "bacaccadac")
-    // O(n + m) (n characters length, m document length) | O(c) space (c number of unique characters in chars string)
+    // O(n + m) (n characters length, m document length) | O(c) space
+    // (c number of unique characters in chars string)
     public boolean generateDocument(String characters, String document) {
         // Write your code here.
-
-        //                                                 i
-        // characters = [a b c a b c a b c a c b c d a a b c]
-        //                                 i
-        // document   = [b a c a c c a d a c]
         Map<Character, Integer> charactersMap = new HashMap<>();
         Map<Character, Integer> documentMap = new HashMap<>();
 
-        // charactersMap = {a : 6, b : 5, c : 6, d : 1}
         for (int i = 0; i < characters.length(); i++) {
             if (charactersMap.containsKey(characters.charAt(i))) {
                 charactersMap.put(characters.charAt(i), charactersMap.get(characters.charAt(i)) + 1);
@@ -36,7 +29,6 @@ public class GenerateDocument {
             }
         }
 
-        // documentMap = {b : 1, a : 4, c : 4, d : 1}
         for (int i = 0; i < document.length(); i++) {
             if (documentMap.containsKey(document.charAt(i))) {
                 documentMap.put(document.charAt(i), documentMap.get(document.charAt(i)) + 1);
@@ -45,10 +37,7 @@ public class GenerateDocument {
             }
         }
 
-        // charactersMap = {a : 6, b : 5, c : 6, d : 1}
-        //                                       *
-        // documentMap = {b : 1, a : 4, c : 4, d : 1}
-        for (Map.Entry<Character, Integer> element : documentMap.entrySet()) { // (d : 1)
+        for (Map.Entry<Character, Integer> element : documentMap.entrySet()) {
             if (!charactersMap.containsKey(element.getKey())) {
                 return false;
             }

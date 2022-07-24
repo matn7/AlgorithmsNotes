@@ -16,6 +16,8 @@ public class NodeDepths {
         }
     }
 
+    // O(n) time | O(n) space
+    // #2: 07/07/2022
     public static int nodeDepths(BinaryTree root) {
         int sums = 0;
         Stack<TreeInfo> stack = new Stack<>();

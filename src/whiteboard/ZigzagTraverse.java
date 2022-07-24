@@ -6,6 +6,7 @@ import java.util.List;
 public class ZigzagTraverse {
 
     // O(n) time | O(n) space
+    // #2: 09/07/2022
     public static List<Integer> zigzagTraverse(List<List<Integer>> array) {
         // Write your code here.
         List<Integer> result = new ArrayList<>();

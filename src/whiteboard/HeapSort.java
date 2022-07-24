@@ -9,6 +9,7 @@ public class HeapSort {
     }
 
     // O(nlog(n)) time | O(1) space
+    // #2: 10/07/2022
     public static int[] heapSort(int[] array) {
         // Write your code here.
         buildMaxHeap(array);

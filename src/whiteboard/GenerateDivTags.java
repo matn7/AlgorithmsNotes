@@ -10,6 +10,10 @@ public class GenerateDivTags {
     }
 
     // O((2n)!/((n!(n+1)))) time |  O((2n)!/((n!(n+1)))) time
+    //      2 * n!
+    // ----------------
+    //   n! * (n + 1)
+    // #2: 04/07/2022
     public ArrayList<String> generateDivTags(int numberOfTags) {
         // Write your code here.
         ArrayList<String> result = new ArrayList<>();

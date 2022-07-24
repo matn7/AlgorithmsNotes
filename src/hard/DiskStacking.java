@@ -60,7 +60,6 @@ public class DiskStacking {
             sequence.add(disks.get(currentIdx));
             currentIdx = sequences.get(currentIdx);
         }
-        // [bottom disk, secondBottom, thirdBottom, ... ]
         List<Integer[]> result = new ArrayList<>();
         int index = sequence.size() - 1;
         for (Integer[] element : sequence) {

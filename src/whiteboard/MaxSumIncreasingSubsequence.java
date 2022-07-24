@@ -15,6 +15,7 @@ public class MaxSumIncreasingSubsequence {
     }
 
     // O(n^2) time | O(n) space
+    // #2: 02/07/2022
     public static List<List<Integer>> maxSumIncreasingSubsequence(int[] array) {
         // Write your code here.
         List<List<Integer>> result = new ArrayList<>();

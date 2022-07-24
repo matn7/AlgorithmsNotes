@@ -23,6 +23,7 @@ public class MinimumAreaRectangle {
     }
 
     // O(n^2) time | O(n) space
+    // #2: 09/07/2022
     public int minimumAreaRectangle(int[][] points) {
         // Write your code here.
         int minArea = Integer.MAX_VALUE;

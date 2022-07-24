@@ -13,6 +13,8 @@ public class UnderscorifySubstring {
     }
 
     // O(n + m) time | O(n) space
+    // #2: 02/07/2022
+    // rand: 16/07/2022
     public static String underscorifySubstring(String str, String substring) {
         // Write your code here.
         List<Integer[]> occurrences = findOccurrences(str, substring);

@@ -13,6 +13,7 @@ public class SmallestDifference {
     }
 
     // O(nlog(n) + mlog(m)) time | O(1) space
+    // rand: 18/07/2022
     public static int[] smallestDifference(int[] arrayOne, int[] arrayTwo) {
         // Write your code here.
         int minDiff = Integer.MAX_VALUE;

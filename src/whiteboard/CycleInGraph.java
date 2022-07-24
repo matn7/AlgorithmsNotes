@@ -24,6 +24,7 @@ public class CycleInGraph {
 
     // O(v + e) time | O(v) space
     // #2: 22/06/2022
+    // rand: 15/07/2022
     public boolean cycleInGraph(int[][] edges) {
         // Write your code here.
         Map<Integer, Node> nodesMap = new HashMap<>();

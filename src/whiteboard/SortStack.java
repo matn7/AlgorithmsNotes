@@ -20,6 +20,7 @@ public class SortStack {
 
     // O(n^2) time | O(n) space
     // #2: 18/06/2022
+    // random: 14/07/2022
     public ArrayList<Integer> sortStack(ArrayList<Integer> stack) {
         sortStackHelper(stack);
         return stack;

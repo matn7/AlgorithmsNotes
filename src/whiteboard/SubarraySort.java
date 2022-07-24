@@ -10,6 +10,7 @@ public class SubarraySort {
     }
 
     // O(n) time | O(1) space
+    // #2: 02/07/2022
     public static int[] subarraySort(int[] array) {
         // Write your code here.
         int minOutOfOrder = Integer.MAX_VALUE;
@@ -17,7 +18,7 @@ public class SubarraySort {
 
         for (int idx = 0; idx < array.length; idx++) {
             int currVal = array[idx];
-            if (!isOutOfOrder(currVal, array, idx)) {
+            if (!isInOrder(currVal, array, idx)) {
                 minOutOfOrder = Math.min(minOutOfOrder, currVal);
                 maxOutOfOrder = Math.max(maxOutOfOrder, currVal);
             }
@@ -40,7 +41,7 @@ public class SubarraySort {
         return new int[] {leftIdx, rightIdx};
     }
 
-    private static boolean isOutOfOrder(int currVal, int[] array, int idx) {
+    private static boolean isInOrder(int currVal, int[] array, int idx) {
         if (idx == 0) {
             return currVal <= array[idx + 1];
         }

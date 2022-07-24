@@ -21,7 +21,7 @@ public class FindLoop {
         LinkedList loop = findLoop2(linkedList);
     }
 
-    // O(N) time | O(N) space
+    // O(n) time | O(n) space
     public static LinkedList findLoop(LinkedList head) {
         // Write your code here.
         Map<LinkedList, Boolean> visitedMap = new HashMap<>();
@@ -40,25 +40,11 @@ public class FindLoop {
         return current;
     }
 
-    // O(N) time | O(1) space
+    // O(n) time | O(1) space
     public static LinkedList findLoop2(LinkedList head) {
         // Write your code here.
         LinkedList first = head;
         LinkedList second = head;
-
-        // 0 -> 1 -> 2 -> 4 -> 5 -> 6
-        //                A         V
-        //                9 <- 8 <- 7
-        //
-        // F -> X -> D + P
-        // S -> 2X -> 2D + 2P
-        // D -> {0-4}
-        // P -> {4-7}
-        // R -> {8-4} ?
-        // T -> total distance
-        // S -> T + P
-        // T = 2D + 2P - P = 2D + P
-        // R = T - P - D = D
 
         while (first != null && second.next != null) {
             first = first.next;
@@ -68,12 +54,10 @@ public class FindLoop {
             }
 
             if (first == second) {
-                // pointers overlap
                 break;
             }
         }
 
-        // move first and second when they overlap we found node
         first = head;
         while (first != null && second != null) {
             first = first.next;

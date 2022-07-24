@@ -5,6 +5,7 @@ import java.util.List;
 public class ProductSum {
 
     // O(n) time | O(d) space
+    // #2: 29/06/2022
     public static int productSum(List<Object> array) {
         // Write your code here.
         return productSumHelper(array, 1);

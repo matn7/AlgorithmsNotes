@@ -22,36 +22,6 @@ public class BoggleBoard {
                 {'x', 'x', 'D', 'E', 'T', 'A', 'E'}
         };
 
-//        char[][] board = {
-//                {TRUE, TRUE, TRUE, TRUE, 'i', 's', 'a'},
-//                {TRUE, TRUE, TRUE, TRUE, 'l', 'e', 'x'},
-//                {TRUE, TRUE, TRUE, 'x', 'x', 'e', 'b'},
-//                {'x', 'o', 'g', 'g', 'l', 'x', 'o'},
-//                {'x', 'x', 'x', 'D', 'T', 'r', 'a'},
-//                {'R', 'E', 'P', 'E', 'A', 'd', 'x'},
-//                {'x', 'x', 'x', 'x', 'x', 'x', 'x'},
-//                {'N', 'O', 'T', 'R', 'E', '-', 'P'},
-//                {'x', 'x', 'D', 'E', 'T', 'A', 'E'}
-//        };
-
-        // root:
-        //  {
-        //      "t":{
-        //              "h":{"i":{"s":{"*":{TRUE}}}},
-        //              "e":{"s":{"t":{"*":{TRUE}}}}
-        //      },
-        //      "i":{"s":{"*":{TRUE}}},
-        //      "n":{"o":{"t":{"*":{TRUE}}}},
-        //      "a":{"*":{TRUE}},
-        //      "s":{"i":{"m":{"p":{"l":{"e":{"*":{TRUE}}}}}}},
-        //      "b":{"o":{
-        //                  "g":{"g":{"l":{"e":{"*":{TRUE}}}}},
-        //                  "a":{"r":{"d":{"*":{TRUE}}}}
-        //      }},
-        //      "R":{"E":{"P":{"E":{"A":{"T":{"E":{"D":{"*":{TRUE}}}}}}}}},
-        //      "N":{"O":{"T":{"R":{"E":{"-":{"P":{"E":{"A":{"T":{"E":{"D":{"*":{TRUE}}}}}}}}}}}}}
-        // }
-
         String[] words = {"this", "is", "not", "a", "simple", "boggle", "board", "test", "REPEATED", "NOTRE-PEATED"};
 
         boggleBoard(board, words);
@@ -157,8 +127,8 @@ public class BoggleBoard {
                 }
                 current = current.children.get(letter);
             }
-            current.children.put('*', null);
-            current.fullString.put('*', word);
+            current.children.put(endSymbol, null);
+            current.fullString.put(endSymbol, word);
         }
     }
 

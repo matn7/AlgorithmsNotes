@@ -21,7 +21,7 @@ public class AmbiguousMeasurements {
     // O(low*high*n) time | O(low*high) space
     public boolean ambiguousMeasurements(int[][] measuringCups, int low, int high) {
         // Write your code here.
-        Map<String, Boolean> memoization = new HashMap<>(); // "2100:2300":true
+        Map<String, Boolean> memoization = new HashMap<>();
         return canMeasureInRange(measuringCups, low, high, memoization);
     }
 

@@ -2,17 +2,19 @@ package whiteboard;
 
 public class RemoveKthNodeFromEnd {
 
+    // O(n) time | O(1) space
+    // #2: 29/06/2022
     public static void removeKthNodeFromEnd(LinkedList head, int k) {
         // Write your code here.
         LinkedList first = head;
         LinkedList second = head;
 
-        while (k > 0) {
+        while (second != null && k > 0) {
             second = second.next;
             k--;
         }
 
-        if (second.next == null) {
+        if (second == null) {
             // means remove first element
             first.value = first.next.value;
             first.next = first.next.next;

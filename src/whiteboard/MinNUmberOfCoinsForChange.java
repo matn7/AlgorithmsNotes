@@ -4,6 +4,8 @@ import java.util.Arrays;
 
 public class MinNUmberOfCoinsForChange {
 
+    // O(nd) time | O(n) space (n - target amount, d - num of coins denominations)
+    // #2: 12/07/2022
     public static int minNumberOfCoinsForChange(int n, int[] denoms) {
         // Write your code here.
         int[] coins = new int[n + 1];

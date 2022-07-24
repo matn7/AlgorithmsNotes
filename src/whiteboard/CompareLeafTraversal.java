@@ -15,6 +15,8 @@ public class CompareLeafTraversal {
     }
 
     // O(n + m) time | O(h1 + h2) space
+    // #2: 04/07/2022
+    // rand: 20/07/2022
     public boolean compareLeafTraversal(BinaryTree tree1, BinaryTree tree2) {
         // Write your code here.
         Stack<BinaryTree> stack1 = new Stack<>();

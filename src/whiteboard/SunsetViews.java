@@ -16,6 +16,7 @@ public class SunsetViews {
     }
 
     // O(n) time | O(n) space
+    // #2: 13/07/2022
     public ArrayList<Integer> sunsetViews(int[] buildings, String direction) {
         // Write your code here.
         Stack<Integer> stack = new Stack<>();
@@ -50,7 +51,9 @@ public class SunsetViews {
         while (!stack.isEmpty()) {
             result.add(stack.pop());
         }
-        Collections.reverse(result);
+        if (!direction.equals("EAST")) {
+            Collections.reverse(result);
+        }
 
         return result;
     }

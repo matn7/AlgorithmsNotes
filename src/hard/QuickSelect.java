@@ -8,10 +8,10 @@ public class QuickSelect {
     public static void main(String[] args) {
         int[] array = {8, 5, 2, 9, 7, 6, 3};
 
-        int result = quickselect(array, 3);
-        System.out.println();
+        quickselect(array, 3);
     }
 
+    // O(n) time | O(k) space
     public static int quickselect(int[] array, int k) {
         // Write your code here.
         PriorityQueue<Integer> heap = new PriorityQueue<>(Collections.reverseOrder());

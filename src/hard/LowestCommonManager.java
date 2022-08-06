@@ -20,7 +20,7 @@ public class LowestCommonManager {
         OrgChart H = new OrgChart('H');
         OrgChart I = new OrgChart('I');
 
-        B.directReports = Arrays.asList(G, H, I);
+        C.directReports = Arrays.asList(G, H, I);
 
         OrgChart J = new OrgChart('J');
 
@@ -66,42 +66,21 @@ public class LowestCommonManager {
         System.out.println(lowestCommonManager.name);
     }
 
-    //                  [A]
-    //                 /   \
-    //                B      C
-    //               / \    / \
-    //              D [E]  F   G
-    //             / \
-    //            H  [I]
-    //
-
-    //  OrgChart
-    //      A = [B, C]
-    //      B = [D, E]
-    //      D = [H, I]
-    //      C = [F, G]
-
-    // O(n) time | O(d) space
+    // O(n) time | O(d) space (d depth of organization tree)
     public static OrgChart getLowestCommonManager(
             OrgChart topManager, OrgChart reportOne, OrgChart reportTwo) {
-        // Write your code here.
-        OrgChart lowestCommonManager = getOrgInfo(topManager, reportOne, reportTwo).lowestCommonManager;
-        return lowestCommonManager; // Replace this line.
+        return getOrgInfo(topManager, reportOne, reportTwo).lowestCommonManager;
     }
 
     private static OrgInfo getOrgInfo(OrgChart manager, OrgChart reportOne, OrgChart reportTwo) {
         int numImportantReports = 0;
-        if (manager.name == 'I') {
-            System.out.println();
-        }
-        for (OrgChart directReports : manager.directReports) {
-            OrgInfo orgInfo = getOrgInfo(directReports, reportOne, reportTwo);
+        for (OrgChart directReport : manager.directReports) {
+            OrgInfo orgInfo = getOrgInfo(directReport, reportOne, reportTwo);
             if (orgInfo.lowestCommonManager != null) {
                 return orgInfo;
             }
             numImportantReports += orgInfo.numImportantReports;
         }
-        // if our important reports
         if (manager == reportOne || manager == reportTwo) {
             numImportantReports += 1;
         }

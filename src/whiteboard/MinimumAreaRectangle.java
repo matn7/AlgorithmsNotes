@@ -23,59 +23,47 @@ public class MinimumAreaRectangle {
     }
 
     // O(n^2) time | O(n) space
-    // #2: 09/07/2022
+    // rand: 28/07/2022
     public int minimumAreaRectangle(int[][] points) {
         // Write your code here.
+        Map<String, Boolean> pointsMap = generatePointsMap(points);
+
         int minArea = Integer.MAX_VALUE;
-
-        Map<String, Point> pointsMap = createPointsMap(points);
-
         for (int i = 0; i < points.length; i++) {
-            int[] current = points[i];
-            int currentX = current[0];
-            int currentY = current[1];
-            for (int j = 0; j < points.length; j++) {
-                int[] prev = points[j];
-                int prevX = prev[0];
-                int prevY = prev[1];
-                if (currentX == prevX || currentY == prevY) {
+            int[] currPoint = points[i];
+            for (int j = i + 1; j < points.length; j++) {
+                int[] otherPoint = points[j];
+                String key1 = otherPoint[0] + "-" + currPoint[1];
+                String key2 = currPoint[0] + "-" + otherPoint[1];
+                if (currPoint[0] == otherPoint[0] || currPoint[1] == otherPoint[1]) {
                     continue;
                 }
-                String coordKey1 = currentX + "-" + prevY;
-                String coordKey2 = prevX + "-" + currentY;
 
-                if (pointsMap.containsKey(coordKey1) && pointsMap.containsKey(coordKey2)) {
-                    Point point1 = pointsMap.get(coordKey1);
-                    Point point2 = pointsMap.get(coordKey2);
-
-                    int height = currentY < point1.y ? Math.abs(currentY - point1.y) : Math.abs(point1.y - currentY);
-                    int width = currentX < point2.x ? Math.abs(currentX - point2.x) : Math.abs(point2.x - currentX);
-
-                    minArea = Math.min(minArea, height * width);
+                if (pointsMap.containsKey(key1) && pointsMap.containsKey(key2)) {
+                    int height = Math.abs(currPoint[1] - otherPoint[1]);
+                    int width = Math.abs(otherPoint[0] - currPoint[0]);
+                    int area = height * width;
+                    if (area < minArea) {
+                        minArea = area;
+                    }
                 }
             }
         }
 
-        return minArea == Integer.MAX_VALUE ? 0 : minArea;
+        return minArea != Integer.MAX_VALUE ? minArea : 0;
     }
 
-    private Map<String, Point> createPointsMap(int[][] points) {
-        Map<String, Point> pointsMap = new HashMap<>();
+    private Map<String, Boolean> generatePointsMap(int[][] points) {
+        Map<String, Boolean> pointsMap = new HashMap<>();
         for (int[] point : points) {
-            String key = point[0] + "-" + point[1];
-            pointsMap.put(key, new Point(point[0], point[1]));
+            String key = generateKey(point);
+            pointsMap.put(key, Boolean.TRUE);
         }
         return pointsMap;
     }
 
-    static class Point {
-        int x;
-        int y;
-
-        public Point(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
+    private String generateKey(int[] point) {
+        return point[0] + "-" + point[1];
     }
 
 }

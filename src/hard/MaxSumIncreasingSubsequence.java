@@ -9,31 +9,29 @@ public class MaxSumIncreasingSubsequence {
     public static void main(String[] args) {
         int[] array = {8, 12, 2, 3, 15, 5, 7};
 
-        maxSumIncreasingSubsequence(array);
+        List<List<Integer>> lists = maxSumIncreasingSubsequence(array);
+
+        System.out.println(lists);
     }
 
     // O(n^2) time | O(n) space
     public static List<List<Integer>> maxSumIncreasingSubsequence(int[] array) {
         // Write your code here.
-        List<Integer> sums = new ArrayList<>();
-        for (Integer element : array) {
-            sums.add(element);
-        }
         List<Integer> sequences = new ArrayList<>();
-        for (Integer element : array) {
+        List<Integer> sums = new ArrayList<>();
+        for (int element : array) {
+            sums.add(element);
             sequences.add(null);
         }
-        int maxSumIdx = 0;
 
-        for (int i = 0; i < array.length; i++) { // i = 1
-            int currentNum = array[i]; // 15
+        int maxSumIdx = 0;
+        for (int i = 0; i < array.length; i++) {
+            int currentNum = array[i];
             for (int j = 0; j < i; j++) {
-                int otherNum = array[j]; // 8
-                if (otherNum < currentNum && sums.get(j) + currentNum >= sums.get(i)) {
-                    sums.remove(i);
-                    sums.add(i, sums.get(j) + currentNum); // 15 + 8
-                    sequences.remove(i);
-                    sequences.add(i, j);
+                int otherNum = array[j];
+                if (currentNum > otherNum && sums.get(j) + currentNum >= sums.get(i)) {
+                    sums.set(i, sums.get(j) + currentNum);
+                    sequences.set(i, j);
                 }
             }
             if (sums.get(i) >= sums.get(maxSumIdx)) {
@@ -41,30 +39,20 @@ public class MaxSumIncreasingSubsequence {
             }
         }
 
-        List<Integer> integers = buildSequence(array, sequences, maxSumIdx);
-        List<Integer> reversed = new ArrayList<>();
-        int counter = integers.size() - 1;
-        for (Integer element : integers) {
-            reversed.add(integers.get(counter));
-            counter--;
-        }
+        List<List<Integer>> result = new ArrayList<>();
+        result.add(List.of(sums.get(maxSumIdx)));
+        result.add(buildSequence(array, sequences, maxSumIdx));
 
-        int finalMaxSumIdx = maxSumIdx;
-        return new ArrayList<List<Integer>>() {
-            {
-                add(List.of(sums.get(finalMaxSumIdx))); // Example max sum
-                add(reversed); // Example max sequence
-            }
-        };
+        return result;
     }
 
-    private static List<Integer> buildSequence(int[] array, List<Integer> sequences, Integer currentIdx) {
+    private static List<Integer>  buildSequence(int[] array, List<Integer> sequences, Integer currentIdx) {
         List<Integer> sequence = new ArrayList<>();
         while (currentIdx != null) {
             sequence.add(array[currentIdx]);
             currentIdx = sequences.get(currentIdx);
         }
+        Collections.reverse(sequence);
         return sequence;
     }
-
 }

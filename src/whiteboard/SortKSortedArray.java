@@ -12,36 +12,36 @@ public class SortKSortedArray {
     }
 
     // O(nlog(k)) time | O(k) space
-    // #2: 20/06/2022
+    // rand: 06/08/2022
     public int[] sortKSortedArray(int[] array, int k) {
         // Write your code here.
         if (array.length == 0) {
             return new int[] {};
         }
-        if (k >= array.length) {
-            k = array.length - 1;
-        }
-        int[] sortedArray = new int[array.length];
+        int[] result = new int[array.length];
+
         PriorityQueue<Integer> queue = new PriorityQueue<>();
-        int idx = 0;
-        for (;idx <= k; idx++) {
-            queue.add(array[idx]);
+        int counter = 0;
+        while (counter <= Math.min(array.length - 1, k)) {
+            queue.add(array[counter]);
+            counter++;
         }
-        int i = 0;
-        while (!queue.isEmpty() && idx < array.length) {
-            Integer currElement = queue.poll();
-            sortedArray[i] = currElement;
-            i++;
-            queue.add(array[idx]);
+        int idx = 0;
+        while (counter < array.length) {
+            Integer top = queue.poll();
+            result[idx] = top;
             idx++;
+            queue.add(array[counter]);
+            counter++;
         }
 
         while (!queue.isEmpty()) {
-            Integer currElement = queue.poll();
-            sortedArray[i] = currElement;
-            i++;
+            Integer top = queue.poll();
+            result[idx] = top;
+            idx++;
         }
-        return sortedArray;
+
+        return result;
     }
 
 }

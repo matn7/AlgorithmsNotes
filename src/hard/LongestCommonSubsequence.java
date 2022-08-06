@@ -8,30 +8,18 @@ public class LongestCommonSubsequence {
     public static void main(String[] args) {
         String str1 = "ZXVVYZW";
         String str2 = "XKYKZPW";
-        //      " "  x  k  y  k   z    p    w
-        // " "   #   #  #  #  #   #    #    #
-        //  z    #   #  #  #  #   z    z    z
-        //  x    #   x  x  x  x   x    x    x
-        //  v    #   x  x  x  x   x    x    x
-        //  v    #   x  x  x  x   x    x    x
-        //  y    #   x  x xy xy  xy   xy   xy
-        //  z    #   x  x xy xy xyz  xyz  xyz
-        //  w    #   x  x xy xy xyz  xyz xyzw
-
         longestCommonSubsequence(str1, str2);
     }
 
     // O(nm * min(n,m)) time | O(nm * min(n,m)) space
     public static List<Character> longestCommonSubsequence(String str1, String str2) {
         // Write your code here.
-
         String[][] lcs = new String[str2.length() + 1][str1.length() + 1];
         for (int i = 0; i <= str2.length(); i++) {
             for (int j = 0; j <= str1.length(); j++) {
                 lcs[i][j] = " ";
             }
         }
-
 
         for (int row = 1; row <= str2.length(); row++) {
             for (int col = 1; col <= str1.length(); col++) {
@@ -53,5 +41,4 @@ public class LongestCommonSubsequence {
         }
         return resultArray;
     }
-
 }

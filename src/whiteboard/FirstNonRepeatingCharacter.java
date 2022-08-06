@@ -5,33 +5,26 @@ import java.util.Map;
 
 public class FirstNonRepeatingCharacter {
 
+    // O(n) time | O(1) space (O(26), 26 characters)
     public int firstNonRepeatingCharacter(String string) {
         // Write your code here.
         Map<Character, Integer> seen = new HashMap<>();
         for (int i = 0; i < string.length(); i++) {
-            char current = string.charAt(i);
-            if (seen.containsKey(current)) {
-                seen.put(current, seen.get(current) + 1);
+            char key = string.charAt(i);
+            if (seen.containsKey(key)) {
+                seen.put(key, seen.get(key) + 1);
             } else {
-                seen.put(current, 1);
-            }
-        }
-
-        Map<Character, Boolean> seenOnce = new HashMap<>();
-        for (Map.Entry<Character, Integer> element : seen.entrySet()) {
-            if (element.getValue() == 1) {
-                seenOnce.put(element.getKey(), Boolean.TRUE);
+                seen.put(key, 1);
             }
         }
 
         for (int i = 0; i < string.length(); i++) {
-            char current = string.charAt(i);
-            if (seenOnce.containsKey(current)) {
+            char key = string.charAt(i);
+            if (seen.get(key) == 1) {
                 return i;
             }
         }
 
         return -1;
     }
-
 }

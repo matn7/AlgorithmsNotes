@@ -13,80 +13,33 @@ public class SmallestDifference {
     }
 
     // O(nlog(n) + mlog(m)) time | O(1) space
-    // rand: 18/07/2022
+    // rand: 18/07/2022 | 03/08/2022
     public static int[] smallestDifference(int[] arrayOne, int[] arrayTwo) {
         // Write your code here.
+        int c1 = 0;
+        int c2 = 0;
         int minDiff = Integer.MAX_VALUE;
-        int first = 0;
-        int second = 0;
-
-        int res1 = 0;
-        int res2 = 0;
-
-        int valOne = 0;
-        int valTwo = 0;
+        int[] result = new int[] {-1, -1};
 
         Arrays.sort(arrayOne);
         Arrays.sort(arrayTwo);
 
-        while (first < arrayOne.length && second < arrayTwo.length) {
-            valOne = arrayOne[first];
-            valTwo = arrayTwo[second];
-            int diff = 0;
-            if (valOne < valTwo) {
-                diff = Math.abs(valOne - valTwo);
-                first++;
-            } else if (valTwo < valOne) {
-                diff = Math.abs(valTwo - valOne);
-                second++;
-            } else {
-                return new int[] {valOne, valTwo};
-            }
-
+        while (c1 < arrayOne.length && c2 < arrayTwo.length) {
+            int first = arrayOne[c1];
+            int second = arrayTwo[c2];
+            int diff = Math.abs(first - second);
             if (diff < minDiff) {
                 minDiff = diff;
-                res1 = valOne;
-                res2 = valTwo;
+                result[0] = first;
+                result[1] = second;
             }
-        }
-
-        while (first < arrayOne.length) {
-            valOne = arrayOne[first];
-            int diff = 0;
-            if (valOne < valTwo) {
-                diff = Math.abs(valOne - valTwo);
-            } else if (valTwo < valOne) {
-                diff = Math.abs(valTwo - valOne);
+            if (first < second) {
+                c1++;
             } else {
-                return new int[] {valOne, valTwo};
+                c2++;
             }
-            if (diff < minDiff) {
-                minDiff = diff;
-                res1 = valOne;
-                res2 = valTwo;
-            }
-            first++;
         }
-
-        while (second < arrayTwo.length) {
-            valTwo = arrayTwo[second];
-            int diff = 0;
-            if (valOne < valTwo) {
-                diff = Math.abs(valOne - valTwo);
-            } else if (valTwo < valOne) {
-                diff = Math.abs(valTwo - valOne);
-            } else {
-                return new int[] {valOne, valTwo};
-            }
-            if (diff < minDiff) {
-                minDiff = diff;
-                res1 = valOne;
-                res2 = valTwo;
-            }
-            second++;
-        }
-
-        return new int[] {res1, res2};
+        return result;
     }
 
 }

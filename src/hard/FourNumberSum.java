@@ -1,110 +1,59 @@
 package hard;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class FourNumberSum {
 
     public static void main(String[] args) {
-//        int[] array = {7, 6, 4, -1, 1, 2};
-//        fourNumberSum(array, 16);
+        int[] array = {7, 6, 4, -1, 1, 2};
 
-//        int[] array = {1, 2, 3, 4, 5, 6, 7};
-//        fourNumberSum(array, 10);
+        List<Integer[]> integers = fourNumberSum(array, 16);
 
-//        int[] array = {-2, -1, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-
-        int[] array = {-10, -3, -5, 2, 15, -7, 28, -6, 12, 8, 11, 5};
-        fourNumberSum(array, 20);
+        for (Integer[] element : integers) {
+            for (Integer elem : element) {
+                System.out.print(elem + " ");
+            }
+            System.out.println();
+        }
     }
 
+    // Average: O(n^2) time | O(n^2) space
+    // Worst: O(n^3) time | O(n^2)
     public static List<Integer[]> fourNumberSum(int[] array, int targetSum) {
         // Write your code here.
-        int start = 0;
-        int end = array.length - 1;
+        Map<Integer, List<Integer[]>> allPairSums = new HashMap<>();
+        List<Integer[]> quadruplets = new ArrayList<>();
 
-        // Key in map must be differ as (-1,1) = 0 and (-2,2) = 0 but only -2,2 is stored
-        Map<Integer, List<Integer[]>> sumMap = new HashMap<>();
-
-        for (int i = 0; i < array.length; i++) {
+        for (int i = 1; i < array.length - 1; i++) {
             for (int j = i + 1; j < array.length; j++) {
-                int curr = array[i] + array[j];
-                if (sumMap.containsKey(curr)) {
-                    Integer[] currIntArr = {array[i], array[j]};
-                    sumMap.get(curr).add(currIntArr);
-                } else {
-                    List<Integer[]> resArr = new ArrayList<>();
-                    Integer[] currIntArr = {array[i], array[j]};
-                    resArr.add(currIntArr);
-                    sumMap.put(curr, resArr);
-                }
-            }
-        }
-
-        Arrays.sort(array);
-
-        Set<Integer> resultSet = new HashSet<>();
-        Map<String, Integer[]> resMap = new HashMap<>();
-
-        for (start = 0; start <array.length; start++) {
-            for (end = array.length - 1 - start; end >= 0; end--) {
-                int first = array[start];
-                int second = array[end];
-                int currentSum = first + second;
-                int mapKey = targetSum - currentSum;
-
-                if (sumMap.containsKey(mapKey)) {
-                    List<Integer[]> listOfInts = sumMap.get(mapKey);
-                    for (Integer[] el : listOfInts) {
-                        boolean changed = false;
-                        Integer[] integers = el;
-                        for (Integer element : integers) {
-                            if (element == first) {
-                                // start++;
-                                changed = true;
-                            }
-                            if (element == second) {
-                                // end--;
-                                changed = true;
-                            }
-                        }
-                        if (changed) {
-                            // we do not do not result continue
-                            continue;
-                        } else {
-                            // found ok result
-                            Integer[] res = new Integer[4];
-                            res[0] = first;
-                            res[1] = second;
-                            res[2] = integers[0];
-                            res[3] = integers[1];
-
-                            Arrays.sort(res);
-
-                            resultSet.clear();
-
-                            resultSet.add(first);
-                            resultSet.add(second);
-                            resultSet.add(integers[0]);
-                            resultSet.add(integers[1]);
-                            if (resultSet.size() == 4) {
-                                String key = Arrays.toString(res);
-                                resMap.put(key, res);
-                            }
-                        }
+                int currentSum = array[i] + array[j];
+                int difference = targetSum - currentSum;
+                if (allPairSums.containsKey(difference)) {
+                    for (Integer[] pair : allPairSums.get(difference)) {
+                        Integer[] result = new Integer[] {pair[0], pair[1], array[i], array[j]};
+                        quadruplets.add(result);
                     }
                 }
             }
+            for (int k = 0; k < i; k++) {
+                int currentSum = array[i] + array[k];
+                if (!allPairSums.containsKey(currentSum)) {
+                    List<Integer[]> resultArray = new ArrayList<>();
+                    resultArray.add(new Integer[] {array[k], array[i]});
+                    allPairSums.put(currentSum, resultArray);
+                } else {
+                    List<Integer[]> temp = allPairSums.get(currentSum);
+                    allPairSums.remove(currentSum);
+                    temp.add(new Integer[] {array[k], array[i]});
+                    allPairSums.put(currentSum, temp);
+                }
+            }
         }
 
-        List<Integer[]> collect = new ArrayList<>();
-
-        for (Map.Entry<String, Integer[]> element : resMap.entrySet() ) {
-            collect.add(element.getValue());
-        }
-
-
-        return collect;
+        return quadruplets;
     }
 
 }

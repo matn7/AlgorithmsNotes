@@ -2,9 +2,10 @@ package hard;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-public class KnapstackProblem {
+public class KnapsackProblem {
 
     public static void main(String[] args) {
         int[][] items = {{1,2},{4,3},{5,6},{6,7}};
@@ -13,11 +14,11 @@ public class KnapstackProblem {
         knapsackProblem(items, capacity);
     }
 
-    // O(nc) time (c capacity) | O(nc) space
+    // O(n * c) time (c capacity) | O(n * c) space
     public static List<List<Integer>> knapsackProblem(int[][] items, int capacity) {
         // Write your code here.
-        // Replace the code below.
         int[][] knapsackValues = new int[items.length + 1][capacity + 1];
+
         for (int i = 1; i < items.length + 1; i++) {
             int currentWeight = items[i - 1][1];
             int currentValue = items[i - 1][0];
@@ -30,16 +31,15 @@ public class KnapstackProblem {
                 }
             }
         }
+        int finalValue = knapsackValues[items.length][capacity];
+        List<Integer> knapsackItems = getKnapSackItems(knapsackValues, items);
         List<List<Integer>> result = new ArrayList<>();
-        List<Integer> res1 = new ArrayList<>();
-        res1.add(knapsackValues[items.length][capacity]);
-        List<Integer> res2 = getKnapsackItems(knapsackValues, items);
-        result.add(res1);
-        result.add(res2);
+        result.add(Arrays.asList(finalValue));
+        result.add(knapsackItems);
         return result;
     }
 
-    private static List<Integer> getKnapsackItems(int[][] knapsackValues, int[][] items) {
+    private static List<Integer> getKnapSackItems(int[][] knapsackValues, int[][] items) {
         List<Integer> sequence = new ArrayList<>();
         int i = knapsackValues.length - 1;
         int c = knapsackValues[0].length - 1;
@@ -55,6 +55,8 @@ public class KnapstackProblem {
                 break;
             }
         }
+        Collections.reverse(sequence);
         return sequence;
     }
+
 }

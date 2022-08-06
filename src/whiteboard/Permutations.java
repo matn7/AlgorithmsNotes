@@ -1,7 +1,6 @@
 package whiteboard;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Permutations {
@@ -12,35 +11,31 @@ public class Permutations {
         array.add(2);
         array.add(3);
 
-        List<List<Integer>> result = getPermutations(array);
-        System.out.println();
+        getPermutations(array);
     }
 
     // O(n * n!) time | O(n * n!) space
-    // #2: 26/06/2022
+    // rand: 06/08/2022
     public static List<List<Integer>> getPermutations(List<Integer> array) {
         // Write your code here.
         if (array.isEmpty()) {
             return new ArrayList<>();
         }
         List<List<Integer>> result = new ArrayList<>();
-        List<Integer> newArr = new ArrayList<>();
-        getPermutationsHelper(array, newArr, result);
-
+        getPermutationsHelper(array, new ArrayList<>(), result);
         return result;
     }
 
-    private static void getPermutationsHelper(List<Integer> array, List<Integer> newArr,
-                                              List<List<Integer>> result) {
+    private static void getPermutationsHelper(List<Integer> array, List<Integer> curr, List<List<Integer>> result) {
         if (array.isEmpty()) {
-            result.add(newArr);
+            result.add(curr);
         } else {
-            for (int idx = 0; idx < array.size(); idx++) {
-                List<Integer> currArray = new ArrayList<>(array);
-                Integer removed = currArray.remove(idx);
-                List<Integer> currNewArray = new ArrayList<>(newArr);
-                currNewArray.add(removed);
-                getPermutationsHelper(currArray, currNewArray, result);
+            for (int i = 0; i < array.size(); i++) {
+                List<Integer> newArray = new ArrayList<>(array);
+                List<Integer> newCurr = new ArrayList<>(curr);
+                Integer top = newArray.remove(i);
+                newCurr.add(top);
+                getPermutationsHelper(newArray, newCurr, result);
             }
         }
     }

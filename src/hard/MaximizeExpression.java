@@ -48,33 +48,33 @@ public class MaximizeExpression {
         return maxOfAMinusBPlusCMinusD[array.length - 1];
     }
 
-//    // O(n^4) time | O(1) space
-//    public int maximizeExpression(int[] array) {
-//        // Write your code here.
-//        if (array.length < 4) {
-//            return 0;
-//        }
-//        int maximumValueFound = Integer.MIN_VALUE;
-//
-//        for (int a = 0; a < array.length; a++) {
-//            int aValue = array[a];
-//            for (int b = a + 1; b < array.length; b++) {
-//                int bValue = array[b];
-//                for (int c = b + 1; c < array.length; c++) {
-//                    int cValue = array[c];
-//                    for (int d = c + 1; d < array.length; d++) {
-//                        int dValue = array[d];
-//                        int expressionValue = evaluateExpression(aValue, bValue, cValue, dValue);
-//                        maximumValueFound = Math.max(expressionValue, maximumValueFound);
-//                    }
-//                }
-//            }
-//        }
-//        return maximumValueFound;
-//    }
-//
-//    private int evaluateExpression(int a, int b, int c, int d) {
-//        return a - b + c - d;
-//    }
+    // O(n^4) time | O(1) space
+    public int maximizeExpressionNotOptimal(int[] array) {
+        // Write your code here.
+        if (array.length < 4) {
+            return 0;
+        }
+        int maximumValueFound = Integer.MIN_VALUE;
+
+        for (int a = 0; a < array.length; a++) {
+            int aValue = array[a];
+            for (int b = a + 1; b < array.length; b++) {
+                int bValue = array[b];
+                for (int c = b + 1; c < array.length; c++) {
+                    int cValue = array[c];
+                    for (int d = c + 1; d < array.length; d++) {
+                        int dValue = array[d];
+                        int expressionValue = evaluateExpression(aValue, bValue, cValue, dValue);
+                        maximumValueFound = Math.max(expressionValue, maximumValueFound);
+                    }
+                }
+            }
+        }
+        return maximumValueFound;
+    }
+
+    private int evaluateExpression(int a, int b, int c, int d) {
+        return a - b + c - d;
+    }
 
 }

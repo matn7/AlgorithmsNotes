@@ -15,31 +15,31 @@ public class LargestRectangleUnderSkyline {
 
     }
 
-//    // O(n^2) time | O(1) space
-//    public int largestRectangleUnderSkyline(ArrayList<Integer> buildings) {
-//        // Write your code here.
-//        if (buildings.isEmpty()) {
-//            return 0;
-//        }
-//        int maxArea = 0;
-//        for (int pillarIdx = 0; pillarIdx < buildings.size(); pillarIdx++) {
-//            int currentHeight = buildings.get(pillarIdx);
-//            int furthestLeft = pillarIdx;
-//            while (furthestLeft > 0 && buildings.get(furthestLeft - 1) >= currentHeight) {
-//                furthestLeft--;
-//            }
-//
-//            int furthestRight = pillarIdx;
-//            while (furthestRight < buildings.size() - 1 && buildings.get(furthestRight + 1) >= currentHeight) {
-//                furthestRight++;
-//            }
-//
-//            int areaWithCurrentBuilding = (furthestRight - furthestLeft + 1) * currentHeight;
-//            maxArea = Math.max(areaWithCurrentBuilding, maxArea);
-//        }
-//
-//        return maxArea;
-//    }
+    // O(n^2) time | O(1) space
+    public int largestRectangleUnderSkylineNotOptimal(ArrayList<Integer> buildings) {
+        // Write your code here.
+        if (buildings.isEmpty()) {
+            return 0;
+        }
+        int maxArea = 0;
+        for (int pillarIdx = 0; pillarIdx < buildings.size(); pillarIdx++) {
+            int currentHeight = buildings.get(pillarIdx);
+            int furthestLeft = pillarIdx;
+            while (furthestLeft > 0 && buildings.get(furthestLeft - 1) >= currentHeight) {
+                furthestLeft--;
+            }
+
+            int furthestRight = pillarIdx;
+            while (furthestRight < buildings.size() - 1 && buildings.get(furthestRight + 1) >= currentHeight) {
+                furthestRight++;
+            }
+
+            int areaWithCurrentBuilding = (furthestRight - furthestLeft + 1) * currentHeight;
+            maxArea = Math.max(areaWithCurrentBuilding, maxArea);
+        }
+
+        return maxArea;
+    }
 
     // O(n) time | O(n) space
     public int largestRectangleUnderSkyline(ArrayList<Integer> buildings) {
@@ -66,8 +66,6 @@ public class LargestRectangleUnderSkyline {
             }
             pillarIndices.push(idx);
         }
-
-
         return maxArea;
     }
 }

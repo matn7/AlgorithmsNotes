@@ -1,8 +1,6 @@
 package hard;
 
-import java.util.*;
-
-public class MaxPathSumREPEAT {
+public class MaxPathSum {
 
     public static void main(String[] args) {
 //        BinaryTree binaryTree = new BinaryTree(-2);
@@ -37,7 +35,6 @@ public class MaxPathSumREPEAT {
     }
 
     // O(n) time | O(log(n)) space
-    // OK - repeated 24/01/2022
     public static int maxPathSum(BinaryTree tree) {
         // Write your code here.
         SumTuple maxSum = findMaxSum(tree);
@@ -49,32 +46,24 @@ public class MaxPathSumREPEAT {
             return new SumTuple(Integer.MIN_VALUE, Integer.MIN_VALUE);
         }
 
-        SumTuple leftMaxSum = findMaxSum(tree.left); // 2:(7,11)
-        SumTuple rightMaxSum = findMaxSum(tree.right); // 3:(10,16)
+        SumTuple leftMaxSum = findMaxSum(tree.left);
+        SumTuple rightMaxSum = findMaxSum(tree.right);
 
-        // SumTuple(int maxSumAsBranch, int maxPathSum)
-        int leftMaxSumAsBranch = leftMaxSum.maxSumAsBranch; // 7
-        int leftMaxPathSum = leftMaxSum.maxPathSum; // 11
-        int rightMaxSumAsBranch = rightMaxSum.maxSumAsBranch; // 10
-        int rightMaxPathSum = rightMaxSum.maxPathSum; // 16
+        int leftMaxSumAsBranch = leftMaxSum.maxSumAsBranch;
+        int leftMaxPathSum = leftMaxSum.maxPathSum;
+        int rightMaxSumAsBranch = rightMaxSum.maxSumAsBranch;
+        int rightMaxPathSum = rightMaxSum.maxPathSum;
 
         // branches only
-        int maxChildSumAsBranch = Math.max(leftMaxSumAsBranch, rightMaxSumAsBranch); // max(7,10) = 10 +
+        int maxChildSumAsBranch = Math.max(leftMaxSumAsBranch, rightMaxSumAsBranch);
+        int value = tree.value;
+        int maxSumAsBranch = Math.max(maxChildSumAsBranch + value, value);
 
-        int value = tree.value; // 1
-        // branch + current root
-        int maxSumAsBranch = Math.max(maxChildSumAsBranch + value, value); // max(10+1,1) = 11 +
-
-        // both branches + current root
         int maxSumAsRootNode = Math.max(leftMaxSumAsBranch + value + rightMaxSumAsBranch,
-                maxSumAsBranch); // max(18,11)=18
+                maxSumAsBranch);
 
-        // (11, 16, 18)
         int maxPathSum = Math.max(leftMaxPathSum, Math.max(rightMaxPathSum, maxSumAsRootNode)); // max(11, 16, 18) = 18
 
-        // 2: (7, 11)
-        // 3: (10, 16)
-        // 1: (11, 18)
         SumTuple sumTuple = new SumTuple(maxSumAsBranch, maxPathSum);
         return sumTuple;
     }

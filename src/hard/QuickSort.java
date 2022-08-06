@@ -36,11 +36,10 @@ public class QuickSort {
                 rightIdx--;
             }
         }
-        swap(array, pivotIdx, rightIdx); // pivot in sorted position
-        // which subarray smaller, to boost space complexity
+        swap(array, pivotIdx, rightIdx);
         boolean leftSubArraySmaller = rightIdx - 1 - startIdx < endIdx - (rightIdx + 1);
         if (leftSubArraySmaller) {
-            quickSortHelper(array, startIdx, rightIdx - 1); // left subarray first
+            quickSortHelper(array, startIdx, rightIdx - 1);
             quickSortHelper(array, rightIdx + 1, endIdx);
         } else {
             quickSortHelper(array, rightIdx + 1, endIdx);

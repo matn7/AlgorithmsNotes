@@ -1,7 +1,5 @@
 package veryhard;
 
-import hard.HeapSort;
-
 public class LinkedListPalindrome {
 
     public static void main(String[] args) {

@@ -2,6 +2,7 @@ package hard;
 
 public class MergeLinkedLists {
 
+
     public static void main(String[] args) {
         LinkedList list1 = new LinkedList(2);
         list1.next = new LinkedList(6);
@@ -18,58 +19,6 @@ public class MergeLinkedLists {
         mergeLinkedLists(list1, list2);
     }
 
-    public static LinkedList mergeLinkedLists(LinkedList headOne, LinkedList headTwo) {
-        // Write your code here.
-        LinkedList first = headOne;
-        LinkedList second = headTwo;
-
-
-        LinkedList result = null;
-        if (first != null && second != null) {
-            if (first.value < second.value) {
-                result = new LinkedList(first.value);
-                first = first.next;
-            } else {
-                result = new LinkedList(second.value);
-                second = second.next;
-            }
-        }
-
-        LinkedList start = result;
-
-        int compare = Integer.compare(first.value, second.value);
-
-        while (first != null && second != null) {
-            if (Integer.valueOf(first.value).compareTo(Integer.valueOf(second.value)) < 0) {
-                result.next = first;
-                first = first.next;
-            } else if (Integer.valueOf(first.value).compareTo(Integer.valueOf(second.value)) > 0)  {
-                result.next = second;
-                second = second.next;
-            } else {
-                result.next = second;
-                second = second.next;
-
-                result = result.next;
-
-                result.next = first;
-                first = first.next;
-            }
-
-            result = result.next;
-        }
-
-        if (first != null) {
-            result.next = first;
-        }
-
-        if (second != null) {
-            result.next = second;
-        }
-
-        return start;
-    }
-
     // This is an input class. Do not edit.
     public static class LinkedList {
         int value;
@@ -79,5 +28,66 @@ public class MergeLinkedLists {
             this.value = value;
             this.next = null;
         }
+    }
+
+    // O(n + m) time | O(n + m) space
+    public static LinkedList mergeLinkedListsRec(LinkedList headOne, LinkedList headTwo) {
+        // Write your code here.
+        recursiveMerge(headOne, headTwo, null);
+
+        if (headOne.value < headTwo.value) {
+            return headOne;
+        }
+        return headTwo;
+    }
+
+    private static void recursiveMerge(LinkedList p1, LinkedList p2, LinkedList p1Prev) {
+        if (p1 == null) {
+            p1Prev.next = p2;
+            return;
+        }
+        if (p2 == null) {
+            return;
+        }
+
+        if (p1.value < p2.value) {
+            recursiveMerge(p1.next, p2, p1);
+        } else {
+            if (p1Prev != null) {
+                p1Prev.next = p2;
+            }
+            LinkedList newP2 = p2.next;
+            p2.next = p1;
+            recursiveMerge(p1, newP2, p2);
+        }
+    }
+
+    // O(n + m) time | O(1) space
+    public static LinkedList mergeLinkedLists(LinkedList headOne, LinkedList headTwo) {
+        // Write your code here.
+        LinkedList p1 = headOne;
+        LinkedList p1Prev = null;
+        LinkedList p2 = headTwo;
+
+        while (p1 != null && p2 != null) {
+            if (p1.value < p2.value) {
+                p1Prev = p1;
+                p1 = p1.next;
+            } else {
+                if (p1Prev != null) {
+                    p1Prev.next = p2;
+                }
+                p1Prev = p2;
+                p2 = p2.next;
+                p1Prev.next = p1;
+            }
+        }
+        if (p1 == null) {
+            p1Prev.next = p2;
+        }
+        if (headOne.value < headTwo.value) {
+            return headOne;
+        }
+        return headTwo;
     }
 }

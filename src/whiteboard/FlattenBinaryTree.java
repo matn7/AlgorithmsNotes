@@ -5,40 +5,76 @@ import java.util.List;
 
 public class FlattenBinaryTree {
 
-    public static void main(String[] args) {
-        BinaryTree root = new BinaryTree(1);
-        root.left = new BinaryTree(2);
-        root.right = new BinaryTree(3);
-        root.left.left = new BinaryTree(4);
-        root.left.right = new BinaryTree(5);
-        root.right.left = new BinaryTree(6);
-        root.left.right.left = new BinaryTree(7);
-        root.left.right.right = new BinaryTree(8);
-
-        flattenBinaryTree(root);
-    }
-
+    // O(n) time | O(n) space
+    // rand: 06/08/2022
     public static BinaryTree flattenBinaryTree(BinaryTree root) {
         // Write your code here.
-        List<BinaryTree> inOrderArray = new ArrayList<>();
-        inOrder(root, inOrderArray);
-        for (int i = 1; i < inOrderArray.size(); i++) {
-            BinaryTree prev = inOrderArray.get(i - 1);
-            BinaryTree curr = inOrderArray.get(i);
-            prev.right = curr;
-            curr.left = prev;
+        List<BinaryTree> inOrderList = new ArrayList<>();
+        inOrder(root, inOrderList);
+
+        BinaryTree head = inOrderList.remove(0);
+        BinaryTree tmp = head;
+        while (!inOrderList.isEmpty()) {
+            BinaryTree curr = inOrderList.remove(0);
+            tmp.right = curr;
+            curr.left = tmp;
+            tmp = curr;
         }
-        return inOrderArray.get(0);
+        return head;
     }
 
-    private static void inOrder(BinaryTree root, List<BinaryTree> array) {
+    private static void inOrder(BinaryTree root, List<BinaryTree> inOrderList) {
         if (root == null) {
             return;
         }
-        inOrder(root.left, array);
-        array.add(root);
-        inOrder(root.right, array);
+        inOrder(root.left, inOrderList);
+        inOrderList.add(root);
+        inOrder(root.right, inOrderList);
     }
+
+    // O(n) time | O(d) space
+    public static BinaryTree flattenBinaryTreeOptimal(BinaryTree root) {
+        // Write your code here.
+        FlattenInfo flattenInfo = flattenTree(root);
+        return flattenInfo.left;
+    }
+
+    private static FlattenInfo flattenTree(BinaryTree node) {
+        BinaryTree leftMost;
+        if (node.left == null) {
+            leftMost = node;
+        } else {
+            FlattenInfo flattenInfo = flattenTree(node.left);
+            connectNodes(flattenInfo.right, node);
+            leftMost = flattenInfo.left;
+        }
+        BinaryTree rightMost;
+        if (node.right == null) {
+            rightMost = node;
+        } else {
+            FlattenInfo flattenInfo = flattenTree(node.right);
+            connectNodes(node, flattenInfo.left);
+            rightMost = flattenInfo.right;
+        }
+        return new FlattenInfo(leftMost, rightMost);
+    }
+
+    private static void connectNodes(BinaryTree left, BinaryTree right) {
+        left.right = right;
+        right.left = left;
+    }
+
+
+    static class FlattenInfo {
+        BinaryTree left;
+        BinaryTree right;
+
+        public FlattenInfo(BinaryTree left, BinaryTree right) {
+            this.left = left;
+            this.right = right;
+        }
+    }
+
 
     // This is the class of the input root. Do not edit it.
     static class BinaryTree {

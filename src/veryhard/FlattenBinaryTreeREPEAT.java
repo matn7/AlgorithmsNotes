@@ -17,47 +17,31 @@ public class FlattenBinaryTreeREPEAT {
 
     }
 
-    //            1
-    //         /     \
-    //        2       3
-    //       / \     /
-    //      4   5   6
-    //         / \
-    //        7   8
     // OK - repeated 21/02/2022
     // O(n) time | O(d) space
-    public static BinaryTree flattenBinaryTree(BinaryTree root) {
+    public static BinaryTree flattenBinaryTreeOptimal(BinaryTree root) {
         // Write your code here.
-        // rec(1)
         FlattenInfo flattenInfo = flattenTree(root);
         return flattenInfo.left;
     }
 
-    // rec(6) => (6,6)
-    // rec(3) => (6,3)
-    // rec(8) => (8,8)
-    // rec(7) => (7,7)
-    // rec(5) => (7,8)
-    // rec(4) => (4,4)
-    // rec(2) => (4,8)
-    // rec(1) *
     private static FlattenInfo flattenTree(BinaryTree node) {
-        BinaryTree leftMost; // 6
+        BinaryTree leftMost;
         if (node.left == null) {
-            leftMost = node; // 6
+            leftMost = node;
         } else {
-            FlattenInfo flattenInfo = flattenTree(node.left); // (6,6)
-            connectNodes(flattenInfo.right, node); // 4 <-> 2 <-> 7 <-> 5 <-> 8 <-> 1 <-> 6 <-> 3
-            leftMost = flattenInfo.left; // 6
+            FlattenInfo flattenInfo = flattenTree(node.left);
+            connectNodes(flattenInfo.right, node);
+            leftMost = flattenInfo.left;
         }
 
         BinaryTree rightMost;
         if (node.right == null) {
-            rightMost = node; // 3
+            rightMost = node;
         } else {
-            FlattenInfo flattenInfo = flattenTree(node.right); // (8,8)
+            FlattenInfo flattenInfo = flattenTree(node.right);
             connectNodes(node, flattenInfo.left);
-            rightMost = flattenInfo.right; // 8
+            rightMost = flattenInfo.right;
         }
 
         return new FlattenInfo(leftMost, rightMost);
@@ -87,30 +71,30 @@ public class FlattenBinaryTreeREPEAT {
     //         / \
     //        7   8
 
-//    // O(n) time | O(n) space
-//    public static BinaryTree flattenBinaryTree(BinaryTree root) {
-//        // Write your code here.
-//        List<BinaryTree> inOrderNodes = new ArrayList<>();
-//        //                    l  r
-//        // [4, 2, 7, 5, 8, 1, 6, 3]
-//        getNodesInOrder(root, inOrderNodes);
-//        for (int i = 0; i < inOrderNodes.size() - 1; i++) {
-//            BinaryTree leftNode = inOrderNodes.get(i); // 6
-//            BinaryTree rightNode = inOrderNodes.get(i + 1); // 3
-//            leftNode.right = rightNode;
-//            rightNode.left = leftNode;
-//        }
-//        // 4 <-> 2 <-> 7 <-> 5 <-> 8 <-> 1 <-> 6 <-> 3
-//        return inOrderNodes.get(0);
-//    }
-//
-//    private static void getNodesInOrder(BinaryTree tree, List<BinaryTree> array) {
-//        if (tree != null) {
-//            getNodesInOrder(tree.left, array);
-//            array.add(tree);
-//            getNodesInOrder(tree.right, array);
-//        }
-//    }
+    // O(n) time | O(n) space
+    public static BinaryTree flattenBinaryTree(BinaryTree root) {
+        // Write your code here.
+        List<BinaryTree> inOrderNodes = new ArrayList<>();
+        //                    l  r
+        // [4, 2, 7, 5, 8, 1, 6, 3]
+        getNodesInOrder(root, inOrderNodes);
+        for (int i = 0; i < inOrderNodes.size() - 1; i++) {
+            BinaryTree leftNode = inOrderNodes.get(i); // 6
+            BinaryTree rightNode = inOrderNodes.get(i + 1); // 3
+            leftNode.right = rightNode;
+            rightNode.left = leftNode;
+        }
+        // 4 <-> 2 <-> 7 <-> 5 <-> 8 <-> 1 <-> 6 <-> 3
+        return inOrderNodes.get(0);
+    }
+
+    private static void getNodesInOrder(BinaryTree tree, List<BinaryTree> array) {
+        if (tree != null) {
+            getNodesInOrder(tree.left, array);
+            array.add(tree);
+            getNodesInOrder(tree.right, array);
+        }
+    }
 
     // This is the class of the input root. Do not edit it.
     static class BinaryTree {

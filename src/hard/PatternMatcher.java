@@ -15,33 +15,28 @@ public class PatternMatcher {
         patternMatcher(pattern, str);
     }
 
-    // O(n^2+m) time | O(n+m) space
-    public static String[] patternMatcher(String pattern, String string) {
+    // O(n^2 + m) time | O(n + m) space
+    public static String[] patternMatcher(String pattern, String str) {
         // Write your code here.
-        if (pattern.length() > string.length()) {
+        if (pattern.length() > str.length()) {
             return new String[] {};
         }
-        char[] newPattern = getNewParent(pattern);
-        boolean didSwitch = false;
-        if (newPattern[0] != pattern.charAt(0)) {
-            didSwitch = true;
-        }
+        char[] newPattern = getNewPattern(pattern);
+        boolean didSwitch = newPattern[0] != pattern.charAt(0);
         Map<Character, Integer> counts = new HashMap<>();
         counts.put('x', 0);
         counts.put('y', 0);
 
         int firstYPos = getCountsAndFirstYPos(newPattern, counts);
-
         if (counts.get('y') != 0) {
-            for (int lenOfX = 1; lenOfX < string.length(); lenOfX++) {
-                int lenOfY = (string.length() - lenOfX * counts.get('x')) / counts.get('y');
+            for (int lenOfX = 1; lenOfX < str.length(); lenOfX++) {
+                int lenOfY = (str.length() - lenOfX * counts.get('x')) / counts.get('y');
                 if (lenOfY <= 0 || lenOfY % 1 != 0) {
                     continue;
                 }
-//                lenOfY int(lenOfY);
                 int yIdx = firstYPos * lenOfX;
-                String x = string.substring(0,lenOfX); // g
-                String y = string.substring(yIdx,yIdx + lenOfY); // gopowerranger
+                String x = str.substring(0, lenOfX);
+                String y = str.substring(yIdx, yIdx + lenOfY);
                 List<String> potentialMatch = new ArrayList<>();
                 for (int i = 0; i < newPattern.length; i++) {
                     if (newPattern[i] == 'x') {
@@ -50,11 +45,11 @@ public class PatternMatcher {
                         potentialMatch.add(y);
                     }
                 }
-                StringBuilder potentialMatchString = new StringBuilder();
+                StringBuilder stringBuilder = new StringBuilder();
                 for (String element : potentialMatch) {
-                    potentialMatchString.append(element);
+                    stringBuilder.append(element);
                 }
-                if (string.equals(potentialMatchString.toString())) {
+                if (str.equals(stringBuilder.toString())) {
                     if (!didSwitch) {
                         return new String[] {x, y};
                     } else {
@@ -63,9 +58,9 @@ public class PatternMatcher {
                 }
             }
         } else {
-            int lenOfX = string.length() / counts.get('x');
+            int lenOfX = str.length() / counts.get('x');
             if (lenOfX % 1 == 0) {
-                String x = string.substring(0, lenOfX);
+                String x = str.substring(0, lenOfX);
                 List<String> potentialMatch = new ArrayList<>();
                 for (int i = 0; i < newPattern.length; i++) {
                     potentialMatch.add(x);
@@ -74,7 +69,7 @@ public class PatternMatcher {
                 for (String element : potentialMatch) {
                     potentialMatchString.append(element);
                 }
-                if (string.equals(potentialMatchString.toString())) {
+                if (str.equals(potentialMatchString.toString())) {
                     if (!didSwitch) {
                         return new String[] {x, ""};
                     } else {
@@ -83,23 +78,10 @@ public class PatternMatcher {
                 }
             }
         }
-
         return new String[] {};
     }
 
-    private static int getCountsAndFirstYPos(char[] pattern, Map<Character, Integer> counts) {
-        int firstYPos = -1;
-        for (int i = 0; i < pattern.length; i++) {
-            char c = pattern[i];
-            counts.put(pattern[i], counts.get(pattern[i]) + 1);
-            if (c == 'y' && firstYPos == -1) {
-                firstYPos = i;
-            }
-        }
-        return firstYPos;
-    }
-
-    private static char[] getNewParent(String pattern) {
+    private static char[] getNewPattern(String pattern) {
         char[] patternLetters = pattern.toCharArray();
         if (pattern.charAt(0) == 'x') {
             return patternLetters;
@@ -114,5 +96,18 @@ public class PatternMatcher {
         }
         return patternLetters;
     }
+
+    private static int getCountsAndFirstYPos(char[] pattern, Map<Character, Integer> counts) {
+        int firstYPos = -1;
+        for (int i = 0; i < pattern.length; i++) {
+            char character = pattern[i];
+            counts.put(character, counts.get(character) + 1);
+            if (character == 'y' && firstYPos == -1) {
+                firstYPos = i;
+            }
+        }
+        return firstYPos;
+    }
+
 
 }

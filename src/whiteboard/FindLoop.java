@@ -5,24 +5,26 @@ import java.util.Map;
 
 public class FindLoop {
 
-//    public static LinkedList findLoop(LinkedList head) {
-//        // Write your code here.
-//        LinkedList current = head;
-//        Map<LinkedList, Boolean> seen = new HashMap<>();
-//
-//        while (current != null) {
-//            if (seen.containsKey(current)) {
-//                return current;
-//            }
-//            seen.put(current, Boolean.TRUE);
-//            current = current.next;
-//
-//        }
-//        return null;
-//    }
+    // O(n) time | O(n) space
+    public static LinkedList findLoopNotOptimal(LinkedList head) {
+        // Write your code here.
+        LinkedList current = head;
+        Map<LinkedList, Boolean> seen = new HashMap<>();
+
+        while (current != null) {
+            if (seen.containsKey(current)) {
+                return current;
+            }
+            seen.put(current, Boolean.TRUE);
+            current = current.next;
+
+        }
+        return null;
+    }
 
     // O(n) time | O(1) space
     // #2: 18/06/2022
+    // rand: 03/08/2022
     public static LinkedList findLoop(LinkedList head) {
         // Write your code here.
         LinkedList first = head;

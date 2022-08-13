@@ -4,7 +4,8 @@ public class BinarySearch  {
 
     // O(log(n)) time | O(log(n)) space
     // #2: 01/07/2022
-    public static int binarySearch(int[] array, int target) {
+    // rand: 06/08/2022
+    public static int binarySearchRec(int[] array, int target) {
         // Write your code here.
         return binarySearchHelper(array, target, 0, array.length - 1);
     }
@@ -13,10 +14,6 @@ public class BinarySearch  {
         if (left > right) {
             return -1;
         }
-//        int middle = (left + right) / 2;
-        // TO AVOID OVERFLOW for JAVA and C++
-        // Imagine right = Integer.MAX_VALUE
-        // right + start ---> OVERFLOW
         int middle = left + (right - left) / 2;
         int value = array[middle];
         if (value == target) {
@@ -28,26 +25,26 @@ public class BinarySearch  {
         }
     }
 
-//    // O(log(n)) time | O(1) space
-//    public static int binarySearch(int[] array, int target) {
-//        // Write your code here.
-//        int left = 0;
-//        int right = array.length - 1;
-//
-//        while (left < right) {
-//            int middle = (left + right) / 2;
-//            int value = array[middle];
-//
-//            if (value == target) {
-//                return middle;
-//            } else if (target < value) {
-//                right = middle - 1;
-//            } else {
-//                left = middle + 1;
-//            }
-//        }
-//
-//        return -1;
-//    }
+    // O(log(n)) time | O(1) space
+    public static int binarySearch(int[] array, int target) {
+        // Write your code here.
+        int left = 0;
+        int right = array.length - 1;
+
+        while (left < right) {
+            int middle = (left + right) / 2;
+            int value = array[middle];
+
+            if (value == target) {
+                return middle;
+            } else if (target < value) {
+                right = middle - 1;
+            } else {
+                left = middle + 1;
+            }
+        }
+
+        return -1;
+    }
 }
 

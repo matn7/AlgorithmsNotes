@@ -13,6 +13,7 @@ public class SingleCycleCheck {
 
     // O(n) time | O(1) space
     // #2: 05/07/2022
+    // rand: 10/08/2022
     public static boolean hasSingleCycle(int[] array) {
         // Write your code here.
         int i = 0;
@@ -38,6 +39,33 @@ public class SingleCycleCheck {
             }
         }
         return i == 0;
+    }
+
+    // O(n) time | O(1) space
+    public static boolean hasSingleCycleMy(int[] array) {
+        // Write your code here.
+        int counter = array.length;
+        int index = 0;
+        int jump = array[index];
+        boolean lastChecked = false;
+        if (jump == 0) {
+            return false;
+        }
+        while (counter > 0) {
+            index = index + jump % array.length;
+            if (index > array.length - 1) {
+                index = index - array.length;
+            }
+            if (index < 0) {
+                index = array.length + index;
+            }
+            if (index == array.length - 1) {
+                lastChecked = true;
+            }
+            jump = array[index];
+            counter--;
+        }
+        return index == 0 && lastChecked;
     }
 
 }

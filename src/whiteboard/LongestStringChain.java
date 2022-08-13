@@ -15,6 +15,7 @@ public class LongestStringChain {
     }
 
     // O(n * m^2 + nlon(n)) time | O(nm) space
+    // rand: 06/08/2022
     public static List<String> longestStringChain(List<String> strings) {
         // Write your code here.
         Map<String, StringChainInfo> stringChains = new HashMap<>();

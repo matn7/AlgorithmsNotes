@@ -26,6 +26,7 @@ public class ZipLinkedList {
     }
 
     // O(n) time | O(1) space
+    // rand: 10/08/2022
     public LinkedList zipLinkedList(LinkedList linkedList) {
         // Write your code here.
         LinkedList first = linkedList;

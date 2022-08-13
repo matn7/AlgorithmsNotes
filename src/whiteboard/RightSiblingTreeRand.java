@@ -1,15 +1,14 @@
 package whiteboard;
 
-public class RightSiblingTree {
+public class RightSiblingTreeRand {
 
-    // O(n) time | O(d) space
-    // rand: 08/08/2022
     public static BinaryTree rightSiblingTree(BinaryTree root) {
         // Write your code here.
         mutate(root, null, false);
         return root;
     }
 
+    // O(n) time | O(d) space
     private static void mutate(BinaryTree node, BinaryTree parent, boolean isLeftChild) {
         if (node == null) {
             return;
@@ -29,6 +28,7 @@ public class RightSiblingTree {
             }
         }
         mutate(right, node, false);
+
     }
 
     // This is the class of the input root. Do not edit it.

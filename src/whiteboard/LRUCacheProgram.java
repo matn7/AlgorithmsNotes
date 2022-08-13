@@ -16,6 +16,7 @@ public class LRUCacheProgram {
         }
 
         // O(1) time | O(1) space
+        // rand: 07/08/2022
         public void insertKeyValuePair(String key, int value) {
             // Write your code here.
             if (!cache.containsKey(key)) {

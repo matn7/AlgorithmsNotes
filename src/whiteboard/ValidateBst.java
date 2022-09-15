@@ -19,6 +19,7 @@ public class ValidateBst {
 
     // O(n) time | O(d) space
     // #2: 27/06/2022
+    // rand: 17/08/2022
     public static boolean validateBst(BST tree) {
         // Write your code here.
         return validateBstHelper(tree, Integer.MIN_VALUE, Integer.MAX_VALUE);
@@ -33,6 +34,19 @@ public class ValidateBst {
         }
         return validateBstHelper(tree.left, min, tree.value)
                 && validateBstHelper(tree.right, tree.value, max);
+    }
+
+    private static boolean validateBstHelper2(BST tree, int min, int max) {
+        if (tree == null) {
+            return true;
+        }
+
+        if (tree.value <= min || tree.value > max) {
+            return false;
+        }
+
+        boolean left = validateBstHelper2(tree.left, min, tree.value);
+        return left && validateBstHelper2(tree.right, tree.value, max);
     }
 
 

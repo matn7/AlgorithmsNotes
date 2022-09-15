@@ -1,0 +1,105 @@
+## Google Questions
+
+- Sorting: 
+    - Insertion sort 
+    - Radix sort 
+    - Quick sort 
+    - Merge sort 
+    - Heap sort 
+- Searching 
+- Binary Search 
+- Divide and conquer 
+- Dynamic Programming - momoization 
+- Greediness - (OK)
+- Recursion 
+- Dijkstra 
+- A * (complexity)
+- Data structures:
+    - Arrays 
+    - Linked Lists: 
+        - Reverse link-list 
+    - Stacks 
+    - Queues 
+    - Hash-sets
+    - Hash-maps
+    - Hash-tables
+    - Dictionary
+    - Trees:
+        - Red black tree
+    - Binary Trees
+    - Heaps 
+    - Graphs
+- Math:
+    - Discrete match questions
+    - Essentials of elementary probability theory and combinatorics
+    - n - choose - k
+- Graphs:
+    - Distance
+    - Search
+    - Connectivity
+    - Cycle detection
+    - Graph representation in memory:
+        - Objects and pointers
+        - Matrix
+        - Adjacency list
+    - Graph traversal:
+        - Depth-first
+        - Breadth-first
+    - Run - time complexity of graphs
+    - Topological sort
+    - Famous algorithms: (complexity what doing)
+        - Prims
+        - Dijkstras (shortest-path weighted graph)
+        - Kruskal
+        - Hamilton
+        - Bellman-Ford (shortest-path negative weighted graph)
+- Recursion
+- System design:
+    - Design policies
+    - Processes
+    - Methods
+    - Tests
+    - Components
+- Topics:
+    - Feature sets
+    - Interfaces
+    - Class hierarchies
+    - Distributed systems
+    - Design system under certain constraints
+    - Simplicity
+    - Limitations
+    - Robustness
+    - Tradeoffs
+    - Routers
+    - Domain name servers
+    - Load balancers
+    - Firewalls
+    - Distributed hash table systems
+    - Resource estimations with real systems
+    - Big product design picture
+    - Translation of an abstract problem to a system
+    - API discussion
+    - Binary tree
+    - Cache
+    - Mapreduce
+    - For loop problems
+    - Index
+    - Compilers
+    - Memory cache
+    - Networks
+- Operating Systems:
+    - Processes
+    - Threads
+    - Concurrency issues
+    - Locks
+    - Mutexes
+    - Semaphores
+    - Monitors
+    - Deadlock (how to avoid)
+    - Livelock (how to avoid)
+    - What resource process needs and thread needs
+    - How context switch works
+    - How context switch is initiated by system the OS and hardware
+    - Scheduling
+    - Multi-core, modern concurrency constraints   
+        

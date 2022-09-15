@@ -9,6 +9,7 @@ public class MaxProfitWithKTransactions {
     }
 
     // O(nk) time | O(nk) space
+    // rand: 24/08/2022
     public static int maxProfitWithKTransactions(int[] prices, int k) {
         if (prices.length == 0) {
             return 0;

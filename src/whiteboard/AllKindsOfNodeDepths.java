@@ -1,8 +1,9 @@
 package whiteboard;
 
-public class AllKindsOfDepths {
+public class AllKindsOfNodeDepths {
 
     // O(n) time | O(h) space
+    // rand: 24/08/2022
     public static int allKindsOfNodeDepths(BinaryTree root) {
         // Write your code here.
         return getTreeInfo(root).sumOfAllDepths;

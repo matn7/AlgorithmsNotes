@@ -15,6 +15,7 @@ public class ShiftLinkedList {
 
     // O(n) time | O(1) space
     // #2: 30/06/2022
+    // rand: 21/08/2022
     public static LinkedList shiftLinkedList(LinkedList head, int k) {
         // Write your code here.
         if (k == 0) {

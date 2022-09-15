@@ -18,6 +18,7 @@ public class PowerSet {
 
     // O(n * 2^n) time | O(n * 2^n) space
     // #2: 26/06/2022
+    // rand: 22/08/2022
     public static List<List<Integer>> powerset(List<Integer> array) {
         // Write your code here.
         List<List<Integer>> result = new ArrayList<>();

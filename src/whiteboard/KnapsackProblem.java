@@ -15,6 +15,7 @@ public class KnapsackProblem {
 
     // O(nc) time | O(nc) space
     // #2: 23/06/2022
+    // rand: 15/09/2022
     public static List<List<Integer>> knapsackProblem(int[][] items, int capacity) {
         // Write your code here.
         // Replace the code below.

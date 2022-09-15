@@ -5,6 +5,8 @@ import java.util.*;
 public class AStarAlgorithm {
 
     // O(w*h*low(w*h)) time | O(w*h) space
+    // rand: 28/08/2022
+    // rand: 14/09/2022
     public int[][] aStarAlgorithm(int startRow, int startCol, int endRow, int endCol, int[][] graph) {
         // Write your code here.
         // H: heuristic value

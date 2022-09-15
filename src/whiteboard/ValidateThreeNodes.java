@@ -30,6 +30,7 @@ public class ValidateThreeNodes {
 
     // O(d) time | O(1) space
     // #2: 27/06/2022
+    // rand: 28/08/2022
     public boolean validateThreeNodes(BST nodeOne, BST nodeTwo, BST nodeThree) {
         // Write your code here.
         if (isAncestor(nodeOne, nodeTwo)) {

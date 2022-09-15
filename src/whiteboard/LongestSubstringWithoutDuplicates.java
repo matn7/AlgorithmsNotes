@@ -13,6 +13,7 @@ public class LongestSubstringWithoutDuplicates {
 
     // O(n) time | O(min(n,a)) space - n len of input string, a len of alphabet
     // #2: 02/07/2022
+    // rand: 28/08/2022
     public static String longestSubstringWithoutDuplication(String str) {
         // Write your code here
         Map<Character, Integer> lastSeen = new HashMap<>();

@@ -2,10 +2,11 @@ package whiteboard;
 
 import java.util.Arrays;
 
-public class MinNUmberOfCoinsForChange {
+public class MinNumberOfCoinsForChange {
 
     // O(nd) time | O(n) space (n - target amount, d - num of coins denominations)
     // #2: 12/07/2022
+    // rand: 16/08/2022
     public static int minNumberOfCoinsForChange(int n, int[] denoms) {
         // Write your code here.
         int[] coins = new int[n + 1];

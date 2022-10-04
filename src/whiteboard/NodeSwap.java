@@ -14,6 +14,7 @@ public class NodeSwap {
     }
 
     // O(n) time | O(n) space
+    // rand: 24/09/2022
     public LinkedList nodeSwap(LinkedList head) {
         // Write your code here.
         LinkedList temp = new LinkedList(0);

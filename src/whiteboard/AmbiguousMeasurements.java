@@ -19,8 +19,9 @@ public class AmbiguousMeasurements {
         measurements.ambiguousMeasurements(measuringCups, low, high);
     }
 
-    // O(low * high * n) time } O(low * high) space
+    // O(low * high * n) time | O(low * high) space
     // n - number of measuring cups
+    // rand: 25/09/2022
     public boolean ambiguousMeasurements(int[][] measuringCups, int low, int high) {
         // Write your code here.
         Map<String, Boolean> cache = new HashMap<>();

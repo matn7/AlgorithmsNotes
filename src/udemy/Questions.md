@@ -9,7 +9,7 @@
 - Searching 
 - Binary Search 
 - Divide and conquer 
-- Dynamic Programming - momoization 
+- Dynamic Programming - memoization 
 - Greediness - (OK)
 - Recursion 
 - Dijkstra 

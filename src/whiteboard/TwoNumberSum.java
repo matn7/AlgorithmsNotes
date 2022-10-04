@@ -7,6 +7,7 @@ public class TwoNumberSum {
 
     // O(n) time | O(n) space
     // #2: 09/07/2022
+    // rand: 27/09/2022
     public static int[] twoNumberSum(int[] array, int targetSum) {
         // Write your code here.
 

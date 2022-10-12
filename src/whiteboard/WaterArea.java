@@ -10,6 +10,7 @@ public class WaterArea {
 
     // O(n) time | O(n) space
     // #2: 11/07/2022
+    // rand: 07/10/2022
     public static int waterArea(int[] heights) {
         // Write your code here.
         if (heights.length == 0) {
@@ -43,6 +44,32 @@ public class WaterArea {
         }
 
         return sum;
+    }
+
+    // MOST OPTIMAL - but no dynamic programming techniques used
+    // O(n) time | O(1) space
+    public static int waterAreaOptimal(int[] heights) {
+        // Write your code here.
+        if (heights.length < 2) {
+            return 0;
+        }
+        int waterArea = 0;
+        int left = 0;
+        int right = heights.length - 1;
+        int leftMax = heights[left];
+        int rightMax = heights[right];
+        while (left <= right) {
+            if (leftMax < rightMax) {
+                leftMax = Math.max(leftMax, heights[left]);
+                waterArea += (leftMax - heights[left]);
+                left++;
+            } else {
+                rightMax = Math.max(rightMax, heights[right]);
+                waterArea += (rightMax - heights[right]);
+                right--;
+            }
+        }
+        return waterArea;
     }
 
 }

@@ -3,115 +3,100 @@ package hard;
 public class SearchForRange {
 
     public static void main(String[] args) {
-//        int[] array = {0, 1, 21, 33, 45, 45, 45, 45, 45, 45, 61, 71, 73};
-//        int[] array = {0, 1, 21, 33, 45, 45, 45, 45, 45, 45, 45, 45, 45};
-        int[] array = {5, 7, 7, 8, 8, 10};
-//        int[] array = {0, 1, 21, 33, 45, 61, 71, 73};
+        int[] array = {0, 1, 21, 33, 45, 45, 45, 45, 45, 45, 61, 71, 73};
+        int target = 45;
 
-//        int result = binarySearch(array, 45);
-        int[] ints = searchForRange(array, 10);
-        for (int i = 0; i < ints.length; i++) {
-            System.out.println(ints[i]);
-        }
+        searchForRange(array, target);
     }
 
+    // O(log(n)) time | O(1) space
+    // OK - repeated 30/01/2022
     public static int[] searchForRange(int[] array, int target) {
-
-        if (binarySearch(array, target) == -1) {
-            return new int[] {-1, -1};
-        }
-        int[] ints = searchForRangeRec(array, target, 0);
-        return ints;
-    }
-
-    public static int binarySearch(int[] array, int target) {
-        int min = 0;
-        int max = array.length - 1;
-
-        while (min <= max) {
-            int mid = (min + max) / 2;
-            if (array[mid] == target) {
-                return mid;
-            } else if (array[mid] < target) {
-                min = mid + 1;
-            } else {
-                max = mid - 1;
-            }
-        }
-
-        return -1;
-    }
-
-    public static int[] searchForRangeRec(int[] array, int target, int carry) {
         // Write your code here.
-        int min = 0;
-        int max = array.length - 1;
-        int left = 0;
-        int right = 0;
+        // finalRange = [4, 9]
+        int[] finalRange = {-1, -1};
 
-        int mid = (min + max) / 2;
-        if (array[mid] == target) {
-            if (array.length == 1) {
-                if (carry == -1) {
-                    return new int[] {mid, mid};
-                }
-                return new int[] {mid + carry, mid + carry};
-            }
-            // means in left and right there is a number
-            right = searchHelper(array, mid + 1, max, target);
-            // check to right if target exists if so move right
-            if (right < array.length - 1 && array[right + 1] == target) {
-                while (array[right] == target && right < array.length - 1) {
-                    right++;
-                }
-            }
+        alteredBinarySearch(array, target, 0, array.length - 1, finalRange, true);
+        alteredBinarySearch(array, target, 0, array.length - 1, finalRange, false);
 
-            left = searchHelper(array, min, mid - 1, target);
-            if (left > 0 && array[left - 1] == target) {
-                while (array[left] == target && left >= 0) {
-                    left--;
-                }
-            }
-            // check to left if target exists if so move
-            return new int[] {left + carry, right + carry};
-        }
-
-        if (array[mid] < target) {
-            // only elements are from right sub array
-            int[] newArray = new int[array.length / 2];
-            int counter = 0;
-            for (int i = mid + 1; i < array.length; i++) {
-                newArray[counter] = array[i];
-                counter++;
-            }
-
-            mid = mid + 1;
-            return searchForRangeRec(newArray, target, carry + mid);
-        }
-
-        if (array[mid] > target) {
-            int[] newArray = new int[array.length / 2];
-            int counter = 0;
-            for (int i = 0; i < array.length / 2; i++) {
-                newArray[counter] = array[i];
-                counter++;
-            }
-
-            mid = mid + 1;
-            return searchForRangeRec(newArray, target, mid - carry);
-        }
-
-        return new int[] {-1, -1};
+        return finalRange;
     }
 
-    private static int searchHelper(int[] array, int min, int max, int target) {
-        int mid = (min + max) / 2;
-        if (array[mid] == target) {
-            return mid;
-        } else if (array[mid] < target) {
-            return searchHelper(array, mid + 1, max, target);
+    private static void alteredBinarySearch(int[] array, int target, int left, int right, int[] finalRange,
+                                            boolean goLeft) {
+        // left = 0
+        // right = 12
+        //          0  1   2   3   4   5   6   7   8   9  10  11  12
+        // array = [0, 1, 21, 33, 45, 45, 45, 45, 45, 45, 61, 71, 73]
+        while (left <= right) {
+            int mid = (left + right) / 2; // (7 + 12) / 2 = 9
+            if (array[mid] < target) { // 45 < 45
+                left = mid + 1;
+            } else if (array[mid] > target) { // 45 > 45
+                right = mid - 1;
+            } else {
+                if (goLeft) {
+                    if (mid == 0 || array[mid - 1] != target) {
+                        finalRange[0] = mid;
+                        return;
+                    } else {
+                        right = mid - 1;
+                    }
+                } else {
+                    if (mid == array.length - 1 || array[mid + 1] != target) {
+                        finalRange[1] = mid;
+                        return;
+                    } else {
+                        left = mid + 1;
+                    }
+                }
+            }
+        }
+    }
+
+    // O(log(n)) time | O(log(n)) space
+    public static int[] searchForRangeRec(int[] array, int target) {
+        // Write your code here.
+        // array = [0, 1, 21, 33, 45, 45, 45, 45, 45, 45, 61, 71, 73]
+        // finalRange = [4, 9]
+        int[] finalRange = {-1, -1};
+
+        alteredBinarySearchRec(array, target, 0, array.length - 1, finalRange, true); // left extreme
+        alteredBinarySearchRec(array, target, 0, array.length - 1, finalRange, false); // right extreme
+
+        return finalRange;
+    }
+
+    private static void alteredBinarySearchRec(int[] array, int target, int left, int right, int[] finalRange,
+                                            boolean goLeft) {
+        if (left > right) {
+            return;
+        }
+        // goLeft = false
+        // left = 7
+        // right = 12
+        // target = 45
+        //          0  1   2   3   4   5   6   7   8   9  10  11  12
+        // array = [0, 1, 21, 33, 45, 45, 45, 45, 45, 45, 61, 71, 73]
+        int mid = (left + right) / 2; // (7 + 12) / 2 = 9
+        if (array[mid] < target) { // 45 < 45
+            alteredBinarySearchRec(array, target, mid + 1, right, finalRange, goLeft);
+        } else if (array[mid] > target) { // 45 > 45
+            alteredBinarySearchRec(array, target, left, mid - 1, finalRange, goLeft);
         } else {
-            return searchHelper(array, min, mid - 1, target);
+            if (goLeft) {
+                if (mid == 0 || array[mid - 1] != target) {
+                    finalRange[0] = mid; // 4
+                } else {
+                    alteredBinarySearchRec(array, target, left, mid - 1, finalRange, goLeft);
+                }
+            } else {
+                if (mid == array.length - 1 || array[mid + 1] != target) {
+                    finalRange[1] = mid; // 9
+                } else {
+                    alteredBinarySearchRec(array, target, mid + 1, right, finalRange, goLeft);
+                }
+            }
         }
     }
 

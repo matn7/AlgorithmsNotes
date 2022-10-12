@@ -1,10 +1,6 @@
 package hard;
 
-import java.util.LinkedList;
-
 public class ValidateThreeNodes {
-
-    static BST root;
 
     public static void main(String[] args) {
         BST tree = new BST(5);
@@ -17,129 +13,12 @@ public class ValidateThreeNodes {
         tree.left.left.left = new BST(0);
         tree.left.right.left = new BST(3);
 
-        root = tree;
-//        BST tree = new BST(3);
-//        tree.left = new BST(2);
-//        tree.left.left = new BST(1);
-
-        //          5
-        //        /   \
-        //       2     7
-        //     /  \   /  \
-        //    1    4 6    8
-        //  /     /
-        // 0     3
-
-        inOrder(tree);
-
         ValidateThreeNodes validateThreeNodes = new ValidateThreeNodes();
-
-        System.out.println();
-        boolean result = validateThreeNodes.validateThreeNodes(tree.left.left, tree.left, tree);
+        boolean result = validateThreeNodes.validateThreeNodes(tree, tree.left, tree.left.right.left);
         System.out.println(result);
-        System.out.println(validateThreeNodes.isBST(tree));
     }
 
-    private boolean isBST(BST tree) {
-        LinkedList<BST> queue = new LinkedList<>();
-        queue.addFirst(tree);
-
-        while (!queue.isEmpty()) {
-            BST element = queue.pollFirst();
-            if (element.left != null) {
-                if (element.left.value >= element.value) {
-                    return false;
-                }
-                queue.addLast(element.left);
-            }
-            if (element.right != null) {
-                if (element.right.value < element.value) {
-                    return false;
-                }
-                queue.addLast(element.right);
-            }
-        }
-        return true;
-    }
-
-    public boolean validateThreeNodes(BST nodeOne, BST nodeTwo, BST nodeThree) {
-        // Write your code here.
-        // Determine whether root is nodeOne or nodeThree
-        BST current = nodeOne;
-        boolean nodeOneIsCloserToRoot = false;
-        BST firstCheckNode = null;
-        BST secondCheckNode = null;
-
-        // assume nodeOne is ancestor of nodeThree
-        while (current != null) {
-            if (current.value > nodeThree.value) {
-                // left
-                current = current.left;
-            } else if (current.value < nodeThree.value) {
-                // right
-                current = current.right;
-            } else {
-                // proof assumed
-                nodeOneIsCloserToRoot = true;
-                break;
-            }
-        }
-
-        if (nodeOneIsCloserToRoot) {
-            firstCheckNode = nodeOne;
-            secondCheckNode = nodeThree;
-        } else {
-            firstCheckNode = nodeThree;
-            secondCheckNode = nodeOne;
-        }
-
-        boolean firstCheck = false;
-        boolean secondCheck = false;
-
-        // check firstCheckNode is parent of nodeTwo
-        while (firstCheckNode != null) {
-            if (firstCheckNode.value > nodeTwo.value) {
-                // left
-                firstCheckNode = firstCheckNode.left;
-            } else if (firstCheckNode.value < nodeTwo.value) {
-                // right
-                firstCheckNode = firstCheckNode.right;
-            } else {
-                // are equals
-                nodeTwo = firstCheckNode;
-                firstCheck = true;
-                break;
-            }
-        }
-
-        // check nodeTwo is parent of secondCheckNode
-        while (nodeTwo != null) {
-            if (nodeTwo.value > secondCheckNode.value) {
-                // left
-                nodeTwo = nodeTwo.left;
-            } else if (nodeTwo.value < secondCheckNode.value) {
-                // right
-                nodeTwo = nodeTwo.right;
-            } else {
-                // are equals
-                secondCheck = true;
-                break;
-            }
-        }
-
-        return firstCheck && secondCheck;
-    }
-
-    public static void inOrder(BST tree) {
-        if (tree == null) {
-            return;
-        }
-
-        inOrder(tree.left);
-        System.out.print(tree.value + " ");
-        inOrder(tree.right);
-    }
-
+    // This is an input class. Do not edit.
     static class BST {
         public int value;
         public BST left = null;
@@ -149,5 +28,114 @@ public class ValidateThreeNodes {
             this.value = value;
         }
     }
+
+    // O(h) time | O(h) space
+    // OK - repeated 28/01/2022
+    // (5, 2, 3)
+//    public boolean validateThreeNodes(BST nodeOne, BST nodeTwo, BST nodeThree) {
+//        // Write your code here.
+//        if (isDescendant(nodeTwo, nodeOne)) { // 2, 5
+//            return isDescendant(nodeThree, nodeTwo);
+//        }
+//        if (isDescendant(nodeTwo, nodeThree)) { // 2, 3    ---> from node 2 we can go to node 3
+//            return isDescendant(nodeOne, nodeTwo); // 5, 2 ---> from node 5 check whether we can go to node 2
+//            // is nodeTwo is descendant of nodeOne
+//            // is nodeOne is ancestor of nodeTwo
+//        }
+//        return false;
+//    }
+//
+//    private boolean isDescendant(BST node, BST target) {
+//        if (node == null) {
+//            return false;
+//        }
+//        if (node == target) { // 2 == 2
+//            return true;
+//        }
+//
+//        if (target.value < node.value) { // 2 < 5
+//            return isDescendant(node.left, target);
+//        } else {
+//            return isDescendant(node.right, target);
+//        }
+//    }
+
+    // O(h) time | O(1) space
+    public boolean validateThreeNodes(BST nodeOne, BST nodeTwo, BST nodeThree) {
+        // Write your code here.
+        if (isDescendant(nodeTwo, nodeOne)) { // 2, 5
+            return isDescendant(nodeThree, nodeTwo);
+        }
+        if (isDescendant(nodeTwo, nodeThree)) { // 2, 3
+            return isDescendant(nodeOne, nodeTwo); // 5, 2
+        }
+        return false;
+    }
+
+    private boolean isDescendant(BST node, BST target) { // 5, 2
+        while (node != null && node != target) {
+            if (node.value > target.value) { // 5 > 2
+                node = node.left;
+            } else {
+                node = node.right;
+            }
+        }
+        return node == target; // 2 == 2
+    }
+
+//    // O(d) time | O(1) space
+//    public boolean validateThreeNodes(BST nodeOne, BST nodeTwo, BST nodeThree) {
+//        BST searchOne = nodeOne;
+//        BST searchTwo = nodeTwo;
+//
+//        while (true) {
+//            boolean foundThreeFromOne = searchOne == nodeThree;
+//            boolean foundOneFromThree = searchTwo == nodeOne;
+//            boolean foundNodeTwo = searchOne == nodeTwo || searchTwo == nodeTwo;
+//            boolean finishedSearching = searchOne == null && searchTwo == null;
+//            if (foundThreeFromOne || foundOneFromThree || foundNodeTwo || finishedSearching) {
+//                break;
+//            }
+//
+//            if (searchOne != null) {
+//                if (searchOne.value > nodeTwo.value) {
+//                    searchOne = searchOne.left;
+//                } else {
+//                    searchOne = searchOne.right;
+//                }
+//            }
+//
+//            if (searchTwo != null) {
+//                if (searchTwo.value > nodeTwo.value) {
+//                    searchTwo = searchTwo.left;
+//                } else {
+//                    searchTwo = searchTwo.right;
+//                }
+//            }
+//        }
+//
+//        boolean foundNodeFromOther = searchOne == nodeThree || searchTwo == nodeOne;
+//        boolean foundNodeTwo = searchOne == nodeTwo || searchTwo == nodeTwo;
+//        if (!foundNodeTwo || foundNodeFromOther) {
+//            return false;
+//        }
+//
+//        if (searchOne == nodeTwo) {
+//            return searchForTarget(nodeTwo, nodeThree);
+//        } else {
+//            return searchForTarget(nodeTwo, nodeOne);
+//        }
+//    }
+//
+//    private boolean searchForTarget(BST node, BST target) {
+//        while (node != null && node != target) {
+//            if (node.value > target.value) {
+//                node = node.left;
+//            } else {
+//                node = node.right;
+//            }
+//        }
+//        return node == target;
+//    }
 
 }

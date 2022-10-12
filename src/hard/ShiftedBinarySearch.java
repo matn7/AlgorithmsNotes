@@ -1,49 +1,103 @@
 package hard;
 
-import java.util.Arrays;
-
 public class ShiftedBinarySearch {
 
 
     public static void main(String[] args) {
-//        int[] array = {45, 61, 71, 72, 73, 0, 1, 21, 33, 37};
+        int[] array = {45, 61, 71, 72, 73, 0, 1, 21, 33, 37};
 //        int[] array = {0, 1, 21, 33, 37, 45, 61, 71, 72, 73};
-        int[] array = {5, 23, 111, 1};
-        int result = shiftedBinarySearch(array, 111);
+        int result = shiftedBinarySearch(array, 1); // target 33
         System.out.println(result);
     }
 
     public static int shiftedBinarySearch(int[] array, int target) {
-        // Write your code here.
-        int shiftBy = 0;
-        for (int i = 0; i < array.length - 1; i++) {
-            if (array[i] > array[i + 1]) {
-                shiftBy++;
-                break;
-            }
-            shiftBy++;
+        return shiftedBinarySearchHelper(array, target, 0, array.length - 1);
+    }
+
+    // O(log(n)) time | O(d) space
+    // OK - repeated 27/01/2022
+    public static int shiftedBinarySearchHelper(int[] array, int target, int left, int right) {
+        if (left > right) {
+            return -1;
         }
-
-        if (shiftBy == array.length) {
-            shiftBy = 0;
-        }
-
-        int min = 0;
-        int max = array.length - 1;
-
-        Arrays.sort(array);
-
-        while (min <= max) {
-            int mid = (max + min) / 2;
-            if (array[mid] == target) {
-                return (mid + shiftBy) % array.length;
-            } else if (array[mid] > target) {
-                max = mid - 1;
+        //   0   1   2   3   4  5  6   7   8   9
+        // [45, 61, 71, 72, 73, 0, 1, 21, 33, 37]
+        int middle = (left + right) / 2; // (8 + 9) = 17 / 2 = 8
+        int potentialMatch = array[middle]; // 33
+        int leftNum = array[left]; // 33
+        int rightNum = array[right]; // 37
+        if (potentialMatch == target) { // 33 == 33 -> no
+            return middle;
+        } else if (leftNum <= potentialMatch) { // 0 <= 21
+            // entire left subarray is sorted
+            if (target < potentialMatch && target >= leftNum) { // 33 < 21 && 33 >= 0
+                // left
+                return shiftedBinarySearchHelper(array, target, left, middle - 1);
             } else {
-                min = mid + 1;
+                // right
+                // rec(array, 33, 5, 9)
+                // rec(array, 33, 8, 9)
+                return shiftedBinarySearchHelper(array, target, middle + 1, right);
+            }
+        } else {
+            // entire left unsorted
+            if (target > potentialMatch && target <= rightNum) {
+                return shiftedBinarySearchHelper(array, target, middle + 1, right);
+            } else {
+                return shiftedBinarySearchHelper(array, target, left, middle - 1);
+            }
+        }
+    }
+
+    // O(log(n)) time | O(1) space
+    public static int shiftedBinarySearchHelper2(int[] array, int target, int left, int right) {
+        // Write your code here.
+        // target = 33
+        //   0   1   2   3   4  5  6   7   8   9
+        // [45, 61, 71, 72, 73, 0, 1, 21, 33, 37]
+        // left = 0
+        // right = 9
+        while (left < right) {
+            int middle = (left + right) / 2; // (8+9)/2 = 8
+            int potentialMatch = array[middle]; // 33
+            int leftNum = array[left]; // 33
+            int rightNum = array[right]; // 37
+            if (potentialMatch == target) {
+                return middle;
+            } else if (leftNum <= potentialMatch) { // 0 <= 21
+                // entire left subarray is sorted
+                if (target < potentialMatch && target >= leftNum) { // 33 < 21 && 33 >= 45
+                    right = middle - 1; // whether our target is in left subarray
+                } else {
+                    left = middle + 1;
+                }
+            } else {
+                // entire left unsorted
+                if (target > potentialMatch && target <= rightNum) {
+                    left = middle + 1;
+                } else {
+                    right = middle - 1;
+                }
             }
         }
 
         return -1;
     }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

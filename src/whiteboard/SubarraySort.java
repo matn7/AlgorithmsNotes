@@ -11,6 +11,7 @@ public class SubarraySort {
 
     // O(n) time | O(1) space
     // #2: 02/07/2022
+    // rand: 05/10/2022
     public static int[] subarraySort(int[] array) {
         // Write your code here.
         int minOutOfOrder = Integer.MAX_VALUE;

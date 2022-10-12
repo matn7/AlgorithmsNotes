@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class ShortenPathREPEAT {
+public class ShortenPathMy {
 
     public static void main(String[] args) {
 //        String path = "foo/../../../test/../test/../foo//bar/./baz"; // relative path ../../foo/bar/baz

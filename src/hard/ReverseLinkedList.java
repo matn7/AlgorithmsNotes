@@ -1,6 +1,6 @@
 package hard;
 
-public class ReverseLinkedListREPEAT {
+public class ReverseLinkedList {
 
     public static void main(String[] args) {
         LinkedList head = new LinkedList(0);

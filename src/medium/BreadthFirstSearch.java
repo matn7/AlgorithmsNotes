@@ -21,8 +21,17 @@ public class BreadthFirstSearch {
         tree.children.get(0).children.get(1).addChild("J");
         tree.children.get(2).children.get(0).addChild("K");
 
-        tree.breadthFirstSearch(new ArrayList<>());
+        List<String> input = new ArrayList<>();
+        List<String> strings = tree.breadthFirstSearch(input);
+        System.out.println();
     }
+    //                  A
+    //               /  |  \
+    //              B   C   D
+    //             / \     / \
+    //            E   F   G   H
+    //               / \   \
+    //              I   J   K
 
     static class Node {
         String name;
@@ -32,15 +41,19 @@ public class BreadthFirstSearch {
             this.name = name;
         }
 
+        // O(V + E) time (V has how many children as edges) | O(V) space
+        // OK - repeated 11/02/2022
         public List<String> breadthFirstSearch(List<String> array) {
             // Write your code here.
             Queue<Node> queue = new LinkedList<>();
+            // ---------------------------------------
+            //
+            // ---------------------------------------
             queue.add(this);
-
             while (!queue.isEmpty()) {
-                Node poll = queue.poll();
-                array.add(poll.name);
-                for (Node child : poll.children) {
+                Node current = queue.poll(); // (K)
+                array.add(current.name); // [A, B, C, D, E, F, G, H, I, J, K]
+                for (Node child : current.children) { // []
                     queue.add(child);
                 }
             }
@@ -53,5 +66,4 @@ public class BreadthFirstSearch {
             return this;
         }
     }
-
 }

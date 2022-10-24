@@ -92,43 +92,43 @@ public class CompareLeafTraversal {
         return node.left == null && node.right == null;
     }
 
-//    // O(n + m) time | O(h1 + h2) space
-//    public boolean compareLeafTraversal(BinaryTree tree1, BinaryTree tree2) {
-//        // Write your code here.
-//        Stack<BinaryTree> tree1TraversalStack = new Stack<>();
-//        Stack<BinaryTree> tree2TraversalStack = new Stack<>();
-//        tree1TraversalStack.push(tree1);
-//        tree2TraversalStack.push(tree2);
-//
-//        while (!tree1TraversalStack.isEmpty() && !tree2TraversalStack.isEmpty()) {
-//            BinaryTree tree1Leaf = getNextLeafNode(tree1TraversalStack);
-//            BinaryTree tree2Leaf = getNextLeafNode(tree2TraversalStack);
-//            if (tree1Leaf.value != tree2Leaf.value) {
-//                return false;
-//            }
-//        }
-//        return tree1TraversalStack.isEmpty() && tree2TraversalStack.isEmpty();
-//    }
-//
-//    private BinaryTree getNextLeafNode(Stack<BinaryTree> traversalStack) {
-//        BinaryTree currentNode = traversalStack.pop();
-//
-//        while (!isLeafNode(currentNode)) {
-//            if (currentNode.right != null) {
-//                traversalStack.push(currentNode.right);
-//            }
-//            if (currentNode.left != null) {
-//                traversalStack.push(currentNode.left);
-//            }
-//
-//            currentNode = traversalStack.pop();
-//        }
-//
-//        return currentNode;
-//    }
-//
-//    private boolean isLeafNode(BinaryTree node) {
-//        return node.left == null && node.right == null;
-//    }
+    // O(n + m) time | O(h1 + h2) space
+    public boolean compareLeafTraversal2(BinaryTree tree1, BinaryTree tree2) {
+        // Write your code here.
+        Stack<BinaryTree> tree1TraversalStack = new Stack<>();
+        Stack<BinaryTree> tree2TraversalStack = new Stack<>();
+        tree1TraversalStack.push(tree1);
+        tree2TraversalStack.push(tree2);
+
+        while (!tree1TraversalStack.isEmpty() && !tree2TraversalStack.isEmpty()) {
+            BinaryTree tree1Leaf = getNextLeafNode(tree1TraversalStack);
+            BinaryTree tree2Leaf = getNextLeafNode(tree2TraversalStack);
+            if (tree1Leaf.value != tree2Leaf.value) {
+                return false;
+            }
+        }
+        return tree1TraversalStack.isEmpty() && tree2TraversalStack.isEmpty();
+    }
+
+    private BinaryTree getNextLeafNode(Stack<BinaryTree> traversalStack) {
+        BinaryTree currentNode = traversalStack.pop();
+
+        while (!isLeafNode2(currentNode)) {
+            if (currentNode.right != null) {
+                traversalStack.push(currentNode.right);
+            }
+            if (currentNode.left != null) {
+                traversalStack.push(currentNode.left);
+            }
+
+            currentNode = traversalStack.pop();
+        }
+
+        return currentNode;
+    }
+
+    private boolean isLeafNode2(BinaryTree node) {
+        return node.left == null && node.right == null;
+    }
 
 }

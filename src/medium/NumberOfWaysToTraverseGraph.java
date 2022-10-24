@@ -1,93 +1,76 @@
 package medium;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class NumberOfWaysToTraverseGraph {
 
     public static void main(String[] args) {
-
-        NumberOfWaysToTraverseGraph numberOfWaysToTraverseGraph = new NumberOfWaysToTraverseGraph();
-        int result = numberOfWaysToTraverseGraph.numberOfWaysToTraverseGraphMath(3, 4);
-
-
-        System.out.println(numberOfWaysToTraverseGraph.factorial(4));
-
-        int fact = numberOfWaysToTraverseGraph.fact(4);
-        System.out.println(fact);
-
+        NumberOfWaysToTraverseGraph ways = new NumberOfWaysToTraverseGraph();
+        int result = ways.numberOfWaysToTraverseGraph(4, 3);
         System.out.println(result);
-
-    }
-
-    // O(2^(n+m)) time | O(nm) space (call stack)
-    public int numberOfWaysToTraverseGraph(int width, int height) {
-        // Write your code here.
-        if (width == 1 || height == 1) {
-            return 1;
-        }
-
-        return numberOfWaysToTraverseGraph(width - 1, height)
-                + numberOfWaysToTraverseGraph(width, height - 1);
-    }
-
-    // (nm) time | O(nm) space
-    public int numberOfWaysToTraverseGraphDP(int width, int height) {
-        // Write your code here.
-        if (width == 1 || height == 1) {
-            return 1;
-        }
-        int[][] newArray = new int[height][width];
-        int sum = 1;
-        for (int row = 0; row < height; row++) {
-            for (int col = 0; col < width; col++) {
-                if (col == 0) {
-                    newArray[row][col] = 1;
-                } else if (row == 0) {
-                    newArray[row][col] = 1;
-                } else {
-                    newArray[row][col] = newArray[row][col - 1] + newArray[row - 1][col];
-                }
-            }
-        }
-
-        return newArray[height-1][width-1];
     }
 
     // O(n + m) time | O(1) space
-    public int numberOfWaysToTraverseGraphMath(int width, int height) {
-        // Write your code here.
-        // permutation
-        int r = (width - 1);
-        int d = (height - 1);
-        int result = factorial(r + d) / (factorial(r) * factorial(d));
-        return result;
+    // OK - repeated 16/02/2022
+    public int numberOfWaysToTraverseGraph(int width, int height) {
+        int xDistanceToCorner = width - 1;
+        int yDistanceToCorner = height - 1;
+
+        int numerator = factorial(xDistanceToCorner + yDistanceToCorner);
+        int denominator = factorial(xDistanceToCorner) * factorial(yDistanceToCorner);
+        return numerator / denominator;
+        // (xDistanceToCorner + yDistanceToCorner)!
+        // ----------------------------------------
+        // (xDistanceToCorner)! * (yDistanceToCorner)!
     }
 
-    private int factorial(int number) {
-        Map<Integer, Integer> memo = new HashMap<>();
-
-        return helper(number, memo);
-    }
-
-    private int helper(int number, Map<Integer, Integer> memo) {
-
-        if (number == 0) {
-            return 1;
-        }
-        if (memo.containsKey(number)) {
-            return number;
-        }
-        memo.put(number,  number * helper(number - 1, memo));
-        return memo.get(number);
-    }
-
-    private int fact(int number) {
+    private int factorial(int num) {
         int result = 1;
-        for (int n = 2; n <= number; n++) {
+        for (int n = 2; n < num + 1; n++) {
             result *= n;
         }
         return result;
+    }
+
+    // O(n*m) time | O(n*m) space
+    public int numberOfWaysToTraverseGraph2(int width, int height) {
+        int[][] numberOfWays = new int[height + 1][width + 1];
+        //             *
+        //     0 1 2 3 4
+        // --+----------
+        // 0 | 0 0 0 0 0
+        // 1 | 0 1 1 1 1  *
+        // 2 | 0 1 2 3 4
+        // 3 | 0 1 3 6 10
+
+        for (int i = 0; i < width; i++) {
+            numberOfWays[0][i] = 0;
+        }
+
+        for (int i = 0; i < height; i++) {
+            numberOfWays[i][0] = 0;
+        }
+
+        for (int widthIdx = 1; widthIdx < width + 1; widthIdx++) { // width = col
+            for (int heightIdx = 1; heightIdx < height + 1; heightIdx++) { // height = row
+                if (widthIdx == 1 || heightIdx == 1) {
+                    numberOfWays[heightIdx][widthIdx] = 1;
+                } else {
+                    int waysLeft = numberOfWays[heightIdx][widthIdx - 1]; // 1
+                    int waysUp = numberOfWays[heightIdx - 1][widthIdx]; // 2
+                    numberOfWays[heightIdx][widthIdx] = waysLeft + waysUp;
+                }
+            }
+        }
+        return numberOfWays[height][width];
+    }
+
+    // O(2^(n+m)) time | O(n + m) space
+    public int numberOfWaysToTraverseGraph3(int width, int height) {
+        if (width == 1 || height == 1) {
+            return 1;
+        }
+
+        return numberOfWaysToTraverseGraph3(width - 1, height)
+                + numberOfWaysToTraverseGraph3(width, height - 1);
     }
 
 }

@@ -1,93 +1,63 @@
 package veryhard;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.PriorityQueue;
 
 public class MergeSortedArrays {
+
     public static void main(String[] args) {
         List<List<Integer>> arrays = new ArrayList<>();
-
-        arrays.add(0, new ArrayList<>());
-        arrays.add(1, new ArrayList<>());
-        arrays.add(2, new ArrayList<>());
-        arrays.add(3, new ArrayList<>());
-
-        arrays.get(0).addAll(Arrays.asList(1, 5, 9, 21));
-        arrays.get(1).addAll(Arrays.asList(-1, 0));
-        arrays.get(2).addAll(Arrays.asList(-124, 81, 121));
-        arrays.get(3).addAll(Arrays.asList(3, 6, 12, 20, 150));
+        arrays.add(Arrays.asList(1, 5, 9, 21));
+        arrays.add(Arrays.asList(-1, 0));
+        arrays.add(Arrays.asList(-124, 81, 121));
+        arrays.add(Arrays.asList(3, 6, 12, 20, 150));
 
         List<Integer> integers = mergeSortedArrays(arrays);
 
         System.out.println();
-
     }
-
-    // O(nk) time | O(n+k) space
-    public static List<Integer> mergeSortedArrays2(List<List<Integer>> arrays) {
-        return null;
-    }
-
-    // O(nlog(k) + k) time (k to build minHeap) | O(n+k) space
+    // OK - repeated 19/02/2022
+    // O(nlog(k) + k) time | O(n + k) space
     public static List<Integer> mergeSortedArrays(List<List<Integer>> arrays) {
-        if (arrays.size() == 0) {
-            return null; // list already sorted
-        }
-
-        int allElements = 0;
-        for (int i = 0; i < arrays.size(); i++) {
-            allElements += arrays.get(i).size();
-        }
-
+        List<Integer> sortedList = new ArrayList<>();
         PriorityQueue<Element> minHeap = new PriorityQueue<>();
 
-        // populate with first element from each list
-        for (int i = 0; i < arrays.size(); i++) {
-            minHeap.add(new Element(arrays.get(i).remove(0), i));
+        for (int arrayIdx = 0; arrayIdx < arrays.size(); arrayIdx++) {
+            minHeap.add(new Element(arrayIdx, 0, arrays.get(arrayIdx).get(0)));
         }
-
-        List<Integer> sorted = new ArrayList<>();
-        int counter = 0;
-        while (counter < allElements) {
-            Element currentMinElement = minHeap.poll();
-            sorted.add(currentMinElement.getValue());
-            int arrayIdentifier = currentMinElement.getArrayIdentifier(); // 0: A, 1: B, 2: C
-            if (!arrays.get(arrayIdentifier).isEmpty()) {
-                minHeap.add(new Element(arrays.get(arrayIdentifier).remove(0), arrayIdentifier));
+        while (!minHeap.isEmpty()) {
+            Element smallestValue = minHeap.poll(); //  (3, 4, 150)
+            int arrayIdx = smallestValue.arrayIdx; // 3
+            int elementIdx = smallestValue.elementIdx; // 4
+            int num = smallestValue.num; // 150
+            sortedList.add(num);
+            if (elementIdx == arrays.get(arrayIdx).size() - 1) { // 4 == 4
+                continue;
             }
-            counter++;
+            //
+            minHeap.add(new Element(arrayIdx, elementIdx + 1, arrays.get(arrayIdx).get(elementIdx + 1)));
         }
-
-        return sorted;
+        return sortedList; // [-123, -1, 0, 1, 3, 5, 6, 9, 12, 20, 21, 81, 121, 150]
     }
 
-    private static class Element implements Comparable<Element> {
-        private int value;
-        private int arrayIdentifier;
+    static class Element implements Comparable<Element> {
+        int arrayIdx;
+        int elementIdx;
+        int num;
 
-        public Element(int value, int arrayIdentifier) {
-            this.value = value;
-            this.arrayIdentifier = arrayIdentifier;
-        }
-
-        public int getValue() {
-            return value;
-        }
-
-        public void setValue(int value) {
-            this.value = value;
-        }
-
-        public int getArrayIdentifier() {
-            return arrayIdentifier;
-        }
-
-        public void setArrayIdentifier(int arrayIdentifier) {
-            this.arrayIdentifier = arrayIdentifier;
+        public Element(int arrayIdx, int elementIdx, int num) {
+            this.arrayIdx = arrayIdx;
+            this.elementIdx = elementIdx;
+            this.num = num;
         }
 
         @Override
-        public int compareTo(Element element) {
-            return value - element.value;
+        public int compareTo(Element o) {
+            return num - o.num;
         }
     }
+
+
 }

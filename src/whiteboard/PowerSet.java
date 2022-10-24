@@ -43,22 +43,24 @@ public class PowerSet {
     }
 
 
-//    // O(n * 2^n) time | O(n * 2^n) space
-//    public static List<List<Integer>> powerset(List<Integer> array) {
-//        // Write your code here.
-//        List<List<Integer>> result = new ArrayList<>();
-//        result.add(new ArrayList<>());
-//
-//        for (Integer element : array) {
-//            int resultSize = result.size();
-//            for (int idx = 0; idx < resultSize; idx++) {
-//                List<Integer> currentElement = new ArrayList<>(result.get(idx));
-//                currentElement.add(element);
-//                result.add(currentElement);
-//            }
-//        }
-//
-//        return result;
-//    }
+    // O(n * 2^n) time | O(n * 2^n) space
+    public static List<List<Integer>> powersetIter(List<Integer> array) {
+        // Write your code here.
+        List<List<Integer>> result = new ArrayList<>();
+        result.add(new ArrayList<>());
+        if (array.isEmpty()) {
+            return result;
+        }
+        for (Integer num : array) {
+            int size = result.size();
+            for (int i = 0; i < size; i++) {
+                List<Integer> current = result.get(i);
+                List<Integer> newCurr = new ArrayList<>(current);
+                newCurr.add(num);
+                result.add(newCurr);
+            }
+        }
+        return result;
+    }
 
 }

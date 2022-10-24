@@ -1,262 +1,154 @@
 package medium;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 public class MinimumPassesOfMatrix {
 
     public static void main(String[] args) {
         int[][] matrix = {
-                {0, -2, -1},
-                {-5, 2, 0},
-                {-6, -2, 0}
+                {0, -1, -3,  2,  0},
+                {1, -2, -5, -1, -3},
+                {3,  0,  0, -4, -1}
         };
 
         MinimumPassesOfMatrix minimumPassesOfMatrix = new MinimumPassesOfMatrix();
-        int result = minimumPassesOfMatrix.minimumPassesOfMatrix(matrix);
-
-        System.out.println(result);
+        minimumPassesOfMatrix.minimumPassesOfMatrix(matrix);
     }
 
+    // O(w*h) time | O(w*h) space
+    // OK - repeated 18/02/2022
     public int minimumPassesOfMatrix(int[][] matrix) {
         // Write your code here.
-        Map<String, Node> nodeMap = new HashMap<>();
-        populateNodesMap(matrix, nodeMap);
+//        [0, -1, -3,  2,  0],
+//        [1, -2, -5, -1, -3],
+//        [3,  0,  0, -4, -1]
+        int passes = convertNegative(matrix);
 
-        Collection<Node> nodes = nodeMap.values();
-
-        boolean isNegativeElement = false;
-
-        // Visit
-        for (Node element : nodes) {
-            if (element.value < 0) {
-                isNegativeElement = true;
-                break;
-            }
+        if (!containsNegative(matrix)) {
+            return passes - 1; // 4 - 1 = 3
         }
-        if (!isNegativeElement) {
-            // no negative element found return immediately
-            return 0;
-        }
-
-        int counter = 0;
-        int numberOfCycles = 0;
-        while (isNegativeElement) {
-            numberOfCycles++;
-            for (Node element : nodes) {
-                if (!element.isVisited()) {
-                    breadthFirst(element);
-                }
-            }
-
-            for (Node element : nodes) {
-                if (element.isEligibleForSignChange()) {
-                    element.setValue(element.getValue() * (-1));
-                    System.out.println(element.value + " changed");
-                    element.setEligibleForSignChange(false);
-                }
-            }
-
-            // check for negative elements
-            for (Node element : nodes) {
-                if (element.value < 0) {
-                    isNegativeElement = true;
-                    break;
-                } else {
-                    isNegativeElement = false;
-                }
-            }
-
-            // still some negatives, do over
-            resetVisited(nodes);
-        }
-
-        return numberOfCycles;
+        return -1;
     }
 
-    private void resetVisited(Collection<Node> nodes) {
-        // reset visited
-        for (Node element : nodes) {
-            element.setVisited(false);
-        }
-    }
+    private int convertNegative(int[][] matrix) {
+//        [0, -1, -3,  2,  0],
+//        [1, -2, -5, -1, -3],
+//        [3,  0,  0, -4, -1]
+        Queue<NodeInfo> queue = getAllPositivePositions(matrix);
+        int passes = 0;
 
-    public void depthFirst(Node element) {
-
-        if (element.isVisited()) {
-            return;
-        }
-
-        System.out.print(element.value + "  ");
-
-        element.setVisited(true);
-
-        Set<Node> neighbors = element.getNeighbors();
-
-        for (Node elem : neighbors) {
-            depthFirst(elem);
-        }
-
-    }
-
-    public void breadthFirst(Node element) {
-
-        Queue<Node> queue = new LinkedList<>();
-
-        queue.add(element);
-
+        // queue
+        // ------------------------------
+        //
+        // ------------------------------
         while (!queue.isEmpty()) {
+            int currentSize = queue.size(); // 1
 
-            boolean isEligibleForSignChange = false;
+            while (currentSize > 0) {
+                NodeInfo current = queue.poll(); // (2,4)
+                int currentRow = current.row; // 2
+                int currentCol = current.col; // 4
 
-            Node poll = queue.poll();
-            poll.setVisited(true);
-//            System.out.println(poll.value);
-            if (poll.value == -5) {
-                System.out.println();
-            }
+                List<NodeInfo> adjacentPositions = getAdjacentPositions(currentRow, currentCol, matrix);
+                //     *
+                // [(1,4),(2.3)]
+                for (NodeInfo position : adjacentPositions) {
+                    int row = position.row; // 1
+                    int col = position.col; // 2
 
-            Set<Node> neighbors = poll.getNeighbors();
-            // check whether neighbors
-            if (poll.value < 0) {
-                int count = 0;
-                for (Node elem : neighbors) {
-                    if (elem.value > 0) {
-                        count++;
+                    int value = matrix[row][col]; // -1
+                    if (value < 0) {
+                        matrix[row][col] = -1 * value;
+                        queue.add(new NodeInfo(row, col)); // (2,4)
                     }
                 }
-                if (count >= 1) {
-                    isEligibleForSignChange = true;
-                    poll.setEligibleForSignChange(true);
-                }
+                currentSize--; // 0
             }
+            passes++; // 4
+        }
+        return passes;
+    }
+    //                         c
+    //         0   1   2   3   4
+    //        ---------------------+
+    //        [0,  1,  3,  2,  0], |
+    //        [1,  2,  5,  1,  3], |
+    //        [3,  0,  0,  4,  1]  | row
 
+    // rec(2, 4, [][])
+    // rec(0, 1, [][])
+    // rec(1, 4, [][])
+    // rec(1, 2, [][])
+    // rec(2, 3, [][])
+    // rec(1, 1, [][])
+    // rec(0, 2, [][])
+    // rec(1, 3, [][])
+    // rec(2, 0, [][])
+    // rec(1, 0, [][])
+    // rec(0, 3, [][])
+    private List<NodeInfo> getAdjacentPositions(int row, int col, int[][] matrix) {
+        List<NodeInfo> adjacentPositions = new ArrayList<>(); //
 
-            for (Node elem : neighbors) {
-                if (!elem.isVisited()) {
-                    elem.setVisited(true);
-                    queue.add(elem);
-                }
-            }
+        if (row > 0) {
+            adjacentPositions.add(new NodeInfo(row - 1, col));
+        }
+        if (row < matrix.length - 1) {
+            adjacentPositions.add(new NodeInfo(row + 1, col));
+        }
+        if (col > 0) {
+            adjacentPositions.add(new NodeInfo(row, col - 1));
+        }
+        if (col < matrix[0].length - 1) {
+            adjacentPositions.add(new NodeInfo(row, col + 1));
         }
 
+        return adjacentPositions; //
     }
+    //                         c
+    //         0   1   2   3   4
+    //        ---------------------+
+    //        [0, -1, -3,  2,  0], |
+    //        [1, -2, -5, -1, -3], |
+    //        [3,  0,  0, -4, -1]  |    row
+    private Queue<NodeInfo> getAllPositivePositions(int[][] matrix) {
+        Queue<NodeInfo> positivePositions = new LinkedList<>();
 
-    private void populateNodesMap(int[][] matrix, Map<String, Node> nodeMap) {
+        // ------------------------------
+        //  (0, 3) (1, 0) (2,0)
+        // ------------------------------
+
         for (int row = 0; row < matrix.length; row++) {
             for (int col = 0; col < matrix[row].length; col++) {
-                if (matrix[row][col] == -5) {
-                    System.out.println();
-                }
-                String key = row + "-" + col;
-                if (nodeMap.containsKey(key)) {
-                    Node node = nodeMap.get(key);
-                    populateNeighbors(matrix, nodeMap, row, col, node);
-                } else {
-                    Node element = new Node(matrix[row][col]);
-                    nodeMap.put(key, element);
-                    populateNeighbors(matrix, nodeMap, row, col, element);
+                int value = matrix[row][col];
+                if (value > 0) {
+                    positivePositions.add(new NodeInfo(row, col));
                 }
             }
         }
+        return positivePositions;
     }
 
-    private void populateNeighbors(int[][] matrix, Map<String, Node> nodeMap, int row, int col, Node element) {
-        // North
-        if (row - 1 >= 0) {
-            String key1 = (row - 1) + "-" + col;
-            if (nodeMap.containsKey(key1)) {
-                // add neighbors back to out element
-                element.addNeighbor(nodeMap.get(key1));
-                nodeMap.get(key1).addNeighbor(element);
-            } else {
-                Node newNode = new Node(matrix[row-1][col]);
-                nodeMap.put(key1, newNode);
-                element.addNeighbor(newNode);
+    private boolean containsNegative(int[][] matrix) {
+        for (int[] row : matrix) {
+            for (int value : row) {
+                if (value < 0) {
+                    return true;
+                }
             }
         }
-        // South
-        if (row + 1 < matrix.length) {
-            String key1 = (row + 1) + "-" + col;
-            if (nodeMap.containsKey(key1)) {
-                // node already exists
-                element.addNeighbor(nodeMap.get(key1));
-                nodeMap.get(key1).addNeighbor(element);
-            } else {
-              Node newNode = new Node(matrix[row + 1][col]);
-              nodeMap.put(key1, newNode);
-              element.addNeighbor(newNode);
-            }
-        }
-        // West
-        if (col - 1 >= 0) {
-            String key1 = row + "-" + (col - 1);
-            if (nodeMap.containsKey(key1)) {
-                element.addNeighbor(nodeMap.get(key1));
-                nodeMap.get(key1).addNeighbor(element);
-            } else {
-                Node newNode = new Node(matrix[row][col - 1]);
-                nodeMap.put(key1, newNode);
-                element.addNeighbor(newNode);
-            }
-        }
-        // East
-        if (col + 1 < matrix[row].length) {
-            String key1 = row + "-" + (col + 1);
-            if (nodeMap.containsKey(key1)) {
-                element.addNeighbor(nodeMap.get(key1));
-                nodeMap.get(key1).addNeighbor(element);
-            } else {
-                Node newNode = new Node((matrix[row][col + 1]));
-                nodeMap.put(key1, newNode);
-                element.addNeighbor(newNode);
-            }
-        }
+        return false;
     }
 
-    class Node {
-        int value;
-        Set<Node> neighbors;
-        boolean visited;
-        boolean isEligibleForSignChange;
+    static class NodeInfo {
+        int row;
+        int col;
 
-        public Node(int value) {
-            this.value = value;
-            this.neighbors = new HashSet<>();
-            this.visited = false;
-            this.isEligibleForSignChange = false;
-        }
-
-        public int getValue() {
-            return value;
-        }
-
-        public void setValue(int value) {
-            this.value = value;
-        }
-
-        public void addNeighbor(Node node) {
-            this.neighbors.add(node);
-        }
-
-        public Set<Node> getNeighbors() {
-            return neighbors;
-        }
-
-        public boolean isVisited() {
-            return visited;
-        }
-
-        public void setVisited(boolean visited) {
-            this.visited = visited;
-        }
-
-        public boolean isEligibleForSignChange() {
-            return isEligibleForSignChange;
-        }
-
-        public void setEligibleForSignChange(boolean eligibleForSignChange) {
-            isEligibleForSignChange = eligibleForSignChange;
+        public NodeInfo(int row, int col) {
+            this.row = row;
+            this.col = col;
         }
     }
-
 }

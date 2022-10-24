@@ -5,7 +5,6 @@ import java.util.*;
 public class AStarAlgorithmMy {
 
     public static void main(String[] args) {
-        AStarAlgorithmMy aStarAlgorithmRand = new AStarAlgorithmMy();
         int[][] graph = {
                 {0, 0, 0, 0, 0},
                 {0, 1, 1, 1, 0},
@@ -13,126 +12,120 @@ public class AStarAlgorithmMy {
                 {1, 0, 1, 1, 1},
                 {0, 0, 0, 0, 0}
         };
-        aStarAlgorithmRand.aStarAlgorithm(0, 1, 4, 3, graph);
+
+        AStarAlgorithmMy aStarAlgorithm = new AStarAlgorithmMy();
+        aStarAlgorithm.aStarAlgorithm(0, 1, 4, 3, graph);
     }
 
-    // O(w*h*low(w*h)) time | O(w*h) space
-    // (do not delete)
+    // O(w*h*log(w * h)) time | O(w * h) space
     public int[][] aStarAlgorithm(int startRow, int startCol, int endRow, int endCol, int[][] graph) {
         // Write your code here.
-        List<List<Node>> nodeGraph = new ArrayList<>();
-        boolean foundResult = false;
+        Map<String, Node> adjList = new HashMap<>();
         for (int row = 0; row < graph.length; row++) {
-            nodeGraph.add(new ArrayList<>());
             for (int col = 0; col < graph[row].length; col++) {
-                int distance = calculateManhattanDistance(row, col, endRow, endCol);
-                nodeGraph.get(row).add(new Node(row, col, distance));
+                String key = row + ":" + col;
+                int distEnd = calculateManhattanDistance(row, endRow, col, endCol);
+                adjList.put(key, new Node(key, row, col, distEnd));
             }
         }
-        Node startNode = nodeGraph.get(startRow).get(startCol);
-        Node endNode = nodeGraph.get(endRow).get(endCol);
-        startNode.distanceFromStart = 0;
+        String startKey = startRow + ":" + startCol;
+        Node startNode = adjList.get(startKey);
+        String endKey = endRow + ":" + endCol;
+        Node endNode = adjList.get(endKey);
         startNode.recalculateHeuristic();
         PriorityQueue<Node> queue = new PriorityQueue<>();
         queue.add(startNode);
-
         while (!queue.isEmpty()) {
             Node curr = queue.poll();
+            if (curr == endNode) {
+                break;
+            }
             if (curr.visited) {
                 continue;
             }
             curr.visited = true;
-            if (curr == endNode) {
-                // break
-                foundResult = true;
-                break;
-            }
-            List<Node> neighbors = getNeighbors(curr, nodeGraph, graph);
+            List<Node> neighbors = getNeighbors(graph, curr, adjList);
             for (Node neighbor : neighbors) {
-                neighbor.cameFrom = curr;
-                neighbor.distanceFromStart = Math.min(neighbor.distanceFromStart, curr.distanceFromStart + 1);
+                neighbor.distStart = 1 + curr.distStart;
                 neighbor.recalculateHeuristic();
-
+                neighbor.cameFrom = curr;
                 queue.add(neighbor);
             }
         }
-
-        if (!foundResult) {
+        if (endNode.cameFrom == null) {
             return new int[][] {};
         }
-
-        Stack<Node> path = new Stack<>();
-        Node currNode = endNode;
-        while (currNode.cameFrom != null) {
-            path.push(currNode);
-            currNode = currNode.cameFrom;
+        List<Integer[]> pathList = new ArrayList<>();
+        Node currentNode = endNode;
+        while (currentNode != null) {
+            pathList.add(new Integer[]{currentNode.row, currentNode.col});
+            currentNode = currentNode.cameFrom;
         }
-        path.push(startNode);
-        int[][] result = new int[path.size()][2];
-        int index = 0;
-        while (!path.isEmpty()) {
-            Node current = path.pop();
-            result[index][0] = current.x;
-            result[index][1] = current.y;
-            index++;
+//        pathList.add(new Integer[]{startNode.row, startNode.col});
+        Collections.reverse(pathList);
+        int[][] result = new int[pathList.size()][2];
+        for (int i = 0; i < pathList.size(); i++) {
+            result[i][0] = pathList.get(i)[0];
+            result[i][1] = pathList.get(i)[1];
         }
-
         return result;
     }
 
-    private List<Node> getNeighbors(Node curr, List<List<Node>> nodeGraph, int[][] graph) {
+    private List<Node> getNeighbors(int[][] graph, Node node, Map<String, Node> adjList) {
         List<Node> neighbors = new ArrayList<>();
-        int currRow = curr.x;
-        int currCol = curr.y;
-        if (currRow > 0) { // north
-            if (!nodeGraph.get(currRow - 1).get(currCol).visited && graph[currRow - 1][currCol] == 0) {
-                neighbors.add(nodeGraph.get(currRow - 1).get(currCol));
-            }
+        int row = node.row;
+        int col = node.col;
+        if (row > 0) {
+            addOneNode(adjList, neighbors, row - 1, col, graph);
         }
-        if (currRow < graph.length - 1) { // south
-            if (!nodeGraph.get(currRow + 1).get(currCol).visited && graph[currRow + 1][currCol] == 0) {
-                neighbors.add(nodeGraph.get(currRow + 1).get(currCol));
-            }
+        if (row < graph.length - 1) {
+            addOneNode(adjList, neighbors, row + 1, col, graph);
         }
-        if (currCol > 0) { // west
-            if (!nodeGraph.get(currRow).get(currCol - 1).visited && graph[currRow][currCol - 1] == 0) {
-                neighbors.add(nodeGraph.get(currRow).get(currCol - 1));
-            }
+        if (col > 0) {
+            addOneNode(adjList, neighbors, row, col - 1, graph);
         }
-        if (currCol < graph[currRow].length - 1) { // east
-            if (!nodeGraph.get(currRow).get(currCol + 1).visited && graph[currRow][currCol + 1] == 0) {
-                neighbors.add(nodeGraph.get(currRow).get(currCol + 1));
-            }
+        if (col < graph[row].length - 1) {
+            addOneNode(adjList, neighbors, row, col + 1, graph);
         }
         return neighbors;
     }
 
-    private int calculateManhattanDistance(int startRow, int startCol, int endRow, int endCol) {
-        return Math.abs(endRow - startRow) + Math.abs(endCol - startCol);
+    private void addOneNode(Map<String, Node> adjList, List<Node> neighbors, int row, int col, int[][] graph) {
+        String key = row + ":" + col;
+        Node neighbor = adjList.get(key);
+        if (!neighbor.visited && graph[row][col] == 0) {
+            neighbors.add(neighbor);
+        }
     }
 
-    static class Node implements Comparable<Node> {
-        int x; // row
-        int y; // col
-        int distanceFromStart = 9999;
-        int distanceToDestination = 9999;
-        Node cameFrom;
-        boolean visited = false;
-        int heuristic;
+    private int calculateManhattanDistance(int sR, int eR, int sC, int eC) {
+        return Math.abs(eR - sR) + Math.abs(eC - sC);
+    }
 
-        public Node(int x, int y, int distanceToDestination) {
-            this.x = x;
-            this.y = y;
-            this.distanceToDestination = distanceToDestination;
+    class Node implements Comparable<Node> {
+        String key;
+        int row;
+        int col;
+        int distStart;
+        int distEnd;
+        int heuristic;
+        boolean visited;
+        Node cameFrom;
+
+        public Node(String key, int row, int col, int distEnd) {
+            this.key = key;
+            this.row = row;
+            this.col = col;
+            this.distEnd = distEnd;
         }
 
         public void recalculateHeuristic() {
-            heuristic = distanceFromStart + distanceToDestination;
+            this.heuristic = this.distStart + this.distEnd;
         }
 
         @Override
         public int compareTo(Node o) {
-            return heuristic - o.heuristic;
+            return this.heuristic - o.heuristic;
         }
     }
 

@@ -1,8 +1,6 @@
 package medium;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Stack;
 
 public class SortStack {
 
@@ -15,26 +13,25 @@ public class SortStack {
         stack.add(3);
         stack.add(1);
 
+        // [-5, 2, -2, 4, 3, 1]
+
         SortStack sortStack = new SortStack();
-        ArrayList<Integer> integers = sortStack.sortStack(stack);
-
-        System.out.println();
-
+        sortStack.sortStack(stack);
     }
 
     // O(n^2) time | O(n) space
+    // OK - repeated 17/02/2022
     public ArrayList<Integer> sortStack(ArrayList<Integer> stack) {
-        if (stack.size() == 0) {
+        // Write your code here.
+        if (stack.isEmpty()) {
             return stack;
         }
 
-        Integer top = stack.remove(stack.size() - 1);
-
+        Integer top = stack.remove(stack.size() - 1); // 1 |
         sortStack(stack);
+        insertInSortedOrder(stack, top); // [-5]
 
-        insertInSortedOrder(stack, top);
-
-        return stack;
+        return stack; // [-5,-2,1,2,3,4]
     }
 
     private void insertInSortedOrder(ArrayList<Integer> stack, Integer value) {
@@ -42,8 +39,9 @@ public class SortStack {
             stack.add(value);
             return;
         }
-        Integer top = stack.remove(stack.size() - 1);
-        insertInSortedOrder(stack, value);
+
+        Integer top = stack.remove(stack.size() - 1); // 4 | 3
+        insertInSortedOrder(stack, value); // [-5, -2, 2,3]
         stack.add(top);
     }
 

@@ -25,152 +25,30 @@ public class SquareOfZeroes {
 
     }
 
-//    // O(n^4) time | O(1) space
-//    public static boolean squareOfZeroes(List<List<Integer>> matrix) {
-//        // Write your code here.
-//        int n = matrix.size();
-//        for (int topRow = 0; topRow < n; topRow++) {
-//            for (int leftCol = 0; leftCol < n; leftCol++) {
-//                int squareLength = 2;
-//                while (squareLength <= n - leftCol && squareLength <= n - topRow) {
-//                    int bottomRow = topRow + squareLength - 1;
-//                    int rightCol = leftCol + squareLength - 1;
-//                    if (isSquareOfZeros(matrix, topRow, leftCol, bottomRow, rightCol)) {
-//                        return true;
-//                    }
-//                    squareLength++;
-//                }
-//            }
-//        }
-//        return false;
-//    }
-//
-//    private static Boolean isSquareOfZeros(List<List<Integer>> matrix, int r1, int c1, int r2, int c2) {
-//        for (int row = r1; row < r2 + 1; row++) {
-//            if (matrix.get(row).get(c1) != 0 || matrix.get(row).get(c2) != 0) {
-//                return false;
-//            }
-//        }
-//        for (int col = c1; col < c2 + 1; col++) {
-//            if (matrix.get(r1).get(col) != 0 || matrix.get(r2).get(col) != 0) {
-//                return false;
-//            }
-//        }
-//        return true;
-//    }
+    //  l  r
+    // [1, 1, 1, 0, 1, 0]    topRow
+    // [0, 0, 0, 0, 0, 1]    bottomRow
+    // [0, 1, 1, 1, 0, 1]
+    // [0, 0, 0, 1, 0, 1]
+    // [0, 1, 1, 1, 0, 1]
+    // [0, 0, 0, 0, 0, 1]
 
-//    // O(n^3) time | O(n^2) space
-//    public static boolean squareOfZeroes(List<List<Integer>> matrix) {
-//        // Write your code here.
-//        List<List<MatrixInfo>> infoMatrix = preComputeNumOfZeroes(matrix);
-//        int lastIdx = matrix.size() - 1;
-//        Map<String, Boolean> cache = new HashMap<>();
-//        return hasSquareOfZeros(infoMatrix, 0, 0, lastIdx, lastIdx, cache);
-//    }
-//
-//    private static List<List<MatrixInfo>> preComputeNumOfZeroes(List<List<Integer>> matrix) {
-//        List<List<MatrixInfo>> infoMatrix = new ArrayList<>();
-//        for (int row = 0; row < matrix.size(); row++) {
-//            infoMatrix.add(new ArrayList<>());
-//            for (int col = 0; col < matrix.get(row).size(); col++) {
-//                infoMatrix.get(row).add(new MatrixInfo(0, 0));
-//            }
-//        }
-//
-//        int n = matrix.size();
-//        for (int row = 0; row < n; row++) {
-//            for (int col = 0; col < n; col++) {
-//                int numZeroes;
-//                if (matrix.get(row).get(col) == 0) {
-//                    numZeroes = 1;
-//                } else {
-//                    numZeroes = 0;
-//                }
-//
-//                infoMatrix.get(row).get(col).numZeroesBelow = numZeroes;
-//                infoMatrix.get(row).get(col).numZeroesRight = numZeroes;
-//            }
-//        }
-//
-//        int lastIdx = matrix.size() - 1;
-//        for (int row = n - 1; row >= 0; row--) {
-//            for (int col = n - 1; col >= 0; col--) {
-//                if (matrix.get(row).get(col) == 1) {
-//                    continue;
-//                }
-//                if (row < lastIdx) {
-//                    infoMatrix.get(row).get(col).numZeroesBelow += infoMatrix.get(row + 1).get(col).numZeroesBelow;
-//                }
-//                if (col < lastIdx) {
-//                    infoMatrix.get(row).get(col).numZeroesRight += infoMatrix.get(row).get(col + 1).numZeroesRight;
-//                }
-//            }
-//        }
-//        return infoMatrix;
-//    }
-//
-//    private static boolean hasSquareOfZeros(List<List<MatrixInfo>> infoMatrix, int r1, int c1, int r2, int c2,
-//                                            Map<String, Boolean> cache) {
-//        if (r1 >= r2 && c1 >= c2) {
-//            return false;
-//        }
-//        String key = r1 + "-" + c1 + "-" + r2 + "-" + c2;
-//        if (cache.containsKey(key)) {
-//            return cache.get(key);
-//        }
-//
-//        cache.put(key,
-//                isSquareOfZeros(infoMatrix, r1, c1, r2, c2)
-//                || hasSquareOfZeros(infoMatrix, r1 + 1, c1 + 1, r2 - 1, c2 - 1, cache)
-//                || hasSquareOfZeros(infoMatrix, r1, c1 + 1, r2 - 1, c2, cache)
-//                || hasSquareOfZeros(infoMatrix, r1 + 1, c1, r2, c2 - 1, cache)
-//                || hasSquareOfZeros(infoMatrix, r1 + 1, c1 + 1, r2, c2, cache)
-//                || hasSquareOfZeros(infoMatrix, r1, c1, r2 - 1, c2 - 1, cache)
-//        );
-//
-//        return cache.get(key);
-//    }
-//
-//    private static Boolean isSquareOfZeros(List<List<MatrixInfo>> infoMatrix, int r1, int c1, int r2, int c2) {
-//        int squareLength = c2 - c1 + 1;
-//        boolean hasTopBorder = infoMatrix.get(r1).get(c1).numZeroesRight >= squareLength;
-//        boolean hasLeftBorder = infoMatrix.get(r1).get(c1).numZeroesBelow >= squareLength;
-//        boolean hasBottomBorder = infoMatrix.get(r2).get(c1).numZeroesRight >= squareLength;
-//        boolean hasRightBorder = infoMatrix.get(r1).get(c2).numZeroesBelow >= squareLength;
-//
-//        return hasTopBorder && hasLeftBorder && hasBottomBorder && hasRightBorder;
-//    }
-
-    // Iterative optimized
-    static class MatrixInfo {
-        int value;
-        int numZeroesBelow;
-        int numZeroesRight;
-
-        public MatrixInfo(int numZeroesBelow, int numZeroesRight) {
-            this.numZeroesBelow = numZeroesBelow;
-            this.numZeroesRight = numZeroesRight;
-        }
-
-        public MatrixInfo(int value, int numZeroesBelow, int numZeroesRight) {
-            this.value = value;
-            this.numZeroesBelow = numZeroesBelow;
-            this.numZeroesRight = numZeroesRight;
-        }
-    }
-
+    // OK - repeated 27/02/2022
     // O(n^3) time | O(n^2) space
     public static boolean squareOfZeroes(List<List<Integer>> matrix) {
-        // Write your code here.
-        List<List<MatrixInfo>> infoMatrix = preComputeNumOfZeroes(matrix);
-        int n = matrix.size();
+        List<List<InfoMatrix>> infoMatrix = preComputeNumOfZeroes(matrix);
+        int n = matrix.size(); // 6
         for (int topRow = 0; topRow < n; topRow++) {
             for (int leftCol = 0; leftCol < n; leftCol++) {
                 int squareLength = 2;
+                // 2 <= 6 - 0 && 2 <= 6 - 0
                 while (squareLength <= n - leftCol && squareLength <= n - topRow) {
-                    int bottomRow = topRow + squareLength - 1;
-                    int rightCol = leftCol + squareLength - 1;
-                    if (isSquareOfZeros(infoMatrix, topRow, leftCol, bottomRow, rightCol)) {
+                    // [1, 1, 1, 0, 1, 0] topRow
+                    // [0, 0, 0, 0, 0, 1] bottomRow
+                    int bottomRow = topRow + squareLength - 1; // 0 + 2 - 1 = 1
+                    int rightCol = leftCol + squareLength - 1; // 0 + 2 - 1 = 1
+                    // rec([][], 0, 0, 1, 1)
+                    if (isSquareOfZeroes(infoMatrix, topRow, leftCol, bottomRow, rightCol)) {
                         return true;
                     }
                     squareLength++;
@@ -180,41 +58,55 @@ public class SquareOfZeroes {
         return false;
     }
 
-    private static Boolean isSquareOfZeros(List<List<MatrixInfo>> infoMatrix, int r1, int c1, int r2, int c2) {
+    //    c
+    // [(0,0), (0,0), (0,0), (2,1), (0,0), (1,1)]
+    // [(5,5), (1,4), (1,3), (1,2), (5,1), (0,0)]   r
+    // [(4,1), (0,0), (0,0), (0,0), (4,1), (0,0)] *
+    // [(3,3), (1,2), (1,1), (0,0), (3,1), (0,0)]
+    // [(2,1), (0,0), (0,0), (0,0), (2,1), (0,0)]
+    // [(1,5), (1,4), (1,3), (1,2), (1,1), (0,0)]
+    // rec([][], 0, 0, 1, 1)
+    private static Boolean isSquareOfZeroes(List<List<InfoMatrix>> infoMatrix, int r1, int c1, int r2, int c2) {
         int squareLength = c2 - c1 + 1;
         boolean hasTopBorder = infoMatrix.get(r1).get(c1).numZeroesRight >= squareLength;
         boolean hasLeftBorder = infoMatrix.get(r1).get(c1).numZeroesBelow >= squareLength;
         boolean hasBottomBorder = infoMatrix.get(r2).get(c1).numZeroesRight >= squareLength;
         boolean hasRightBorder = infoMatrix.get(r1).get(c2).numZeroesBelow >= squareLength;
-
         return hasTopBorder && hasLeftBorder && hasBottomBorder && hasRightBorder;
     }
 
-    private static List<List<MatrixInfo>> preComputeNumOfZeroes(List<List<Integer>> matrix) {
-        List<List<MatrixInfo>> infoMatrix = new ArrayList<>();
+    private static List<List<InfoMatrix>> preComputeNumOfZeroes(List<List<Integer>> matrix) {
+        List<List<InfoMatrix>> infoMatrix = new ArrayList<>();
         for (int row = 0; row < matrix.size(); row++) {
             infoMatrix.add(new ArrayList<>());
             for (int col = 0; col < matrix.get(row).size(); col++) {
-                infoMatrix.get(row).add(new MatrixInfo(0, 0));
+                infoMatrix.get(row).add(new InfoMatrix(0, 0));
             }
         }
-
+        //           c
+        // [1, 1, 1, 0, 1, 0]
+        // [0, 0, 0, 0, 0, 1]   r
+        // [0, 1, 1, 1, 0, 1]
+        // [0, 0, 0, 1, 0, 1]
+        // [0, 1, 1, 1, 0, 1]
+        // [0, 0, 0, 0, 0, 1]
         int n = matrix.size();
         for (int row = 0; row < n; row++) {
             for (int col = 0; col < n; col++) {
-                int numZeroes;
-                if (matrix.get(row).get(col) == 0) {
-                    numZeroes = 1;
-                } else {
-                    numZeroes = 0;
-                }
-
+                int numZeroes = matrix.get(row).get(col) == 0 ? 1 : 0;
                 infoMatrix.get(row).get(col).numZeroesBelow = numZeroes;
                 infoMatrix.get(row).get(col).numZeroesRight = numZeroes;
             }
         }
 
-        int lastIdx = matrix.size() - 1;
+        //    c
+        // [(0,0), (0,0), (0,0), (2,1), (0,0), (1,1)]
+        // [(5,5), (1,4), (1,3), (1,2), (5,1), (0,0)]   r
+        // [(4,1), (0,0), (0,0), (0,0), (4,1), (0,0)] *
+        // [(3,3), (1,2), (1,1), (0,0), (3,1), (0,0)]
+        // [(2,1), (0,0), (0,0), (0,0), (2,1), (0,0)]
+        // [(1,5), (1,4), (1,3), (1,2), (1,1), (0,0)]
+        int lastIdx = matrix.size() - 1; // 5
         for (int row = n - 1; row >= 0; row--) {
             for (int col = n - 1; col >= 0; col--) {
                 if (matrix.get(row).get(col) == 1) {
@@ -231,29 +123,87 @@ public class SquareOfZeroes {
         return infoMatrix;
     }
 
+    static class InfoMatrix {
+        int numZeroesBelow;
+        int numZeroesRight;
+
+        public InfoMatrix(int numZeroesBelow, int numZeroesRight) {
+            this.numZeroesBelow = numZeroesBelow;
+            this.numZeroesRight = numZeroesRight;
+        }
+    }
+
+    // O(n^4) time | O(1) space
+    public static boolean squareOfZeroes2(List<List<Integer>> matrix) {
+        int n = matrix.size();
+        for (int topRow = 0; topRow < n; topRow++) {
+            for (int leftCol = 0; leftCol < n; leftCol++) {
+                int squareLength = 2;
+                while (squareLength <= n - leftCol && squareLength <= n - topRow) {
+                    int bottomRow = topRow + squareLength - 1;
+                    int rightCol = leftCol + squareLength - 1;
+                    if (isSquareOfZeroes2(matrix, topRow, leftCol, bottomRow, rightCol)) {
+                        return true;
+                    }
+                    squareLength++;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static Boolean isSquareOfZeroes2(List<List<Integer>> matrix, int r1, int c1, int r2, int c2) {
+        for (int row = r1; row < r2 + 1; row++) {
+            if (matrix.get(row).get(c1) != 0 || matrix.get(row).get(c2) != 0) {
+                return false;
+            }
+        }
+        for (int col = c1; col < c2 + 1; col++) {
+            if (matrix.get(r1).get(col) != 0 || matrix.get(r2).get(col) != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // O(n^4) time | O(n^3) space
+    public static boolean squareOfZeroes3(List<List<Integer>> matrix) {
+        int lastIdx = matrix.size() - 1;
+        return hasSquareOfZeroes(matrix, 0, 0, lastIdx, lastIdx, new HashMap<>());
+    }
+
+    private static boolean hasSquareOfZeroes(List<List<Integer>> matrix, int r1, int c1, int r2, int c2,
+                                             Map<String, Boolean> cache) {
+        if (r1 >= r2 || c1 >= c2) {
+            return false;
+        }
+        String key = r1 + "-" + c1 + "-" + r2 + "-" + c2;
+        if (cache.containsKey(key)) {
+            return cache.get(key);
+        }
+
+        cache.put(key, isSquareOfZeroes3(matrix, r1, c1, r2, c2) ||
+                hasSquareOfZeroes(matrix, r1 + 1, c1 + 1, r2 - 1, c2 - 1, cache) ||
+                hasSquareOfZeroes(matrix, r1, c1 + 1, r2 - 1, c2, cache) ||
+                hasSquareOfZeroes(matrix, r1 + 1, c1, r2, c2 - 1, cache) ||
+                hasSquareOfZeroes(matrix, r1 + 1, c1 + 1, r2, c2, cache) ||
+                hasSquareOfZeroes(matrix, r1, c1, r2 - 1, c2 - 1, cache));
+
+        return cache.get(key);
+    }
+
+    private static Boolean isSquareOfZeroes3(List<List<Integer>> matrix, int r1, int c1, int r2, int c2) {
+        for (int row = r1; row < r2 + 1; row++) {
+            if (matrix.get(row).get(c1) != 0 || matrix.get(row).get(c2) != 0) {
+                return false;
+            }
+        }
+        for (int col = c1; col < c2 + 1; col++) {
+            if (matrix.get(r1).get(col) != 0 || matrix.get(r2).get(col) != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

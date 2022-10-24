@@ -25,44 +25,44 @@ public class LinkedListPalindrome {
         }
     }
 
-//    // O(n) time | O(1) space
-//    public boolean linkedListPalindrome(LinkedList head) {
-//        // Write your code here.
-//        LinkedList slowNode = head;
-//        LinkedList fastNode = head;
-//        while (fastNode != null && fastNode.next != null) {
-//            slowNode = slowNode.next;
-//            fastNode = fastNode.next.next;
-//        }
-//
-//        LinkedList reversedSecondHalfNode = reverseLinkedList(slowNode);
-//        LinkedList firstHalfNode = head;
-//
-//        while (reversedSecondHalfNode != null) {
-//            if (reversedSecondHalfNode.value != firstHalfNode.value) {
-//                return false;
-//            }
-//            reversedSecondHalfNode = reversedSecondHalfNode.next;
-//            firstHalfNode = firstHalfNode.next;
-//        }
-//        return true;
-//    }
-//
-//    private LinkedList reverseLinkedList(LinkedList head) {
-//        LinkedList previoudNode = null;
-//        LinkedList currentNode = head;
-//
-//        while (currentNode != null) {
-//            LinkedList nextNode = currentNode.next;
-//            currentNode.next = previoudNode;
-//            previoudNode = currentNode;
-//            currentNode = nextNode;
-//        }
-//        return previoudNode;
-//    }
+    // O(n) time | O(1) space
+    public boolean linkedListPalindrome(LinkedList head) {
+        // Write your code here.
+        LinkedList slowNode = head;
+        LinkedList fastNode = head;
+        while (fastNode != null && fastNode.next != null) {
+            slowNode = slowNode.next;
+            fastNode = fastNode.next.next;
+        }
+
+        LinkedList reversedSecondHalfNode = reverseLinkedList(slowNode);
+        LinkedList firstHalfNode = head;
+
+        while (reversedSecondHalfNode != null) {
+            if (reversedSecondHalfNode.value != firstHalfNode.value) {
+                return false;
+            }
+            reversedSecondHalfNode = reversedSecondHalfNode.next;
+            firstHalfNode = firstHalfNode.next;
+        }
+        return true;
+    }
+
+    private LinkedList reverseLinkedList(LinkedList head) {
+        LinkedList previoudNode = null;
+        LinkedList currentNode = head;
+
+        while (currentNode != null) {
+            LinkedList nextNode = currentNode.next;
+            currentNode.next = previoudNode;
+            previoudNode = currentNode;
+            currentNode = nextNode;
+        }
+        return previoudNode;
+    }
 
     // O(n) time | O(n) space
-    public boolean linkedListPalindrome(LinkedList head) {
+    public boolean linkedListPalindrome2(LinkedList head) {
         // Write your code here.
         LinkedListInfo isPalindromeResults = isPalindrome(head, head);
         return isPalindromeResults.outerNodesAreEqual;

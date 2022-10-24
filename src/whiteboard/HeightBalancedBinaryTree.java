@@ -13,27 +13,31 @@ public class HeightBalancedBinaryTree {
         }
     }
 
+    // O(n) time | O(h) space
     public boolean heightBalancedBinaryTree(BinaryTree tree) {
         // Write your code here.
-        return heightBalancedBinaryTreeHelper(tree).balanced;
+        if (tree == null) {
+            return true;
+        }
+        TreeInfo info = checkBalance(tree);
+        return info.balanced;
     }
 
-    private TreeInfo heightBalancedBinaryTreeHelper(BinaryTree tree) {
-        if (tree == null) {
+    private TreeInfo checkBalance(BinaryTree node) {
+        if (node == null) {
             return new TreeInfo(0, true);
         }
+        TreeInfo leftInfo = checkBalance(node.left);
+        TreeInfo rightInfo = checkBalance(node.right);
 
-        TreeInfo leftTree = heightBalancedBinaryTreeHelper(tree.left);
-        TreeInfo rightTree = heightBalancedBinaryTreeHelper(tree.right);
+        boolean isBalance = leftInfo.balanced && rightInfo.balanced
+                && Math.abs(leftInfo.height - rightInfo.height) <= 1;
 
-        boolean balanced = Math.abs(leftTree.height - rightTree.height) < 2;
-
-        int height = 1 + Math.max(leftTree.height, rightTree.height);
-
-        return new TreeInfo(height, balanced);
+        int currHeight = Math.max(leftInfo.height, rightInfo.height) + 1;
+        return new TreeInfo(currHeight, isBalance);
     }
 
-    static class TreeInfo {
+    class TreeInfo {
         int height;
         boolean balanced;
 

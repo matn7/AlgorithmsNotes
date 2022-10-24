@@ -3,25 +3,23 @@ package medium;
 public class BSTConstruction {
 
     public static void main(String[] args) {
-        BST bst = new BST(1);
-        bst.insert(2);
-        bst.insert(3);
-        bst.insert(4);
+        BST bst = new BST(10);
+        bst.insert(12);
+        bst.insert(13);
 //        bst.insert(5);
 //        bst.insert(15);
 //        bst.insert(2);
 //        bst.insert(5);
+//        bst.insert(1);
 //        bst.insert(13);
 //        bst.insert(22);
-//        bst.insert(1);
 //        bst.insert(14);
 //        bst.insert(12);
 
         inOrder(bst);
         System.out.println();
 
-        bst.remove(1);
-
+        bst.remove(10, null);
         inOrder(bst);
         System.out.println();
     }
@@ -36,6 +34,9 @@ public class BSTConstruction {
         inOrder(root.right);
     }
 
+    // OK - repeated 21/02/2022
+    // Average: O(log(n)) time | O(log(n)) space (O(1) if implement iteratively)
+    // Worst: O(n) time | O(n) space
     static class BST {
         public int value;
         public BST left;
@@ -45,43 +46,49 @@ public class BSTConstruction {
             this.value = value;
         }
 
+        // left < root
+        // right >= root
+        // Average: O(log(n)) time | O(1) space
+        // Worst: O(n) time | O(1) space
+        // rec(12)
         public BST insert(int value) {
             // Write your code here.
             // Do not edit the return statement of this method.
-            BST current = this;
-            while (current != null) {
-                if (current.value > value) {
-                    if (current.left == null) {
-                        current.left = new BST(value);
+            BST currentNode = this;
+            while (true) {
+                if (value < currentNode.value) {
+                    // left
+                    if (currentNode.left == null) {
+                        currentNode.left = new BST(value);
                         break;
+                    } else {
+                        currentNode = currentNode.left;
                     }
-                    current = current.left;
                 } else {
-                    if (current.right == null) {
-                        current.right = new BST(value);
+                    // right
+                    if (currentNode.right == null) {
+                        currentNode.right = new BST(value);
                         break;
+                    } else {
+                        currentNode = currentNode.right;
                     }
-                    current = current.right;
                 }
             }
             return this;
         }
 
+        // Average: O(log(n)) time | O(1) space
+        // Worst: O(n) time | O(1) space
         public boolean contains(int value) {
             // Write your code here.
-            BST current = this;
-            while (current != null) {
-                if (current.value > value) {
-                    // look left
-                    if (current.left == null) {
-                        return false;
-                    }
-                    current = current.left;
-                } else if (current.value < value) {
-                    if (current.right == null) {
-                        return false;
-                    }
-                    current = current.right;
+            BST currentNode = this;
+            // rec(14)
+            while (currentNode != null) {
+                if (value < currentNode.value) {
+                    // left
+                    currentNode = currentNode.left;
+                } else if (value > currentNode.value) {
+                    currentNode = currentNode.right;
                 } else {
                     return true;
                 }
@@ -89,116 +96,100 @@ public class BSTConstruction {
             return false;
         }
 
+        // Average: O(log(n)) time | O(1) space
+        // Worst: O(n) time | O(1) space
         public BST remove(int value) {
             // Write your code here.
             // Do not edit the return statement of this method.
-            BST previous = null;
-            BST current = this;
-            while (current != null) {
-                if (current.value > value) {
-                    // look left
-                    previous = current;
-                    current = current.left;
-                } else if (current.value < value) {
-                    // look right
-                    previous = current;
-                    current = current.right;
+            // rec(10,null)
+            return remove(value, null);
+        }
+
+        // value = 10
+        //               12
+        //             /    \
+        //            5      15
+        //           / \    /   \
+        //          2   5  13 p  22
+        //         /      /  \
+        //        1      N c 14 c
+        // rec(12, (12))
+        public BST remove(int value, BST parentNode) {
+            BST currentNode = this; // 15
+            while (currentNode != null) {
+                if (value < currentNode.value) { // 12 < 12
+                    parentNode = currentNode;
+                    currentNode = currentNode.left;
+                } else if (value > currentNode.value) {
+                    parentNode = currentNode;
+                    currentNode = currentNode.right;
                 } else {
                     // found node
-                    // leaf node
-                    if (isLeaf(current)) {
-                        if (previous == null) {
-                            // remove node itself
-                            return null;
+                    if (currentNode.left != null && currentNode.right != null) { // case 2 child parent node
+                        currentNode.value = currentNode.right.getMinValue(); // (15).getMinValue() = 12
+                        // currentNode.value = smallest value of right subtree
+                        currentNode.right.remove(currentNode.value, currentNode); // (15).remove(12, (12))
+                    } else if (parentNode == null) {
+                        if (currentNode.left != null) {
+                            currentNode.value = currentNode.left.value;
+                            currentNode.right = currentNode.left.right;
+                            currentNode.left = currentNode.left.left;
+                        } else if (currentNode.right != null){
+                            currentNode.value = currentNode.right.value;
+                            currentNode.left = currentNode.right.left;
+                            currentNode.right = currentNode.right.right;
                         } else {
-                            if (current.value < previous.value) {
-                                previous.left = null;
-                            } else {
-                                previous.right = null;
-                            }
+                            currentNode = null;
                         }
-                        break;
                     }
-                    // one child node
-                    else if (isOneChildNode(current)) {
-                        // check whether we have left or right child
-                        if (previous == null) {
-                            // remove root
-                            if (current.left != null) {
-                                current.value = current.left.value;
-                                current.left = current.left.left;
-                            } else {
-                                current.value = current.right.value;
-                                current.right = current.right.right;
-                            }
+                    // we're gonna come back to the root node case
+                    else if (parentNode.left == currentNode) {
+                        if (currentNode.left != null) {
+                            parentNode.left = currentNode.left;
                         } else {
-                            if (current.left != null) {
-                                // current has child on left
-                                if (previous.value > current.value) {
-                                    // node on left -> previous.left
-                                    previous.left = current.left;
-                                } else {
-                                    // node on right -> previous.right
-                                    previous.right = current.left;
-                                }
-                            } else {
-                                // current has child on right
-                                if (previous.value > current.value) {
-                                    // node on left -> previous.left
-                                    previous.left = current.right;
-                                } else {
-                                    // node on right -> previous.right
-                                    previous.right = current.right;
-                                }
-                            }
+                            parentNode.left = currentNode.right;
                         }
-                        break;
                     }
-                    // two child nodes
-                    else if (isTwoChildNode(current)) {
-                        // find min value from right
-                        int minRight = findAndRemoveMin(current, current.right);
-                        current.value = minRight;
-                        break;
+                    else if (parentNode.right == currentNode) {
+                        if (currentNode.left != null) {
+                            parentNode.right = currentNode.left;
+                        } else {
+                            parentNode.right = currentNode.right;
+                        }
                     }
+                    break;
                 }
             }
             return this;
         }
 
-        private boolean isLeaf(BST node) {
-            return node.left == null && node.right == null;
-        }
 
-        private boolean isOneChildNode(BST node) {
-            return (node.left == null && node.right != null) || (node.left != null && node.right == null);
-        }
-
-        private boolean isTwoChildNode(BST node) {
-            return node.left != null && node.right != null;
-        }
-
-        private int findAndRemoveMin(BST previous, BST bst) {
-            BST current = bst;
-            int valueToReturn = -1;
-            boolean atLeasOnce = false;
-            while (current != null) {
-                if (current.left == null) {
-                    valueToReturn = current.value;
-                    break;
-                }
-                atLeasOnce = true;
-                previous = current;
-                current = current.left;
+        private int getMinValue() {
+            BST currentNode = this; // 15
+            while (currentNode.left != null) {
+                currentNode = currentNode.left; // 12
             }
-            if (atLeasOnce) {
-                previous.left = null;
-            } else {
-                previous.right = null;
-            }
-
-            return valueToReturn;
+            return currentNode.value; // 12
         }
     }
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

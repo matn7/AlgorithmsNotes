@@ -10,11 +10,12 @@ public class ThreeNumberSort {
         tns.threeNumberSort(array, order);
     }
 
+    // O(n) time | O(1) space
     public int[] threeNumberSort(int[] array, int[] order) {
         // Write your code here.
         int start = 0;
         int end = array.length - 1;
-        int idx = 1;
+        int idx = 0;
         while (idx <= end) {
             if (array[idx] == order[0]) {
                 swap(array, start, idx);

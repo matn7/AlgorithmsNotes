@@ -5,35 +5,64 @@ import java.util.*;
 public class LongestStringChain {
 
     public static void main(String[] args) {
-        List<String> strings = new ArrayList<>();
-        strings.add("abcdef");
-        strings.add("abcde");
-        strings.add("abde");
-        strings.add("ade");
-        strings.add("ae");
+        List<String> strings = Arrays.asList("abde", "abc", "abd", "abcde", "ade", "ae", "1abde", "abcdef");
 
         longestStringChain(strings);
     }
 
-    // O(n * m^2 + nlog(n)) time | O(n * m) space
+    // OK - repeated 26/02/2022
+    // O(n * m^2 + nlog(n)) time | O(nm) space
     public static List<String> longestStringChain(List<String> strings) {
         // Write your code here.
         Map<String, StringChainInfo> stringChains = new HashMap<>();
+
+        // ["abde", "abc", "abd", "abcde", "ade", "ae", "1abde", "abcdef"]
         for (String string : strings) {
             stringChains.put(string, new StringChainInfo("", 1));
         }
+        // {"abde": ("", 1), "abc": ("", 1), "abd": ("", 1), "abcde": (), "ade": ("", 1), "ae": ("", 1),
+        // "1abde": ("", 1), "abcdef": ("", 1)}
 
-        Collections.sort(strings, Comparator.comparingInt(String::length));
-
-        for (String string : strings) {
+        List<String> sortedStrings = new ArrayList<>(strings);
+        sortedStrings.sort(Comparator.comparingInt(String::length));
+        //                                          *
+        // ["ae", "abc", "abd", "abde", "abcde", "1abde", "abcdef"]
+        for (String string : sortedStrings) {
+            // rec("abcdef", {})
             findLongestStringChain(string, stringChains);
         }
-
 
         return buildLongestStringChain(strings, stringChains);
     }
 
+    //        *
+    // rec("abcdef", {})
+    private static void findLongestStringChain(String string, Map<String, StringChainInfo> stringChains) {
+        for (int i = 0; i < string.length(); i++) {
+            String smallerString = getSmallerString(string, i); // abcdef
+            if (!stringChains.containsKey(smallerString)) {
+                continue;
+            }
+            // rec("abcdef", "abcdef", {})
+            tryUpdateLongestStringChain(string, smallerString, stringChains);
+        }
+    }
+    // {"abde": ("abde", 4), "abc": ("abc", 2), "abd": ("abd", 2), "abcde": ("abcde", 4), "ade": ("", 1), "ae": ("ae", 2),
+    // "1abde": ("", 1), "abcdef": ("abcde", 5)}
+    private static void tryUpdateLongestStringChain(String currentString, String smallerString,
+                                                    Map<String, StringChainInfo> stringChains) {
+        // rec("abcdef", "abcdef", {})
+        int currentStringChainLength = stringChains.get(currentString).maxChainLength; // 5
+        int smallerStringChainLength = stringChains.get(smallerString).maxChainLength; // 5
+        if (smallerStringChainLength + 1 > currentStringChainLength) {
+            stringChains.remove(currentString);
+            stringChains.put(currentString, new StringChainInfo(smallerString,
+                    smallerStringChainLength + 1));
+        }
+    }
+
     private static List<String> buildLongestStringChain(List<String> strings, Map<String, StringChainInfo> stringChains) {
+
         int maxChainLength = 0;
         String chainStartingString = "";
         for (String string : strings) {
@@ -42,40 +71,20 @@ public class LongestStringChain {
                 chainStartingString = string;
             }
         }
+
         List<String> ourLongestStringChain = new ArrayList<>();
         String currentString = chainStartingString;
-        while (currentString != "") {
+        while (!currentString.equals("")) {
             ourLongestStringChain.add(currentString);
             currentString = stringChains.get(currentString).nextString;
         }
-        if (ourLongestStringChain.size() == 1) {
-            return new ArrayList<>();
-        }
-        return ourLongestStringChain;
+
+        return ourLongestStringChain.size() == 1 ? new ArrayList<>() : ourLongestStringChain;
     }
 
-    private static void findLongestStringChain(String string, Map<String, StringChainInfo> stringChains) {
-        for (int i = 0; i < string.length(); i++) {
-            String smallerString = getSmallerString(string, i);
-            if (!stringChains.containsKey(smallerString)) {
-                continue;
-            }
-            tryUpdateLongestStringChain(string, smallerString, stringChains);
-        }
-    }
-
-    private static void tryUpdateLongestStringChain(String currentString, String smallerString,
-        Map<String, StringChainInfo> stringChains) {
-        int smallerStringChainLength = stringChains.get(smallerString).maxChainLength;
-        int currentStringChainLength = stringChains.get(currentString).maxChainLength;
-        if (smallerStringChainLength + 1 > currentStringChainLength) {
-            stringChains.remove(currentString);
-            stringChains.put(currentString, new StringChainInfo(smallerString, smallerStringChainLength + 1));
-        }
-    }
 
     private static String getSmallerString(String string, int index) {
-        return string.substring(0, index) + string.substring(index + 1);
+        return string.substring(0,index) + string.substring(index + 1);
     }
 
     static class StringChainInfo {

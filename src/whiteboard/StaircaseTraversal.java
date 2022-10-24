@@ -5,6 +5,19 @@ import java.util.Map;
 
 public class StaircaseTraversal {
 
+    // O(k^n) time | O(n) space
+    public int staircaseTraversal(int height, int maxSteps) {
+        // Write your code here.
+        if (height <= 1) {
+            return 1;
+        }
+        int num = 0;
+        for (int step = 1; step < Math.min(maxSteps, height) + 1; step++) {
+            num += staircaseTraversal(height - step, maxSteps);
+        }
+        return num;
+    }
+
     // O(nk) time | O(n) space
     public int staircaseTraversalDP(int height, int maxSteps) {
         int[] waysToTop = new int[height + 1];

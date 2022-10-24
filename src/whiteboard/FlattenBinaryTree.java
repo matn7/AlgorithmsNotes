@@ -5,6 +5,19 @@ import java.util.List;
 
 public class FlattenBinaryTree {
 
+    public static void main(String[] args) {
+        BinaryTree root = new BinaryTree(1);
+        root.left = new BinaryTree(2);
+        root.right = new BinaryTree(3);
+        root.left.left = new BinaryTree(4);
+        root.left.right = new BinaryTree(5);
+        root.left.right.left = new BinaryTree(7);
+        root.left.right.right = new BinaryTree(8);
+        root.right.left = new BinaryTree(6);
+
+        flattenBinaryTreeOptimal(root);
+    }
+
     // O(n) time | O(n) space
     // rand: 06/08/2022
     public static BinaryTree flattenBinaryTree(BinaryTree root) {

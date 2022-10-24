@@ -1,19 +1,12 @@
 package medium;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
 
 public class RemoveIslands {
 
     public static void main(String[] args) {
-//        int[][] matrix = {
-//                {1, 0, 0, 0, 0, 0},
-//                {0, 0, 0, 1, 1, 1},
-//                {0, 0, 0, 0, 1, 0},
-//                {1, 1, 0, 0, 1, 0},
-//                {1, 0, 0, 0, 0, 0},
-//                {1, 0, 0, 0, 0, 1}
-//        };
-
         int[][] matrix = {
                 {1, 0, 0, 0, 0, 0},
                 {0, 1, 0, 1, 1, 1},
@@ -27,60 +20,34 @@ public class RemoveIslands {
         removeIslands.removeIslands(matrix);
     }
 
+    // O(w*h) time | O(w*h) space
+    // OK - repeated 17/02/2022
     public int[][] removeIslands(int[][] matrix) {
         // Write your code here.
-
-        Map<String, Node> createdNodeInfoMap = new HashMap<>();
-
         for (int row = 0; row < matrix.length; row++) {
-            for (int col = 0; col < matrix[0].length; col++) {
-                if (matrix[row][col] == 1) {
-                    // create new node
-                    if (createdNodeInfoMap.containsKey(row + "-" + col)) {
-                        addNeighbors(matrix, createdNodeInfoMap, row, col, createdNodeInfoMap.get(row + "-" + col));
-                    } else {
-                        Node element = new Node(row + "-" + col);
-                        if (isBorder(matrix, row, col)) {
-                            element.setBorder(true);
-                        }
-                        createdNodeInfoMap.put(row + "-" + col, element);
-                        addNeighbors(matrix, createdNodeInfoMap, row, col, element);
-                    }
+            for (int col = 0; col < matrix[row].length; col++) { // 1
+                boolean rowIsBorder = row == 0 || row == matrix.length - 1; // true
+                boolean colIsBorder = col == 0 || col == matrix[row].length - 1; // true
+                boolean isBorder = rowIsBorder || colIsBorder; // true
+                if (!isBorder) {
+                    continue;
                 }
-            }
-        }
 
-        // Relax look for missed connections
-        for (Map.Entry<String, Node> element : createdNodeInfoMap.entrySet()) {
-            Node currentNode = element.getValue(); // 1-5
-            if (currentNode.value.equals("1-5")) {
-                System.out.println();
-            }
-            for (Node oneNode : currentNode.getNeighbors()) {
-                Node innerNode = createdNodeInfoMap.get(oneNode.getValue());// 1-4
-                // check whether 1-4 has 1-5 as a neighbors
-                if (!innerNode.getNeighbors().contains(currentNode)) {
-                    innerNode.addNeighbor(currentNode);
-                    System.out.println();
+                if (matrix[row][col] != 1) {
+                    continue;
                 }
-            }
-        }
 
-        Map<String, Node> noBorderNodes = new HashMap<>();
-        noBorderNodes.putAll(createdNodeInfoMap);
-        for (Map.Entry<String, Node> element : createdNodeInfoMap.entrySet()) {
-//            if (!element.getValue().isBorder()) {
-//                noBorderNodes.put(element.getKey(), element.getValue());
-//            }
-            if (element.getValue().isBorder()) {
-                breadthFirst(element.getValue(), noBorderNodes);
+                changeOnesConnectedToBorderToTwos(matrix, row, col);
             }
         }
 
         for (int row = 0; row < matrix.length; row++) {
-            for (int col = 0; col < matrix[0].length; col++) {
-                if (noBorderNodes.containsKey(row + "-" + col)) {
+            for (int col = 0; col < matrix[row].length; col++) {
+                int color = matrix[row][col];
+                if (color == 1) {
                     matrix[row][col] = 0;
+                } else if (color == 2) {
+                    matrix[row][col] = 1;
                 }
             }
         }
@@ -88,159 +55,62 @@ public class RemoveIslands {
         return matrix;
     }
 
-    public List<String> breadthFirst(Node node, Map<String, Node> noBorderNodes) {
-        Queue<Node> queue = new LinkedList<>();
-        queue.add(node);
-        List<String> result = new ArrayList<>();
-        System.out.println("=========");
-        while (!queue.isEmpty()) {
-            Node poll = queue.poll();
-            System.out.println(poll.value);
-            noBorderNodes.remove(poll.value);
+    private void changeOnesConnectedToBorderToTwos(int[][] matrix, int startRow, int startCol) {
+        Stack<NodeInfo> stack = new Stack<>();
+        stack.push(new NodeInfo(startRow, startCol));
+        // ---------------
+        // | (5,5)
+        // ---------------
 
-            poll.setVisited(true);
+        while (!stack.isEmpty()) {
+            NodeInfo currentPosition = stack.pop(); // (5,5)
 
-            result.add(poll.value);
+            matrix[currentPosition.row][currentPosition.col] = 2;
 
-            for (Node element : poll.getNeighbors()) {
-                if (!element.isVisited()) {
-                    element.setVisited(true);
-                    queue.add(element);
+            List<NodeInfo> neighbors = getNeighbors(matrix, currentPosition.row, currentPosition.col);
+
+            // [(4,5), (5,4)]
+            for (NodeInfo neighbor : neighbors) {
+                int row = neighbor.row;
+                int col = neighbor.col;
+
+                if (matrix[row][col] != 1) {
+                    continue;
                 }
-            }
-        }
 
-        return result;
-    }
-
-    private boolean isBorder(int[][] matrix, int row, int col) {
-        return row == 0 || row == matrix.length - 1 || col == 0 || col == matrix[0].length - 1;
-    }
-
-    private void addNeighbors(int[][] matrix, Map<String, Node> createdNodeInfoMap, int row, int col, Node element) {
-        // add neighbors
-        // NORTH
-        if (row - 1 > 0) {
-            String key = (row - 1) + "-" + col;
-            if (matrix[row - 1][col] == 1) {
-                if (createdNodeInfoMap.containsKey(key)) {
-                    // 2 way connection
-                    element.addNeighbor(createdNodeInfoMap.get(key));
-                } else {
-                    Node newNode = new Node(key);
-                    if (isBorder(matrix, row - 1, col)) {
-                        newNode.setBorder(true);
-                    }
-                    element.addNeighbor(newNode);
-                    createdNodeInfoMap.put(key, newNode);
-                }
-            }
-        }
-        // SOUTH
-        if (row + 1 < matrix.length - 1) {
-            String key = (row + 1) + "-" + col;
-            if (matrix[row + 1][col] == 1) {
-                if (createdNodeInfoMap.containsKey(key)) {
-                    // 2 way connection
-                    element.addNeighbor(createdNodeInfoMap.get(key));
-                } else {
-                    Node newNode = new Node(key);
-                    if (isBorder(matrix, row + 1, col)) {
-                        newNode.setBorder(true);
-                    }
-                    element.addNeighbor(newNode);
-                    createdNodeInfoMap.put(key, newNode);
-                }
-            }
-        }
-        // WEST
-        if (col - 1 > 0) {
-            String key = row + "-" + (col - 1);
-            if (matrix[row][col - 1] == 1) {
-                if (createdNodeInfoMap.containsKey(key)) {
-                    // 2 way connection
-                    element.addNeighbor(createdNodeInfoMap.get(key));
-                } else {
-                    Node newNode = new Node(key);
-                    if (isBorder(matrix, row, col - 1)) {
-                        newNode.setBorder(true);
-                    }
-                    element.addNeighbor(newNode);
-                    createdNodeInfoMap.put(key, newNode);
-                }
-            }
-        }
-        // EAST
-        if (col + 1 < matrix[0].length - 1) {
-            String key = row + "-" + (col + 1);
-            if (matrix[row][col + 1] == 1) {
-                if (createdNodeInfoMap.containsKey(key)) {
-                    // 2 way connection
-                    element.addNeighbor(createdNodeInfoMap.get(key));
-                } else {
-                    Node newNode = new Node(key);
-                    if (isBorder(matrix, row, col + 1)) {
-                        newNode.setBorder(true);
-                    }
-                    element.addNeighbor(newNode);
-                    createdNodeInfoMap.put(key, newNode);
-                }
+                stack.push(neighbor);
             }
         }
     }
 
-    class Node {
-        String value;
-        Set<Node> neighbors;
-        boolean border;
-        boolean visited;
+    private List<NodeInfo> getNeighbors(int[][] matrix, int row, int col) { // (3,1)
+        List<NodeInfo> neighbors = new ArrayList<>();
 
-        public Node(String value) {
-            this.value = value;
-            this.neighbors = new HashSet<>();
-            this.border = false;
-            this.visited = false;
+        int numRows = matrix.length;
+        int numCols = matrix[row].length;
+
+        if (row - 1 >= 0) { // up
+            neighbors.add(new NodeInfo(row - 1, col));
         }
-
-        public void addNeighbor(Node node) {
-            this.neighbors.add(node);
+        if (row + 1 < numRows) { // down
+            neighbors.add(new NodeInfo(row + 1, col));
         }
-
-        public String getValue() {
-            return value;
+        if (col - 1 >= 0) { // left
+            neighbors.add(new NodeInfo(row, col - 1));
         }
-
-        public Set<Node> getNeighbors() {
-            return neighbors;
+        if (col + 1 < numCols) { // right
+            neighbors.add(new NodeInfo(row, col + 1));
         }
+        return neighbors; //
+    }
 
-        public boolean isBorder() {
-            return border;
-        }
+    static class NodeInfo {
+        int row;
+        int col;
 
-        public void setBorder(boolean border) {
-            this.border = border;
-        }
-
-        public boolean isVisited() {
-            return visited;
-        }
-
-        public void setVisited(boolean visited) {
-            this.visited = visited;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Node node = (Node) o;
-            return value.equals(node.value);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(value);
+        public NodeInfo(int row, int col) {
+            this.row = row;
+            this.col = col;
         }
     }
 

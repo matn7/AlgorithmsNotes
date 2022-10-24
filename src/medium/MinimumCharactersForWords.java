@@ -1,60 +1,83 @@
 package medium;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MinimumCharactersForWords {
 
     public static void main(String[] args) {
-        MinimumCharactersForWords min = new MinimumCharactersForWords();
         String[] words = {"this", "that", "did", "deed", "them!", "a"};
 
-        min.minimumCharactersForWords(words);
+        MinimumCharactersForWords minimumCharactersForWords = new MinimumCharactersForWords();
+        minimumCharactersForWords.minimumCharactersForWords(words);
     }
 
+    // OK - repeated 17/02/2022
+    // O(n*l) time (l longest word) | O(c) space (num of unique character)
     public char[] minimumCharactersForWords(String[] words) {
         // Write your code here.
-        Map<Character, Integer> countMap = new HashMap<>();
-        Map<Character, Integer> tempRemoved = new HashMap<>();
-        List<Character> visited = new ArrayList<>();
+        Map<Character, Integer> maximumCharacterFrequencies = new HashMap<>();
+
+        // {'t':2, 'h':1, 'i':1, 's':1, 'a':1, 'd':2, 'e':2, 'm':1, '!':1}
+        // words = ["this", "that", "did", "deed", "them!", "a"]
         for (String word : words) {
-            Map<Character, Integer> wordCountMap = new HashMap<>();
-            for (Character element : word.toCharArray()) {
-                if (wordCountMap.containsKey(element)) {
-                    wordCountMap.put(element, wordCountMap.get(element) + 1);
-                } else {
-                    wordCountMap.put(element, 1);
-                }
+            // a
+            Map<Character, Integer> characterFrequencies = countCharacterFrequencies(word);
+            // {'a':1}
+            updateMaximumFrequencies(characterFrequencies, maximumCharacterFrequencies);
+        }
+        return makeArrayFromCharacterFrequencies(maximumCharacterFrequencies);
+    }
+
+    private Map<Character, Integer> countCharacterFrequencies(String string) {
+        // a
+        Map<Character, Integer> characterFrequencies = new HashMap<>();
+        // characterFrequencies = {'a':1}
+        for (char character : string.toCharArray()) {
+            // !
+            if (!characterFrequencies.containsKey(character)) {
+                characterFrequencies.put(character, 0);
             }
-            if (countMap.isEmpty()) {
-                countMap.putAll(wordCountMap);
+            characterFrequencies.put(character, characterFrequencies.get(character) + 1);
+        }
+        // {'a':1}
+        return characterFrequencies;
+    }
+
+    private void updateMaximumFrequencies(Map<Character, Integer> frequencies,
+                                          Map<Character, Integer> maximumFrequencies) {
+        // frequencies = {'a':1}
+        // maximumFrequencies = {'t':2, 'h':1, 'i':1, 's':1, 'a':1, 'd':2, 'e':2, 'm':1, '!':1}
+        for (Map.Entry<Character, Integer> character : frequencies.entrySet()) { // 'a':1
+            Integer frequency = frequencies.get(character.getKey()); // 1
+            if (maximumFrequencies.containsKey(character.getKey())) {
+                maximumFrequencies.put(character.getKey(),
+                        Math.max(frequency, maximumFrequencies.get(character.getKey())));
             } else {
-                for (Map.Entry<Character, Integer> element : wordCountMap.entrySet()) {
-                    if (countMap.containsKey(element.getKey())) {
-                        // use max
-                        int count = countMap.get(element.getKey());
-                        int current = wordCountMap.get(element.getKey());
-                        countMap.put(element.getKey(), Math.max(count, current));
-                    } else {
-                        countMap.put(element.getKey(), element.getValue());
-                    }
-                }
+                maximumFrequencies.put(character.getKey(), frequency);
             }
         }
+    }
 
-        Collection<Integer> values = countMap.values();
-        List<Character> resultArray = new ArrayList<>();
-        for (Map.Entry<Character, Integer> element : countMap.entrySet()) {
-            for (int i = 0; i < countMap.get(element.getKey()); i++) {
-                resultArray.add(element.getKey());
+    private char[] makeArrayFromCharacterFrequencies(Map<Character, Integer> characterFrequencies) {
+        //                                                             *
+        // {'t':2, 'h':1, 'i':1, 's':1, 'a':1, 'd':2, 'e':2, 'm':1, '!':1}
+        List<Character> characterList = new ArrayList<>();
+        for (Map.Entry<Character, Integer> character : characterFrequencies.entrySet()) {
+            // 'm':1
+            Integer frequency = characterFrequencies.get(character.getKey()); // 1
+            for (int i = 0; i < frequency; i++) {
+                // ['t', 't', 'h', 'i', 's', 'a', 'd', 'd', 'e', 'e', 'm', '!']
+                characterList.add(character.getKey());
             }
         }
-        char[] result = new char[resultArray.size()];
-
-        for (int i = 0; i < resultArray.size(); i++) {
-            result[i] = resultArray.get(i);
+        char[] characters = new char[characterList.size()];
+        for (int i = 0; i < characterList.size(); i++) {
+            characters[i] = characterList.get(i);
         }
-
-        return result;
+        return characters; // ['t', 't', 'h', 'i', 's', 'a', 'd', 'd', 'e', 'e', 'm', '!']
     }
 
 }

@@ -12,7 +12,7 @@ public class PalindromeCheck {
     }
 
     private static boolean isPalindromeHelper(String str, int start, int end) {
-        if (start < end) {
+        if (start > end) {
             return true;
         }
         char firstToCheck = str.charAt(start);

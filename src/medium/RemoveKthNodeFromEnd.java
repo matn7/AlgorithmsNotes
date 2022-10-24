@@ -14,56 +14,33 @@ public class RemoveKthNodeFromEnd {
         head.next.next.next.next.next.next.next.next = new LinkedList(8);
         head.next.next.next.next.next.next.next.next.next = new LinkedList(9);
 
-        traverse(head);
-
-        removeKthNodeFromEnd(head, 10);
-        traverse(head);
-    }
-
-    public static void traverse(LinkedList linkedList) {
-        while (linkedList != null) {
-            System.out.print(linkedList.value + " ");
-            linkedList = linkedList.next;
-        }
+        removeKthNodeFromEnd(head, 4);
         System.out.println();
     }
 
+    // O(n) time | O(1) space
+    // OK - repeated 12/02/2022
     public static void removeKthNodeFromEnd(LinkedList head, int k) {
         // Write your code here.
         LinkedList first = head;
-        int total = 0;
-        while (first != null) {
-            first = first.next;
-            total++;
-        }
-
-        LinkedList prev = null;
+        LinkedList second = head;
         int counter = 0;
-        int nodeToDelIdx = total - k;
-        first = head;
-        if (nodeToDelIdx == 0) {
-            while (first.next != null) {
-                prev = first;
-                first.value = first.next.value;
-                first = first.next;
-            }
-            prev.next = null;
+        // second pointer k node ahead first
+        while (second != null && counter < k) {
+            second = second.next;
+            counter++; // 1
+        }
+        if (second == null) {
+            // update head of the list
+            head.value = head.next.value; // overwrites head value
+            head.next = head.next.next;
             return;
         }
-        while (first.next != null && counter < nodeToDelIdx) {
-            prev = first;
+        while (second.next != null) {
+            second = second.next;
             first = first.next;
-            counter++;
         }
-
-        if (prev == null) {
-            // delete head
-
-            first = first.next;
-            head = first;
-        } else {
-            prev.next = first.next;
-        }
+        first.next = first.next.next;
     }
 
     static class LinkedList {
@@ -74,4 +51,5 @@ public class RemoveKthNodeFromEnd {
             this.value = value;
         }
     }
+
 }

@@ -4,13 +4,13 @@ public class SumOfLinkedLists {
 
     public static void main(String[] args) {
         LinkedList linkedListOne = new LinkedList(2);
-//        linkedListOne.next = new LinkedList(4);
-//        linkedListOne.next.next = new LinkedList(7);
-//        linkedListOne.next.next.next = new LinkedList(1);
+        linkedListOne.next = new LinkedList(4);
+        linkedListOne.next.next = new LinkedList(7);
+        linkedListOne.next.next.next = new LinkedList(1);
 
         LinkedList linkedListTwo = new LinkedList(9);
-//        linkedListTwo.next = new LinkedList(4);
-//        linkedListTwo.next.next = new LinkedList(5);
+        linkedListTwo.next = new LinkedList(4);
+        linkedListTwo.next.next = new LinkedList(5);
 
         SumOfLinkedLists sumOfLinkedLists = new SumOfLinkedLists();
         sumOfLinkedLists.sumOfLinkedLists(linkedListOne, linkedListTwo);
@@ -27,63 +27,38 @@ public class SumOfLinkedLists {
         }
     }
 
+    // O(max(m, n)) time | O(max(m, n)) space
+    // OK - repeated 13/02/2022
     public LinkedList sumOfLinkedLists(LinkedList linkedListOne, LinkedList linkedListTwo) {
         // Write your code here.
-        LinkedList current1 = linkedListOne;
-        LinkedList current2 = linkedListTwo;
-
-        LinkedList result = null;
-        LinkedList previous = null;
+        LinkedList newLinkedListHeadPointer = new LinkedList(0);
+        LinkedList currentNode = newLinkedListHeadPointer;
         int carry = 0;
-        while (current1 != null && current2 != null) {
-            int sum = current1.value + current2.value + carry;
-            if (sum >= 10) {
-                sum = sum % 10;
-                carry = 1;
-            } else {
-                carry = 0;
-            }
-            if (result == null) {
-                result = new LinkedList(sum);
-                previous = result;
-            } else {
-                previous.next = new LinkedList(sum);
-                previous = previous.next;
-            }
-            current1 = current1.next;
-            current2 = current2.next;
+
+        //                     c
+        // 0 -> 1 -> 9 -> 2 -> 2 ->
+        //                     o
+        // 2 -> 4 -> 7 -> 1 ->
+        //                t
+        // 9 -> 4 -> 5 ->
+        LinkedList nodeOne = linkedListOne;
+        LinkedList nodeTwo = linkedListTwo;
+        while (nodeOne != null || nodeTwo != null || carry != 0) {
+            int valueOne = nodeOne != null ? nodeOne.value : 0; // 1
+            int valueTwo = nodeTwo != null ? nodeTwo.value : 0; // 0
+            int sumOfValues = valueOne + valueTwo + carry; // 1 + 0 + 1 = 2
+
+            int newValue = sumOfValues % 10; // 2
+            LinkedList newNode = new LinkedList(newValue);
+            currentNode.next = newNode;
+            currentNode = newNode;
+
+            carry = sumOfValues / 10; // 0
+            nodeOne = nodeOne != null ? nodeOne.next : null;
+            nodeTwo = nodeTwo != null ? nodeTwo.next : null;
         }
 
-        while (current1 != null) {
-            int sum = current1.value + carry;
-            if (sum >= 10) {
-                sum = sum % 10;
-                carry = 1;
-            } else {
-                carry = 0;
-            }
-            previous.next = new LinkedList(sum);
-            previous = previous.next;
-            current1 = current1.next;
-        }
-
-        while (current2 != null) {
-            int sum = current2.value + carry;
-            if (sum >= 10) {
-                sum = sum % 10;
-                carry = 1;
-            } else {
-                carry = 0;
-            }
-            previous.next = new LinkedList(sum);
-            previous = previous.next;
-            current2 = current2.next;
-        }
-
-        if (carry != 0) {
-            previous.next = new LinkedList(carry);
-        }
-        return result;
+        return newLinkedListHeadPointer.next; // 1 -> 9 -> 2 -> 2 ->
     }
 
 }

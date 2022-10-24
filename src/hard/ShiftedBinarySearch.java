@@ -20,8 +20,6 @@ public class ShiftedBinarySearch {
         if (left > right) {
             return -1;
         }
-        //   0   1   2   3   4  5  6   7   8   9
-        // [45, 61, 71, 72, 73, 0, 1, 21, 33, 37]
         int middle = (left + right) / 2; // (8 + 9) = 17 / 2 = 8
         int potentialMatch = array[middle]; // 33
         int leftNum = array[left]; // 33

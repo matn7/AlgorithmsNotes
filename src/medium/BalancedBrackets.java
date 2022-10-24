@@ -1,50 +1,58 @@
 package medium;
 
-import java.util.*;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Stack;
 
 public class BalancedBrackets {
 
-    private static Map<Character, Character> matchingParenthesis = new HashMap<>();
-    private static Set<Character> openingBracket = new HashSet<>();
-
-    static {
-        matchingParenthesis.put(')', '(');
-        matchingParenthesis.put(']', '[');
-        matchingParenthesis.put('}', '{');
-
-        openingBracket.addAll(matchingParenthesis.values());
-    }
-
     public static void main(String[] args) {
-//        String input = "{()()}[]";
-        String input = ")[]}";
+        String input = "{()()}[]";
 
         boolean result = balancedBrackets(input);
         System.out.println(result);
     }
 
+    // O(n) time | O(n) space
+    // OK - repeated 12/02/2022
     public static boolean balancedBrackets(String str) {
         // Write your code here.
-        LinkedList<Character> openingStack = new LinkedList<>();
+        Map<Character, Character> matchingBrackets = new HashMap<>();
+        matchingBrackets.put(')', '(');
+        matchingBrackets.put('}', '{');
+        matchingBrackets.put(']', '[');
 
-        for (int i = 0; i < str.length(); i++) {
-            if (openingBracket.contains(str.charAt(i))) {
-                openingStack.push(str.charAt(i)); // { (
+        // matchingBrackets = {')': '(', '}': '{', ']': '['}
+        Collection<Character> openingBrackets = matchingBrackets.values();
+
+        // openingBrackets = ['(', '{', '[']
+        Stack<Character> openingBracketsStack = new Stack<>();
+
+        // --------------------
+        // |
+        // --------------------
+        //                *
+        // "{ ( ) ( ) } [ ]"
+        for (Character character : str.toCharArray()) { // ]
+            if (openingBrackets.contains(character)) {
+                openingBracketsStack.push(character); //
             }
 
-            if (matchingParenthesis.containsKey(str.charAt(i))) {
-                if (openingStack.isEmpty()) {
+            if (matchingBrackets.containsKey(character)) { // ]
+                // closing
+                if (openingBracketsStack.isEmpty()) {
                     return false;
                 }
-                Character bracketPair = matchingParenthesis.get(str.charAt(i)); // ')' : '('
-                Character bracketFromStack = openingStack.pop(); // (
-                if (bracketPair != bracketFromStack) {
+                Character opening = openingBracketsStack.pop(); // [
+                Character openingFromMap = matchingBrackets.get(character); // [
+                if (opening != openingFromMap) {
                     return false;
                 }
             }
         }
-
-        return openingStack.isEmpty();
+        return openingBracketsStack.isEmpty(); // true
     }
 
 

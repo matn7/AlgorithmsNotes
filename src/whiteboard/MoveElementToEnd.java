@@ -46,7 +46,38 @@ public class MoveElementToEnd {
         Integer temp = array.get(left);
         array.set(left, array.get(right));
         array.set(right, temp);
-        System.out.println();
+    }
+
+    // O(n) time | O(1) space
+    public static List<Integer> moveElementToEnd2(List<Integer> array, int toMove) {
+        // Write your code here.
+        if (array.size() == 0) {
+            return array;
+        }
+        int left = 0;
+        int right = array.size() - 1;
+        while (left < right) {
+            while (array.get(right) == toMove && left < right) {
+                right--;
+            }
+            while (array.get(left) != toMove && left < right) {
+                left++;
+            }
+            if (left >= right) {
+                break;
+            }
+
+            swap2(array, left, right);
+            left++;
+            right--;
+        }
+        return array;
+    }
+
+    private static void swap2(List<Integer> array, int i, int j) {
+        int temp = array.get(i);
+        array.set(i, array.get(j));
+        array.set(j, temp);
     }
 
 }

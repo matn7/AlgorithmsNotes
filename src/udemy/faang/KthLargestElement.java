@@ -1,6 +1,7 @@
 package udemy.faang;
 
-public class KthLargestElement {
+public class
+KthLargestElement {
 
     public static void main(String[] args) {
         int[] array = {5, 3, 1, 6, 4, 2};

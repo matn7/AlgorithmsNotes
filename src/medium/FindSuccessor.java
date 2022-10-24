@@ -24,43 +24,12 @@ public class FindSuccessor {
 
         FindSuccessor findSuccessor = new FindSuccessor();
 
-        BinaryTree successor = findSuccessor.findSuccessor(tree, new BinaryTree(3));
+        BinaryTree successor = findSuccessor.findSuccessor(tree, tree.left);
 
         System.out.println(successor.value);
     }
 
-    public void inOrder(BinaryTree tree, BinaryTree node,  List<BinaryTree> path) {
-        if (tree == null) {
-            return;
-        }
-
-        if (tree.value == node.value) {
-            // found node
-            System.out.print("Found " + node.value);
-        }
-        inOrder(tree.left, node, path);
-        path.add(tree);
-        inOrder(tree.right, node, path);
-    }
-
-    public BinaryTree findSuccessor(BinaryTree tree, BinaryTree node) {
-        // Write your code here.
-        List<BinaryTree> path = new ArrayList<>();
-        inOrder(tree, node, path);
-        System.out.println();
-        int counter = 0;
-        for (BinaryTree element : path) {
-            if (element.value == node.value) {
-                break;
-            }
-            counter++;
-        }
-        if (path.size() > counter + 1) {
-            return path.get(counter + 1);
-        }
-        return null;
-    }
-
+    // This is an input class. Do not edit.
     static class BinaryTree {
         public int value;
         public BinaryTree left = null;
@@ -72,4 +41,88 @@ public class FindSuccessor {
         }
     }
 
+    //              1
+    //             / \
+    //            2   3
+    //           / \
+    //          4   5
+    //         /
+    //        6
+    // O(n) time | O(1) space
+    // OK - repeated 13/02/2022
+    public BinaryTree findSuccessor(BinaryTree tree, BinaryTree node) {
+        // 2
+        if (node.right != null) {
+            return getLeftMostChild(node.right);
+        }
+        return getRightMostParent(node);
+    }
+
+    private BinaryTree getLeftMostChild(BinaryTree node) {
+        BinaryTree currentNode = node; // 5
+        while (currentNode.left != null) {
+            currentNode = currentNode.left;
+        }
+        return currentNode;
+    }
+
+    private BinaryTree getRightMostParent(BinaryTree node) {
+        BinaryTree currentNode = node; // 5
+        while (currentNode.parent != null && currentNode.parent.right == currentNode) {
+            currentNode = currentNode.parent; // 2
+        }
+        return currentNode.parent; // 1
+    }
+
+    // O(n) time | O(n) space
+    public BinaryTree findSuccessor2(BinaryTree tree, BinaryTree node) {
+        // Write your code here.
+        List<BinaryTree> order = new ArrayList<>();
+
+        getInOrderTraversal(tree, order);
+
+        for (BinaryTree element : order) {
+            System.out.print(element.value + " - ");
+        }
+
+        // order = [6,4,2,5,1,3]
+        for (int idx = 0; idx < order.size(); idx++) {
+            BinaryTree currentNode = order.get(idx); // 6
+            if (currentNode != node) { // 5 != 5
+                continue;
+            }
+
+            if (idx == order.size() - 1) {
+                return null;
+            }
+
+            return order.get(idx + 1); // 1
+        }
+
+        return null;
+    }
+
+    // rec(null) -> 3 right
+    // rec(null) -> 3 left
+    // rec(3) =>
+    // rec(null) -> 5 right
+    // rec(null) -> 5 left
+    // rec(5) =>
+    // rec(null) -> 4 right
+    // rec(null) -> 6 right
+    // rec(null) -> 6 left
+    // rec(6) =>
+    // rec(4) =>
+    // rec(2) =>
+    // rec(1) =>
+    // order = [6,4,2,5,1,3]
+    private void getInOrderTraversal(BinaryTree node, List<BinaryTree> order) {
+        if (node == null) {
+            return;
+        }
+
+        getInOrderTraversal(node.left, order);
+        order.add(node);
+        getInOrderTraversal(node.right, order);
+    }
 }

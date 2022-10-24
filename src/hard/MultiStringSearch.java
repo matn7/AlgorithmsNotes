@@ -8,8 +8,10 @@ import java.util.Map;
 public class MultiStringSearch {
 
     public static void main(String[] args) {
-        String bigString = "this is a big string";
-        String[] smallStrings = {"this", "yo", "is", "a", "bigger", "string", "kappa"};
+//        String bigString = "this is a big string";
+//        String[] smallStrings = {"this", "yo", "is", "a", "bigger", "string", "kappa"};
+        String bigString = "abcdefghijklmnopqrstuwxyz";
+        String[] smallStrings = {"abc", "a"};
 
         List<Boolean> booleans = multiStringSearch(bigString, smallStrings);
         booleans.stream().forEach(System.out::println);

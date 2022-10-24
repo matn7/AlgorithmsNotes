@@ -2,6 +2,7 @@ package whiteboard;
 
 public class YoungestCommonAncestor {
 
+    // O(d) time | O(1) space - d is depth of tree, equal to n in worst case
     public static AncestralTree getYoungestCommonAncestor(
             AncestralTree topAncestor, AncestralTree descendantOne, AncestralTree descendantTwo) {
         // Write your code here.

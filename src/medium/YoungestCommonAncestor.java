@@ -26,44 +26,46 @@ public class YoungestCommonAncestor {
         AncestralTree nodeI = new AncestralTree('I');
         nodeI.ancestor = nodeD;
 
-        getYoungestCommonAncestor(root, nodeE, nodeI);
+        AncestralTree result = getYoungestCommonAncestor(root, nodeE, nodeI);
+        System.out.println();
     }
 
+
+    // O(d) time (depth of lowest descendant) | O(1) space
+    // OK - repeated 15/02/2022
     public static AncestralTree getYoungestCommonAncestor(
             AncestralTree topAncestor, AncestralTree descendantOne, AncestralTree descendantTwo) {
         // Write your code here.
-
-        List<AncestralTree> pathOne = breadthFirst(descendantOne);
-        List<AncestralTree> pathTwo = breadthFirst(descendantTwo);
-
-        for (AncestralTree element : pathTwo) {
-            if (pathOne.contains(element)) {
-                System.out.println();
-                return element;
-            }
+        // rec(
+        int depthOne = getDescendantDepth(descendantOne, topAncestor); // 2
+        int depthTwo = getDescendantDepth(descendantTwo, topAncestor); // 3
+        if (depthOne > depthTwo) {
+            return backtrackAncestralTree(descendantOne, descendantTwo, depthOne - depthTwo);
+        } else {
+            return backtrackAncestralTree(descendantTwo, descendantOne, depthTwo - depthOne);
         }
-
-        return topAncestor; // Replace this line
     }
 
-    public static List<AncestralTree> breadthFirst(AncestralTree node) {
-        Queue<AncestralTree> queue = new LinkedList<>();
-        queue.add(node);
-
-        List<AncestralTree> path = new ArrayList<>();
-
-        while (!queue.isEmpty()) {
-            AncestralTree poll = queue.poll();
-
-            System.out.println(poll.name);
-            path.add(poll);
-
-            if (poll.ancestor != null) {
-                queue.add(poll.ancestor);
-            }
+    private static AncestralTree backtrackAncestralTree(AncestralTree lowerDescendant,
+                                                        AncestralTree higherDescendant, int diff) {
+        while (diff > 0) {
+            lowerDescendant = lowerDescendant.ancestor;
+            diff--;
         }
+        while (lowerDescendant != higherDescendant) {
+            lowerDescendant = lowerDescendant.ancestor;
+            higherDescendant = higherDescendant.ancestor;
+        }
+        return lowerDescendant;
+    }
 
-        return path;
+    private static int getDescendantDepth(AncestralTree descendant, AncestralTree topAncestor) {
+        int depth = 0;
+        while (descendant != topAncestor) {
+            depth++;
+            descendant = descendant.ancestor;
+        }
+        return depth;
     }
 
     static class AncestralTree {

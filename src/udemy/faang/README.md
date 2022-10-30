@@ -562,6 +562,10 @@ key     "grapes"    --> Hash function -->   711 | 10000
 - Are there repetitive subproblems?
 - Memoize subproblems
 
+***
+
+- Powerful number
+- Calculate prime
 
 
 

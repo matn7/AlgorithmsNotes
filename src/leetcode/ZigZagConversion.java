@@ -1,4 +1,4 @@
-package udemy.faang.leetcode;
+package leetcode;
 
 import java.util.ArrayList;
 import java.util.HashMap;

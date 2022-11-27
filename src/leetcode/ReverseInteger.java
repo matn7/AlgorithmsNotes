@@ -1,4 +1,4 @@
-package udemy.faang.leetcode;
+package leetcode;
 
 public class ReverseInteger {
 

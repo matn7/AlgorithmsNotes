@@ -1,4 +1,4 @@
-package udemy.faang.leetcode;
+package leetcode;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;

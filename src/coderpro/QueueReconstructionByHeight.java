@@ -24,6 +24,7 @@ public class QueueReconstructionByHeight {
 
     }
 
+    // O(nlog(n)) time | O(log(n)) space
     public List<List<Integer>> reconstructQueue(List<List<Integer>> input) {
 
 //        input.sort((a, b) -> b.get(0) - a.get(0));
@@ -36,6 +37,7 @@ public class QueueReconstructionByHeight {
             }
         });
 
+        // [[7, 0], [7, 1], [6, 1], [5, 0], [5, 2], [4, 4]]
         List<List<Integer>> res = new ArrayList<>();
         for (List<Integer> person : input) {
             res.add(person.get(1), person);

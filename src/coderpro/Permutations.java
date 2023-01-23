@@ -11,18 +11,15 @@ public class Permutations {
 
         Permutations permutations = new Permutations();
 
-        List<List<Integer>> result = permutations.permute(nums);
+        List<List<Integer>> result = permutations.findPermutationsMy(nums);
         System.out.println();
     }
 
-    // O(n!) time || O(n!) space
+    // O(n!) time | O(n!) space
     public List<List<Integer>> permute(List<Integer> nums) {
         List<List<Integer>> result = new ArrayList<>();
-
         permuteHelper(nums, 0, result);
-
         return result;
-
     }
 
     private void permuteHelper(List<Integer> nums, int start, List<List<Integer>> result) {
@@ -44,7 +41,7 @@ public class Permutations {
         nums.set(j, temp);
     }
 
-    // O(n!) time || O(n!) space
+    // O(n!) time | O(n!) space
     public List<List<Integer>> findPermutationsMy(List<Integer> nums) {
         List<List<Integer>> perms = new ArrayList<>();
         findPermutationsHelper(nums, new ArrayList<>(), perms);

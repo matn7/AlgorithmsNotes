@@ -1,25 +1,25 @@
 ## Google Questions
 
 - Sorting: 
-    - Insertion sort 
-    - Radix sort 
-    - Quick sort 
-    - Merge sort 
-    - Heap sort 
-- Searching 
-- Binary Search 
-- Divide and conquer 
-- Dynamic Programming - memoization 
-- Greediness - (OK)
-- Recursion 
-- Dijkstra 
-- A * (complexity)
+    - Insertion sort  x
+    - Radix sort x
+    - Quick sort x
+    - Merge sort x
+    - Heap sort x
+- Searching x
+- Binary Search x 
+- Divide and conquer x 
+- Dynamic Programming - memoization x 
+- Greediness x
+- Recursion x
+- Dijkstra  (complexity) 
+- A * (complexity) 
 - Data structures:
-    - Arrays 
-    - Linked Lists: 
-        - Reverse link-list 
-    - Stacks 
-    - Queues 
+    - Arrays x
+    - Linked Lists: x
+        - Reverse link-list x 
+    - Stacks x
+    - Queues x
     - Hash-sets
     - Hash-maps
     - Hash-tables
@@ -71,9 +71,9 @@
     - Robustness
     - Tradeoffs
     - Routers
-    - Domain name servers
+    - Domain name servers x
     - Load balancers
-    - Firewalls
+    - Firewalls x
     - Distributed hash table systems
     - Resource estimations with real systems
     - Big product design picture
@@ -85,21 +85,21 @@
     - For loop problems
     - Index
     - Compilers
-    - Memory cache
+    - Memory cache x
     - Networks
+    - VPN x
 - Operating Systems:
-    - Processes
-    - Threads
-    - Concurrency issues
-    - Locks
-    - Mutexes
-    - Semaphores
-    - Monitors
-    - Deadlock (how to avoid)
-    - Livelock (how to avoid)
-    - What resource process needs and thread needs
-    - How context switch works
-    - How context switch is initiated by system the OS and hardware
-    - Scheduling
-    - Multi-core, modern concurrency constraints   
-        
+    - Processes x
+    - Threads x
+    - Concurrency issues x
+    - Locks x
+    - Mutexes x
+    - Semaphores x
+    - Monitors x
+    - Deadlock (how to avoid) x
+    - Livelock (how to avoid) x
+    - What resource process needs and thread needs x
+    - How context switch works x
+    - How context switch is initiated by system the OS and hardware x
+    - Scheduling x
+    - Multi-core, modern concurrency constraints

@@ -10,6 +10,7 @@ public class PushDominoes {
 
     }
 
+    // O(n) time | O(n) space
     public String pushDominoes(String dominoes) {
         int[] forces = new int[dominoes.length()];
         int maxForce = dominoes.length();

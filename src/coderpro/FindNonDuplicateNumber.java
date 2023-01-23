@@ -3,6 +3,8 @@ package coderpro;
 import java.util.HashMap;
 import java.util.Map;
 
+// * STAR
+// Bit manipulation
 public class FindNonDuplicateNumber {
     // XOR
     // 1 ^ 1 = 0
@@ -10,6 +12,7 @@ public class FindNonDuplicateNumber {
     // 1 ^ 0 = 1
     // 0 ^ 1 = 1
 
+    // Only one value does not have duplicate
     public static void main(String[] args) {
         int[] nums = {4, 3, 2, 4, 1, 3, 2};
         FindNonDuplicateNumber findNonDuplicateNumber = new FindNonDuplicateNumber();
@@ -21,10 +24,7 @@ public class FindNonDuplicateNumber {
     public int singleNumber(int[] nums) {
         int unique = 0;
         for (int n : nums) {
-            System.out.println(unique);
             unique ^= n;
-            System.out.println(unique);
-            System.out.println("----");
         }
         return unique;
     }

@@ -10,6 +10,12 @@ public class NonDecreasingArray {
         System.out.println();
     }
 
+    // index = n - 2 index
+    // index = 0 index
+    // n[index] <= n[index]
+    // n[index - 1] <= n[index + 1]
+
+    // O(n) time | O(1) space
     public boolean checkPossibility(int[] nums) {
 
         int invalid_index = -1;

@@ -71,6 +71,7 @@ public class ThreeSum {
         }
     }
 
+    // O(n^3) time | O(1) space
     public List<List<Integer>> threeSumBruteForce(int[] nums, int target) {
         List<List<Integer>> result = new ArrayList<>();
 
@@ -90,6 +91,7 @@ public class ThreeSum {
         return result;
     }
 
+    // O(n^2) time | O(log(n)) space
     public List<List<Integer>> threeSumMy(int[] nums, int target) {
         List<List<Integer>> result = new ArrayList<>();
 

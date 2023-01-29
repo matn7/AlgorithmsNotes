@@ -15,6 +15,7 @@ public class RemoveKthLastElementFromLinkedList {
         removeKthLastElementFromLinkedList.removeKthFromLinkedList(head, k);
     }
 
+    // O(n) time | O(1) space
     public ListNode removeKthFromLinkedList(ListNode node, int k) {
         ListNode slow = node;
         ListNode fast = node;
@@ -37,6 +38,7 @@ public class RemoveKthLastElementFromLinkedList {
 
     }
 
+    // O(n) time | O(1) space
     public ListNode removeKthLastElementFromLinkedList2(ListNode head, int k) {
         ListNode s = head;
         ListNode f = head;

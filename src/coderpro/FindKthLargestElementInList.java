@@ -17,7 +17,7 @@ public class FindKthLargestElementInList {
         System.out.println();
     }
 
-    // O(klog(n)) time | O(log(n)) space
+    // O(n) time | O(log(n)) space
     public int findKthLargest(int[] nums, int k) {
         return select(nums, 0, nums.length - 1, k);
     }

@@ -28,37 +28,30 @@ public class SumOfLinkedLists {
     }
 
     // O(max(m, n)) time | O(max(m, n)) space
-    // OK - repeated 13/02/2022
     public LinkedList sumOfLinkedLists(LinkedList linkedListOne, LinkedList linkedListTwo) {
         // Write your code here.
         LinkedList newLinkedListHeadPointer = new LinkedList(0);
         LinkedList currentNode = newLinkedListHeadPointer;
         int carry = 0;
 
-        //                     c
-        // 0 -> 1 -> 9 -> 2 -> 2 ->
-        //                     o
-        // 2 -> 4 -> 7 -> 1 ->
-        //                t
-        // 9 -> 4 -> 5 ->
         LinkedList nodeOne = linkedListOne;
         LinkedList nodeTwo = linkedListTwo;
         while (nodeOne != null || nodeTwo != null || carry != 0) {
-            int valueOne = nodeOne != null ? nodeOne.value : 0; // 1
-            int valueTwo = nodeTwo != null ? nodeTwo.value : 0; // 0
-            int sumOfValues = valueOne + valueTwo + carry; // 1 + 0 + 1 = 2
+            int valueOne = nodeOne != null ? nodeOne.value : 0;
+            int valueTwo = nodeTwo != null ? nodeTwo.value : 0;
+            int sumOfValues = valueOne + valueTwo + carry;
 
-            int newValue = sumOfValues % 10; // 2
+            int newValue = sumOfValues % 10;
             LinkedList newNode = new LinkedList(newValue);
             currentNode.next = newNode;
             currentNode = newNode;
 
-            carry = sumOfValues / 10; // 0
+            carry = sumOfValues / 10;
             nodeOne = nodeOne != null ? nodeOne.next : null;
             nodeTwo = nodeTwo != null ? nodeTwo.next : null;
         }
 
-        return newLinkedListHeadPointer.next; // 1 -> 9 -> 2 -> 2 ->
+        return newLinkedListHeadPointer.next;
     }
 
 }

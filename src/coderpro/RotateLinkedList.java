@@ -10,7 +10,8 @@ public class RotateLinkedList {
         node.next.next.next.next = new ListNode(5);
 
         RotateLinkedList rotate = new RotateLinkedList();
-        rotate.rotate(node, 2);
+        ListNode result = rotate.rotate(node, 4);
+        System.out.println();
     }
 
     // O(n) time | O(1) space
@@ -39,6 +40,7 @@ public class RotateLinkedList {
         return head;
     }
 
+    // O(n) time | O(1) space
     public ListNode rotate2(ListNode node, int k) {
         int len = 1;
         ListNode tail = node;

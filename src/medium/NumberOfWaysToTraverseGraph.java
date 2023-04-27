@@ -9,7 +9,6 @@ public class NumberOfWaysToTraverseGraph {
     }
 
     // O(n + m) time | O(1) space
-    // OK - repeated 16/02/2022
     public int numberOfWaysToTraverseGraph(int width, int height) {
         int xDistanceToCorner = width - 1;
         int yDistanceToCorner = height - 1;
@@ -33,13 +32,6 @@ public class NumberOfWaysToTraverseGraph {
     // O(n*m) time | O(n*m) space
     public int numberOfWaysToTraverseGraph2(int width, int height) {
         int[][] numberOfWays = new int[height + 1][width + 1];
-        //             *
-        //     0 1 2 3 4
-        // --+----------
-        // 0 | 0 0 0 0 0
-        // 1 | 0 1 1 1 1  *
-        // 2 | 0 1 2 3 4
-        // 3 | 0 1 3 6 10
 
         for (int i = 0; i < width; i++) {
             numberOfWays[0][i] = 0;
@@ -49,13 +41,13 @@ public class NumberOfWaysToTraverseGraph {
             numberOfWays[i][0] = 0;
         }
 
-        for (int widthIdx = 1; widthIdx < width + 1; widthIdx++) { // width = col
-            for (int heightIdx = 1; heightIdx < height + 1; heightIdx++) { // height = row
+        for (int widthIdx = 1; widthIdx < width + 1; widthIdx++) {
+            for (int heightIdx = 1; heightIdx < height + 1; heightIdx++) {
                 if (widthIdx == 1 || heightIdx == 1) {
                     numberOfWays[heightIdx][widthIdx] = 1;
                 } else {
-                    int waysLeft = numberOfWays[heightIdx][widthIdx - 1]; // 1
-                    int waysUp = numberOfWays[heightIdx - 1][widthIdx]; // 2
+                    int waysLeft = numberOfWays[heightIdx][widthIdx - 1];
+                    int waysUp = numberOfWays[heightIdx - 1][widthIdx];
                     numberOfWays[heightIdx][widthIdx] = waysLeft + waysUp;
                 }
             }

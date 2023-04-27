@@ -11,6 +11,10 @@ public class CircleOfChainedWords {
         circleOfChainedWords.chainedWords(words);
     }
 
+    // ********
+    // * STAR *
+    // ********
+
     // O(n) time | O(n) space
     public boolean chainedWords(String[] words) {
         Map<Character, List<String>> symbol = new HashMap<>();

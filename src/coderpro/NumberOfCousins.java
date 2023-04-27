@@ -17,6 +17,10 @@ public class NumberOfCousins {
         numberOfCousins.list_cousins(node, node.right.right);
     }
 
+    // ********
+    // * STAR *
+    // ********
+
     // O(n) time | O(n) space
     public List<TreeNode> list_cousins(TreeNode node, TreeNode target) {
         CousinTree treeInfo = find_node(node, target, null, 0);
@@ -50,6 +54,38 @@ public class NumberOfCousins {
         }
 
         return  find_node(node.right, target, node, height + 1);
+    }
+
+    // =============
+    // O(n) time | O(n) space
+    public List<TreeNodeParent> findCousins(TreeNodeParent node, TreeNodeParent cousin) {
+        int depth = getDepth(cousin);
+        List<TreeNodeParent> cousins = new ArrayList<>();
+        findCousinsHelper(node, cousin, 0, depth, cousins);
+        return cousins;
+    }
+
+    private void findCousinsHelper(TreeNodeParent currNode, TreeNodeParent cousin, int currDepth, int depth,
+                                   List<TreeNodeParent> cousins) {
+        if (currNode == cousin.parent) {
+            return;
+        }
+        if (currDepth == depth) {
+            cousins.add(currNode);
+            return;
+        }
+        findCousinsHelper(currNode.left, cousin, currDepth + 1, depth, cousins);
+        findCousinsHelper(currNode.right, cousin, currDepth + 1, depth, cousins);
+    }
+
+    private int getDepth(TreeNodeParent node) {
+        int depth = 0;
+        TreeNodeParent curr = node;
+        while (curr.parent != null) {
+            curr = curr.parent;
+            depth++;
+        }
+        return depth;
     }
 
 }

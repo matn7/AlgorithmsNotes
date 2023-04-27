@@ -11,6 +11,9 @@ public class PrimeNumbers {
         System.out.println(prime);
     }
 
+    // ********
+    // * STAR *
+    // ********
     public boolean checkPrime(int n) {
 
         if (n <= 1) {

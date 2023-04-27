@@ -8,9 +8,11 @@ public class HeapSort {
         heapSort(array);
     }
 
+    // ********
+    // * STAR *
+    // ********
+
     // O(nlog(n)) time | O(1) space
-    // #2: 10/07/2022
-    // rand: 25/09/2022
     public static int[] heapSort(int[] array) {
         // Write your code here.
         buildMaxHeap(array);
@@ -54,6 +56,55 @@ public class HeapSort {
     }
 
     private static void swap(int i, int j, int[] array) {
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+
+    // O(nlog(n)) time | O(1) space
+    public static int[] heapSort2(int[] array) {
+        // Write your code here.
+        buildMaxHeap2(array);
+        for (int i = 0; i < array.length; i++) {
+            swap2(array, 0, array.length - 1 - i);
+            siftDown(array, 0, array.length - 1 - i);
+        }
+        return array;
+    }
+
+    private static void buildMaxHeap2(int[] array) {
+        int lastIdx = array.length - 1;
+        int parentIdx = (lastIdx - 1) / 2;
+
+        for (int i = parentIdx; i >= 0; i--) {
+            siftDown2(array, i, lastIdx);
+        }
+    }
+
+    private static void siftDown2(int[] array, int start, int end) {
+        int leftIdx = 2 * start + 1;
+        while (leftIdx < end) {
+            int idxToSwap = 0;
+            int rightIdx = 2 * start + 2;
+            if (rightIdx >= end) {
+                rightIdx = -1;
+            }
+            if (rightIdx == -1 || array[leftIdx] > array[rightIdx]) {
+                idxToSwap = leftIdx;
+            } else {
+                idxToSwap = rightIdx;
+            }
+            if (array[idxToSwap] > array[start]) {
+                swap2(array, start, idxToSwap);
+                start = idxToSwap;
+                leftIdx = 2 * start + 1;
+            } else {
+                break;
+            }
+        }
+    }
+
+    private static void swap2(int[] array, int i, int j) {
         int temp = array[i];
         array[i] = array[j];
         array[j] = temp;

@@ -1,10 +1,16 @@
 package whiteboard;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class NumberOfWaysToTraverseGraph {
 
+    public static void main(String[] args) {
+        NumberOfWaysToTraverseGraph numberOfWaysToTraverseGraph = new NumberOfWaysToTraverseGraph();
+        numberOfWaysToTraverseGraph.numberOfWaysToTraverseGraphPermute(4, 3);
+    }
+
     // O(nm) time | O(nm) space
-    // #2: 13/07/2022
-    // rand: 28/08/2022
     public int numberOfWaysToTraverseGraph(int width, int height) {
         // Write your code here.
         int[][] ways = new int[height][width];
@@ -49,6 +55,37 @@ public class NumberOfWaysToTraverseGraph {
 
         return numberOfWaysToTraverseGraphNaive(width - 1, height)
              + numberOfWaysToTraverseGraphNaive(width, height - 1);
+    }
+
+    // Does not work
+    // O(n * n!) time | O(n * n!) space
+    public int numberOfWaysToTraverseGraphPermute(int width, int height) {
+        List<String> input = new ArrayList<>();
+        for (int i = 0; i < width - 1; i++) {
+            input.add("Right");
+        }
+        for (int i = 0; i < height - 1; i++) {
+            input.add("Down");
+        }
+        List<List<String>> permutations = new ArrayList<>();
+
+        permutationsHelper(input, new ArrayList<>(), permutations);
+
+        return permutations.size();
+    }
+
+    private void permutationsHelper(List<String> input, List<String> curr, List<List<String>> permutations) {
+        if (input.isEmpty()) {
+            permutations.add(curr);
+        } else {
+            for (int i = 0; i < input.size(); i++) {
+                List<String> newInput = new ArrayList<>(input);
+                String inputElem = newInput.remove(i);
+                List<String> newCurr = new ArrayList<>(curr);
+                newCurr.add(inputElem);
+                permutationsHelper(newInput, newCurr, permutations);
+            }
+        }
     }
 
 }

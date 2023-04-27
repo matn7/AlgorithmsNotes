@@ -29,16 +29,7 @@ public class FindNodesDistanceK {
         }
     }
 
-//                      1
-//                    /   \
-//                   2     3
-//                  / \     \
-//                 4   5     6
-//                          / \
-//                         7   8
-
     // O(n) time | O(n) space
-    // OK - repeated 29/01/2022
     public ArrayList<Integer> findNodesDistanceK(BinaryTree tree, int target, int k) {
         // Write your code here.
         Map<Integer, BinaryTree> nodesToParents = new HashMap<>();

@@ -18,7 +18,6 @@ public class MinHeightBst {
     }
 
     // O(n) time | O(n) space
-    // #2: 25/06/2022
     public static BST minHeightBst(List<Integer> array) {
         // Write your code here.
         BST bst = minHeightBstHelper(null, array, 0, array.size() - 1);
@@ -47,39 +46,6 @@ public class MinHeightBst {
         minHeightBstHelper(bst, array, mid + 1, end);
         return bst;
     }
-
-
-
-
-
-//    public static BST minHeightBst(List<Integer> array) {
-//        // Write your code here.
-//        BST bst = minHeightBstHelper(null, 0, array.size() - 1, array);
-//        return bst;
-//    }
-//
-//    private static BST minHeightBstHelper(BST tree, int start, int end, List<Integer> array) {
-//        if (start > end) {
-//            return null;
-//        }
-//
-//        int mid = (start + end) / 2;
-//        int arrVal = array.get(mid);
-//        BST newBst = new BST(arrVal);
-//        if (tree == null) {
-//            tree = newBst;
-//        } else if (arrVal < tree.value) {
-//            tree.left = newBst;
-//            tree = tree.left;
-//        } else {
-//            tree.right = newBst;
-//            tree = tree.right;
-//        }
-//
-//        minHeightBstHelper(tree, start, mid - 1, array);
-//        minHeightBstHelper(tree, mid + 1, end, array);
-//        return tree;
-//    }
 
 
     static class BST {

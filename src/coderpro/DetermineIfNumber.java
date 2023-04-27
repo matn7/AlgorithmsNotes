@@ -32,12 +32,17 @@ public class DetermineIfNumber {
 
     public static void main(String[] args) {
 
+        // finite state machine
         DetermineIfNumber determineIfNumber = new DetermineIfNumber();
         boolean result = determineIfNumber.parse_number("123e5");
         System.out.println(result);
         System.out.println(determineIfNumber.parse_number("123a"));
 
     }
+
+    // ********
+    // * STAR *
+    // ********
 
     // O(n) time | O(k) space (build finite state machine or O(1))
     public boolean parse_number(String str) {

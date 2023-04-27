@@ -18,6 +18,10 @@ public class ZigZagBinaryTrees {
         zigZagBinaryTrees.zigzag_order(node);
     }
 
+    // ********
+    // * STAR *
+    // ********
+
     // O(n) time | O(n) space
     public List<Integer> zigzag_order(TreeNode tree) {
         List<Integer> result = new ArrayList<>();

@@ -3,12 +3,15 @@ package whiteboard;
 public class MergeSort {
 
     public static void main(String[] args) {
-        int[] array = {8, 5, 2, 9, 5, 6, 3};;
+        int[] array = {8, 5, 2, 9, 5, 6, 3};
         mergeSort(array);
     }
 
+    // ********
+    // * STAR *
+    // ********
+
     // O(nlog(n)) time | O(n) space
-    // #2: 19/06/2022
     public static int[] mergeSort(int[] array) {
         // Write your code here.
         if (array.length == 1) {

@@ -16,6 +16,7 @@ public class CountNumberUnivalSubtrees {
         System.out.println(result);
     }
 
+    // O(n) time | O(n) space
     public int countUnivalSubtrees(TreeNode node) {
         UnivalInfo info = countUnivalSubtreesHelper(node);
         return info.count;

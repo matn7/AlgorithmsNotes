@@ -10,8 +10,13 @@ public class ShortestUniquePrefix {
         String[] words = { "jon", "john", "jack", "techlead" };
 
         ShortestUniquePrefix shortestUniquePrefix = new ShortestUniquePrefix();
-        shortestUniquePrefix.shortest_unique_prefix(words);
+        List<String> result = shortestUniquePrefix.shortest_unique_prefix(words);
+        System.out.println(result);
     }
+
+    // ********
+    // * STAR *
+    // ********
 
     // O(n) time | O(n) space
     public List<String> shortest_unique_prefix(String[] words) {

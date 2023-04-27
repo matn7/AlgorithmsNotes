@@ -16,6 +16,10 @@ public class QuickSelect {
         System.out.println(result);
     }
 
+    // ********
+    // * STAR *
+    // ********
+
     // O(n) time | O(1) space
     public int quickSelect(int[] arr, int k) {
         int left = 0;

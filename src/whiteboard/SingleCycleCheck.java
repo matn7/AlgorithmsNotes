@@ -12,8 +12,6 @@ public class SingleCycleCheck {
     }
 
     // O(n) time | O(1) space
-    // #2: 05/07/2022
-    // rand: 10/08/2022
     public static boolean hasSingleCycle(int[] array) {
         // Write your code here.
         int i = 0;

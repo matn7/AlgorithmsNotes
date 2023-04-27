@@ -27,7 +27,6 @@ public class CalendarMatching {
     }
 
     // O(c1 + c2) time | O(c1 + c2) space
-    // rand: 30/07/2022
     public static List<StringMeeting> calendarMatching(
             List<StringMeeting> calendar1,
             StringMeeting dailyBounds1,

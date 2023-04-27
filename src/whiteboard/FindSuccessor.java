@@ -39,4 +39,29 @@ public class FindSuccessor {
         return tree;
     }
 
+    // O(n) time | O(1) space
+    public BinaryTree findSuccessor2(BinaryTree tree, BinaryTree node) {
+        // Write your code here.
+        if (node.right != null) {
+            return min(node.right);
+        }
+        BinaryTree curr = node;
+        while (curr.parent != null && curr != curr.parent.left) {
+            curr = curr.parent;
+        }
+        if (curr.parent == null) {
+            return null;
+        }
+        return curr.parent;
+    }
+
+    private BinaryTree min(BinaryTree node) {
+        BinaryTree curr = node;
+        while (curr.left != null) {
+            curr = curr.left;
+        }
+        return curr;
+    }
+
+
 }

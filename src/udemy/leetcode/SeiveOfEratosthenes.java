@@ -8,6 +8,9 @@ public class SeiveOfEratosthenes {
         seiveOfEratosthenes.seive(n, arr);
     }
 
+    // ********
+    // * STAR *
+    // ********
     public void seive(int n, boolean[] primes) {
         for (int i = 2; i*i <= n; i++) {
             if (!primes[i]) {

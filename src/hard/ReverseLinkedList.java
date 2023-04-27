@@ -11,23 +11,9 @@ public class ReverseLinkedList {
         head.next.next.next.next.next = new LinkedList(5);
 
         LinkedList linkedList = reverseLinkedList(head);
-
-        traverse(linkedList);
     }
 
-    public static void traverse(LinkedList head) {
-        LinkedList current = head;
-        while (current != null) {
-            System.out.print(current.value + " ");
-            current = current.next;
-        }
-    }
-
-    //   head
-    // <-- 0 <-- 1 <-- 2 <-- 3 <-- 4 <-- 5    null
-    //                                   p     c
     // O(n) time | O(1) space
-    // OK - repeated 29/01/2022
     public static LinkedList reverseLinkedList(LinkedList head) {
         // Write your code here.
         if (head == null) {

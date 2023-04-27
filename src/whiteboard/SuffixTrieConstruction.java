@@ -7,8 +7,6 @@ public class SuffixTrieConstruction {
 
     public static void main(String[] args) {
         SuffixTrie suffixTrie = new SuffixTrie("babc");
-
-
         suffixTrie.contains("aba");
     }
 
@@ -16,7 +14,6 @@ public class SuffixTrieConstruction {
         Map<Character, TrieNode> children = new HashMap<Character, TrieNode>();
     }
 
-    // rand: 01/08/2022
     static class SuffixTrie {
         TrieNode root = new TrieNode();
         char endSymbol = '*';

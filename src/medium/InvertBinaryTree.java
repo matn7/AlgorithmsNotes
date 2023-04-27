@@ -32,17 +32,7 @@ public class InvertBinaryTree {
         inOrder(tree.right);
     }
 
-    //               1
-    //            /      \
-    //           2        3
-    //         /   \    /   \
-    //        4     5  6     7
-    //      /   \
-    //     8     9
-
-
     // O(n) time | O(d) space
-    // OK - repeated 07/02/2022
     public static void invertBinaryTree(BinaryTree tree) {
         if (tree == null) {
             return;
@@ -52,14 +42,6 @@ public class InvertBinaryTree {
         invertBinaryTree(tree.right);
     }
 
-    //               1
-    //            /      \
-    //           2        3
-    //         /   \    /   \
-    //        4     5  6     7
-    //      /   \
-    //     8     9
-
     // O(n) time | O(n) time
     public static void invertBinaryTree2(BinaryTree tree) {
         // Write your code here.
@@ -67,7 +49,7 @@ public class InvertBinaryTree {
         queue.add(tree);
 
         while (!queue.isEmpty()) {
-            BinaryTree current = queue.poll(); // (1)
+            BinaryTree current = queue.poll();
             if (current == null) {
                 continue;
             }
@@ -75,7 +57,6 @@ public class InvertBinaryTree {
             queue.add(current.left);
             queue.add(current.right);
         }
-
     }
 
     private static void swapLeftAndRight(BinaryTree tree) {

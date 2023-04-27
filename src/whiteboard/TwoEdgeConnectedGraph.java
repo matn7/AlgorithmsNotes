@@ -1,6 +1,6 @@
 package whiteboard;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class TwoEdgeConnectedGraph {
 
@@ -48,5 +48,92 @@ public class TwoEdgeConnectedGraph {
             return -1;
         }
         return minimumArrivalTime;
+    }
+
+    // O(e * (e+v)) time | O(e) space
+    public boolean twoEdgeConnectedGraph2(int[][] edges) {
+        // Write your code here.
+        if (edges.length <= 1) {
+            return true;
+        }
+        if (edges[0].length == 0) {
+            return false;
+        }
+        Map<Integer, Node> graphMap = new HashMap<>();
+        for (int i = 0; i < edges.length; i++) {
+            graphMap.put(i, new Node(i));
+        }
+
+        for (int i = 0; i < edges.length; i++) {
+            int[] edge = edges[i];
+            Node currNode = graphMap.get(i);
+            for (int e : edge) {
+                currNode.addNeighbor(graphMap.get(e));
+            }
+        }
+
+        for (int i = 0; i < graphMap.size(); i++) {
+            Node currNode = graphMap.get(i);
+            List<Node> neighbors = currNode.neighbors;
+            int size = neighbors.size();
+            if (size == 0 && graphMap.size() > 1) {
+                return false;
+            }
+            for (int n = 0; n < size; n++) {
+                Node removed = neighbors.remove(n); // remove neighbor from list
+                if (neighbors.isEmpty()) {
+                    return false;
+                }
+                explore(currNode, currNode);
+                if (!currNode.visited) {
+                    return false;
+                }
+                neighbors.add(removed); // add removed it back
+                for (Node n1 : neighbors) {
+                    if (!n1.visited) {
+                        return false;
+                    }
+                }
+                currNode.visited = false;// reset visiting
+                for (Node n1 : neighbors) {
+                    n1.visited = false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    private void explore(Node node, Node currNode) {
+        if (node == null) {
+            return;
+        }
+        if (node.visiting) {
+            return;
+        }
+        node.visiting = true;
+
+        List<Node> neighbors = node.neighbors;
+        for (Node neighbor : neighbors) {
+            explore(neighbor, currNode);
+        }
+        node.visited = true;
+        node.visiting = false;
+    }
+
+    static class Node {
+        int val;
+        boolean visiting;
+        boolean visited;
+        List<Node> neighbors;
+
+        public Node(int val) {
+            this.val = val;
+            this.neighbors = new ArrayList<>();
+        }
+
+        public void addNeighbor(Node n) {
+            this.neighbors.add(n);
+        }
     }
 }

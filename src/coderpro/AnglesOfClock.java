@@ -10,6 +10,10 @@ public class AnglesOfClock {
 
     }
 
+    // ********
+    // * STAR *
+    // ********
+
     // O(1) time | O(1) space
     public double calcAngle(int h, int m) {
         double hour_angle = (360 / (12 * 60.0)) * (h * 60 + m);

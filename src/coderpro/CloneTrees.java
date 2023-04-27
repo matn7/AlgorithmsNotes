@@ -23,6 +23,10 @@ public class CloneTrees {
 
     }
 
+    // ********
+    // * STAR *
+    // ********
+
     // O(n) time | O(n) space
     public TreeNode findNode(TreeNode a, TreeNode b, TreeNode node) {
         if (a == node) {

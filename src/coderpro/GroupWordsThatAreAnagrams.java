@@ -11,7 +11,7 @@ public class GroupWordsThatAreAnagrams {
         groupWordsThatAreAnagrams.groupAnagramWords(words);
     }
 
-    // O(n * m) time | O(n) space
+    // O(n * O(26)) time | O(n) space
     public Collection<List<String>> groupAnagramWords(List<String> strs) {
         Map<String, List<String>> groups = new HashMap<>();
 

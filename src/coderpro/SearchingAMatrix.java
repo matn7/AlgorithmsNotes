@@ -12,9 +12,11 @@ public class SearchingAMatrix {
         SearchingAMatrix searchingAMatrix = new SearchingAMatrix();
         boolean result = searchingAMatrix.searchMatrix(matrix, 4);
         System.out.println(result);
-
-
     }
+
+    // ********
+    // * STAR *
+    // ********
 
     // O(log(n)) time | O(1) space
     public boolean searchMatrix(int[][] matrix, int value) {

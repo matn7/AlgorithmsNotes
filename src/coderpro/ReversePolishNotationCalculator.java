@@ -10,8 +10,13 @@ public class ReversePolishNotationCalculator {
         String[] operation = {"1", "2", "3", "+", "2", "*", "-"};
 
         ReversePolishNotationCalculator notation = new ReversePolishNotationCalculator();
-        notation.calc(operation);
+        int result = notation.calc(operation);
+        System.out.println(result);
     }
+
+    // ********
+    // * STAR *
+    // ********
 
     // O(n) time | O(n) space
     public int calc(String[] inputs) {
@@ -41,7 +46,6 @@ public class ReversePolishNotationCalculator {
                     int val = a / b;
                     stack.push(String.valueOf(val));
                 }
-
             } else {
                 stack.push(i);
             }

@@ -9,8 +9,6 @@ public class WaterArea {
     }
 
     // O(n) time | O(n) space
-    // #2: 11/07/2022
-    // rand: 07/10/2022
     public static int waterArea(int[] heights) {
         // Write your code here.
         if (heights.length == 0) {
@@ -70,6 +68,31 @@ public class WaterArea {
             }
         }
         return waterArea;
+    }
+
+    // O(n) time | O(n) space
+    public static int waterArea2(int[] heights) {
+        // Write your code here.
+        if (heights.length == 0) {
+            return 0;
+        }
+        int leftMax = heights[0];
+        int[] water = new int[heights.length];
+
+        for (int i = 0; i < heights.length; i++) {
+            leftMax = Math.max(leftMax, heights[i]);
+            water[i] = leftMax - heights[i];
+        }
+        int rightMax = heights[heights.length - 1];
+        for (int i = heights.length - 1; i >= 0; i--) {
+            rightMax = Math.max(rightMax, heights[i]);
+            water[i] = Math.min(water[i], rightMax - heights[i]);
+        }
+        int sum = 0;
+        for (int w : water) {
+            sum += w;
+        }
+        return sum;
     }
 
 }

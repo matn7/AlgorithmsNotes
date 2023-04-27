@@ -1,5 +1,7 @@
 package whiteboard;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.PriorityQueue;
 
 public class DijkstrasAlgorithm {
@@ -19,11 +21,14 @@ public class DijkstrasAlgorithm {
         System.out.println();
     }
 
+    // Directly, positive edges, no self loops
+    // Adjacency list to represent a graph
+
     // O((v+e)*log(v)) time | O(v) space
-    // #2: 26/06/2022
     public int[] dijkstrasAlgorithm(int start, int[][][] edges) {
         // Write your code here.
         int[] distances = new int[edges.length];
+        Map<Integer, Node> graphMap = new HashMap<>();
 
         for (int i = 0; i < edges.length; i++) {
             distances[i] = Integer.MAX_VALUE;
@@ -40,6 +45,7 @@ public class DijkstrasAlgorithm {
             Node currentElement = distanceHeap.remove();
             int currentIdx = currentElement.idx;
             int currentDistance = currentElement.distance;
+            graphMap.put(currentIdx, currentElement);
 
             int[][] neighbors = edges[currentIdx];
             for (int[] neighbor : neighbors) {
@@ -47,7 +53,9 @@ public class DijkstrasAlgorithm {
                 int neighborDistance = neighbor[1];
                 if (currentDistance + neighborDistance < distances[neighborIdx]) {
                     distances[neighborIdx] = currentDistance + neighborDistance;
-                    distanceHeap.add(new Node(neighborIdx, currentDistance + neighborDistance));
+                    Node neighborNode = new Node(neighborIdx, currentDistance + neighborDistance);
+                    distanceHeap.add(neighborNode);
+                    neighborNode.cameFrom = currentElement; // to determine path if needed
                 }
             }
 
@@ -56,6 +64,7 @@ public class DijkstrasAlgorithm {
         for (int i = 0; i < distances.length; i++) {
             if (distances[i] == Integer.MAX_VALUE)  {
                 distances[i] = -1;
+                graphMap.put(i, new Node(i, -1));
             }
         }
 
@@ -65,6 +74,7 @@ public class DijkstrasAlgorithm {
     static class Node implements Comparable<Node> {
         int idx;
         int distance;
+        Node cameFrom;
 
         public Node(int idx, int distance) {
             this.idx = idx;

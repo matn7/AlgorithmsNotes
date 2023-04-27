@@ -19,8 +19,8 @@ public class JumpToTheEnd {
         hops[0] = 0;
 
         for (int i = 0; i < nums.length; i++) {
-            int n = nums[i];
-            for (int j = 1; j < n + 1; j++) {
+            int n = nums[i]; // n is num of hops
+            for (int j = i; j < n + 1; j++) {
                 if (i + j < hops.length) {
                     hops[i + j] = Math.min(hops[i + j], hops[i] + 1);
                 } else {

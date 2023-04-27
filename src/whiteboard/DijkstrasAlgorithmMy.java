@@ -18,6 +18,7 @@ public class DijkstrasAlgorithmMy {
         dijkstrasAlgorithmMy.dijkstrasAlgorithm(0, edges);
     }
 
+    // O(v^2 + e) time | O(v) space
     public int[] dijkstrasAlgorithm(int start, int[][][] edges) {
         // Write your code here.
         if (edges.length == 0) {

@@ -6,14 +6,29 @@ import java.util.Map;
 public class FrequentSubtreeSum {
 
     public static void main(String[] args) {
+//        TreeNode node = new TreeNode(3);
+//        node.left = new TreeNode(1);
+//        node.right = new TreeNode(-3);
+
         TreeNode node = new TreeNode(3);
         node.left = new TreeNode(1);
         node.right = new TreeNode(-3);
+        node.right.left = new TreeNode(0);
+        node.right.left.left = new TreeNode(33);
+        node.right.right = new TreeNode(0);
+        node.right.right.left = new TreeNode(13);
+        node.left.left = new TreeNode(2);
+        node.left.left.right = new TreeNode(13);
 
         FrequentSubtreeSum frequentSubtreeSum = new FrequentSubtreeSum();
-        frequentSubtreeSum.most_freq(node);
+        int result = frequentSubtreeSum.most_freq(node);
+        System.out.println(result);
 
     }
+
+    // ********
+    // * STAR *
+    // ********
 
     // O(n) time | O(n) space
     public int most_freq(TreeNode root) {

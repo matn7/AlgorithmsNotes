@@ -15,6 +15,10 @@ public class Autocompletion {
         System.out.println();
     }
 
+    // ********
+    // * STAR *
+    // ********
+
     TrieNode2 trie;
 
     // O(n*m) time | O(n*m) space

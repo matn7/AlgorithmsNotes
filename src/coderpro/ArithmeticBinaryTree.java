@@ -1,8 +1,6 @@
 package coderpro;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 
@@ -22,11 +20,17 @@ public class ArithmeticBinaryTree {
         System.out.println(result);
     }
 
+    // ********
+    // * STAR *
+    // ********
+
     // O(n) time | O(n) space
     public int evaluate2(ArithmeticTree node) {
         Map<String, Operator<Integer>> operators = new HashMap<>();
         operators.put("+", (a, b) -> a + b);
         operators.put("*", (a, b) -> a * b);
+        operators.put("-", (a, b) -> a - b);
+        operators.put("/", (a, b) -> a / b);
 
         if (operators.containsKey(node.value)) {
             Operator<Integer> fn = operators.get(node.value);
@@ -46,6 +50,55 @@ public class ArithmeticBinaryTree {
         } else {
             return Integer.parseInt(node.value);
         }
+    }
+
+    // =======================
+    public int calculate(ArithmeticTree node) {
+        Set<String> operators = new HashSet<>();
+        operators.add("+");
+        operators.add("-");
+        operators.add("*");
+        operators.add("/");
+        Stack<String> stack = new Stack<>();
+        calcHelper(node, operators, stack);
+        return Integer.parseInt(stack.pop());
+    }
+
+    private void calcHelper(ArithmeticTree node, Set<String> operators, Stack<String> stack) {
+        if (isLeaf(node)) {
+            stack.add(node.value);
+            return;
+        }
+        calcHelper(node.left, operators, stack);
+        calcHelper(node.right, operators, stack);
+
+        if (operators.contains(node.value)) {
+            Integer b = Integer.parseInt(stack.pop());
+            Integer a = Integer.parseInt(stack.pop());
+            if (node.value.equals("+")) {
+                int res = a + b;
+                stack.push(String.valueOf(res));
+            }
+            if (node.value.equals("-")) {
+                int res = a - b;
+                stack.push(String.valueOf(res));
+            }
+            if (node.value.equals("*")) {
+                int res = a * b;
+                stack.push(String.valueOf(res));
+            }
+            if (node.value.equals("/")) {
+                int res = a / b;
+                stack.push(String.valueOf(res));
+            }
+        } else {
+            stack.add(node.value);
+        }
+    }
+
+    private boolean isLeaf(ArithmeticTree node)
+    {
+        return node.left == null && node.right == null;
     }
 
 }

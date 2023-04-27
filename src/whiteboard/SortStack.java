@@ -13,14 +13,16 @@ public class SortStack {
         }
 
         SortStack sortStack = new SortStack();
-        ArrayList<Integer> result = sortStack.sortStack(stack);
+        ArrayList<Integer> result = sortStack.sortStack2(stack);
         System.out.println();
 
     }
 
+    // ********
+    // * STAR *
+    // ********
+
     // O(n^2) time | O(n) space
-    // #2: 18/06/2022
-    // random: 14/07/2022
     public ArrayList<Integer> sortStack(ArrayList<Integer> stack) {
         sortStackHelper(stack);
         return stack;
@@ -49,5 +51,37 @@ public class SortStack {
         merge(stack, currVal);
         stack.add(popped);
     }
+
+    // O(n^2) time | O(n) space
+    public ArrayList<Integer> sortStack2(ArrayList<Integer> stack) {
+        // Write your code here.
+        sortHelper(stack);
+        return stack;
+    }
+
+    private void sortHelper(ArrayList<Integer> stack) {
+        if (stack.isEmpty()) {
+            return;
+        }
+        Integer curr = stack.remove(stack.size() - 1);
+        sortHelper(stack);
+        mergeHelper(stack, curr);
+    }
+
+    private void mergeHelper(ArrayList<Integer> result, Integer curr) {
+        if (result.isEmpty()) {
+            result.add(curr);
+        } else {
+            Integer topElement = result.get(result.size() - 1);
+            if (topElement <= curr) {
+                result.add(curr);
+            } else {
+                Integer removed = result.remove(result.size() - 1);
+                mergeHelper(result, curr);
+                result.add(removed);
+            }
+        }
+    }
+
 
 }

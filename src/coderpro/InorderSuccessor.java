@@ -34,6 +34,10 @@ public class InorderSuccessor {
         // 1 2 4 5 7 8 9
     }
 
+    // ********
+    // * STAR *
+    // ********
+
     // O(n) time | O(1) space
     public TreeNodeParent in_order_successor(TreeNodeParent node) {
         if (node.right != null) {

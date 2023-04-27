@@ -14,7 +14,6 @@ public class LinkedListPalindrome {
     }
 
     // O(n) time | O(1) space
-    // #2: 02/07/2022
     public boolean linkedListPalindrome(LinkedList head) {
         // Write your code here.
         if (head.next == null) {
@@ -57,6 +56,38 @@ public class LinkedListPalindrome {
             curr = next;
         }
         return prev;
+    }
+
+    // O(n) time | O(n) space
+    public boolean linkedListPalindrome2(LinkedList head) {
+        // Write your code here.
+        LinkedListInfo isPalindromeResult = isPalindrome(head, head);
+        return isPalindromeResult.outerNodesAreEqual;
+    }
+
+    private LinkedListInfo isPalindrome(LinkedList leftNode, LinkedList rightNode) {
+        if (rightNode == null) {
+            return new LinkedListInfo(true, leftNode);
+        }
+
+        LinkedListInfo recursiveCallResults = isPalindrome(leftNode, rightNode.next);
+        LinkedList leftNodeToCompare = recursiveCallResults.leftNodeToCompare;
+        boolean outerNodesAreEqual = recursiveCallResults.outerNodesAreEqual;
+
+        boolean recursiveIsEqual = outerNodesAreEqual && leftNodeToCompare.value == rightNode.value;
+        LinkedList nextLeftNodeToCompare = leftNodeToCompare.next;
+
+        return new LinkedListInfo(recursiveIsEqual, nextLeftNodeToCompare);
+    }
+
+    static class LinkedListInfo {
+        boolean outerNodesAreEqual;
+        LinkedList leftNodeToCompare;
+
+        public LinkedListInfo(boolean outerNodesAreEqual, LinkedList leftNodeToCompare) {
+            this.outerNodesAreEqual = outerNodesAreEqual;
+            this.leftNodeToCompare = leftNodeToCompare;
+        }
     }
 
 }

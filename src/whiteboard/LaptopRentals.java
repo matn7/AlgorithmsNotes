@@ -19,8 +19,39 @@ public class LaptopRentals {
     }
 
     // O(nlog(n)) time | O(n) space
-    // #2: 22/06/2022
     public int laptopRentals(ArrayList<ArrayList<Integer>> times) {
+        if (times.size() == 0) {
+            return 0;
+        }
+
+        int usedLaptops = 0;
+        List<Integer> startTimes = new ArrayList<>();
+        List<Integer> endTimes = new ArrayList<>();
+
+        for (int i = 0; i < times.size(); i++) {
+            ArrayList<Integer> time = times.get(i);
+            startTimes.add(time.get(0));
+            endTimes.add(time.get(1));
+        }
+
+        Collections.sort(startTimes);
+        Collections.sort(endTimes);
+
+        int startIterator = 0;int endIterator = 0;
+        while (startIterator < times.size()) {
+            if (startTimes.get(startIterator) >= endTimes.get(endIterator)) {
+                usedLaptops--;
+                endIterator++;
+            }
+            usedLaptops++;
+            startIterator++;
+        }
+
+        return usedLaptops;
+    }
+
+    // O(nlog(n)) time | O(n) space
+    public int laptopRentals2(ArrayList<ArrayList<Integer>> times) {
         // Write your code here.
         PriorityQueue<Laptop> borrowedLaptops = new PriorityQueue<>();
 
@@ -50,7 +81,6 @@ public class LaptopRentals {
             this.startTime = startTime;
             this.endTime = endTime;
         }
-
 
         @Override
         public int compareTo(Laptop o) {

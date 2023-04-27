@@ -13,6 +13,7 @@ public class BinaryTreeDiameter {
         }
     }
 
+    // O(n) time | O(n) space
     public int binaryTreeDiameter(BinaryTree tree) {
         // Write your code here.
         return binaryTreeDiameterHelper(tree).diameter;
@@ -31,7 +32,6 @@ public class BinaryTreeDiameter {
         int currentDiameter = Math.max(pathThroughRoot, maxDiameterSoFar);
         int currentHeight = 1 + Math.max(leftTree.height, rightTree.height);
         return new TreeInfo(currentDiameter, currentHeight);
-
     }
 
     static class TreeInfo {

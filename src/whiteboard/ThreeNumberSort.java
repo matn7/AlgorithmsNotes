@@ -37,4 +37,55 @@ public class ThreeNumberSort {
         array[j] = temp;
     }
 
+    // O(n) time | O(1) space
+    public int[] threeNumberSort2(int[] array, int[] order) {
+        // Write your code here.
+        int[] valuesCounts = {0, 0, 0};
+
+        for (int element : array) {
+            if (element == order[0]) {
+                valuesCounts[0]++;
+            } else if (element == order[1]) {
+                valuesCounts[1]++;
+            } else {
+                valuesCounts[2]++;
+            }
+        }
+
+        int j = 0;
+        for (int i = 0; i < 3; i++) {
+            int value = order[i];
+            int count = valuesCounts[i] + j;
+            for (int c = j; c < count; c++) {
+                array[c] = value;
+                j++;
+            }
+        }
+        return array;
+    }
+
+    // O(n) time | O(1) space
+    public int[] threeNumberSort3(int[] array, int[] order) {
+        int firstValue = order[0];
+        int thirdValue = order[2];
+
+        int firstIdx = 0;
+        for (int idx = 0; idx < array.length; idx++) {
+            if (array[idx] == firstValue) {
+                swap(array, idx, firstIdx);
+                firstIdx++;
+            }
+        }
+
+        int thirdIdx = array.length - 1;
+        for (int idx = array.length - 1; idx >= 0; idx--) {
+            if (array[idx] == thirdValue) {
+                swap(array, idx, thirdIdx);
+                thirdIdx--;
+            }
+        }
+
+        return array;
+    }
+
 }

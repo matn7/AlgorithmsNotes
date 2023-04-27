@@ -29,6 +29,31 @@ public class FindClosestValueInBst {
         return minNode;
     }
 
+    // O(n) time | O(n) space
+    public static int findClosestValueInBstRec(BST tree, int target) {
+        // Write your code here.
+        return findClosestValueInBstHelper(tree, target, Integer.MAX_VALUE, -1);
+    }
+
+    private static int findClosestValueInBstHelper(BST node, int target, int minDistance, int result) {
+        if (node == null) {
+            return result;
+        }
+        int currDist = Math.abs(target - node.value);
+        if (currDist < minDistance) {
+            minDistance = currDist;
+            result = node.value;
+        }
+        if (node.value == target) {
+            return node.value;
+        } else if (node.value < target) {
+            return findClosestValueInBstHelper(node.right, target, minDistance, result);
+        } else {
+            return findClosestValueInBstHelper(node.left, target, minDistance, result);
+        }
+    }
+
+
     static class BST {
         public int value;
         public BST left;

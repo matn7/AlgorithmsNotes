@@ -24,6 +24,7 @@ public class DepthOfBinaryTree {
         return 1 + Math.max(deepest(node.left), deepest(node.right));
     }
 
+    // O(n) time | O(n) space
     public int depthOfBinaryTree(TreeNode root) {
         if (root == null) {
             return 0;

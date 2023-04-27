@@ -13,12 +13,17 @@ public class AnagramsInAString {
 
         AnagramsInAString anagramsInAString = new AnagramsInAString();
         anagramsInAString.find_anagrams(str, anagram);
+
     }
 
-    // TO REPEAT
+    // ********
+    // * STAR *
+    // ********
+
+    // O(n) time | O(n) space
     public List<Integer> find_anagrams(String a, String b) {
         Map<Character, Integer> char_map = new HashMap<>();
-        List<Integer> result = new ArrayList<>();
+        List<Integer> results = new ArrayList<>();
 
         for (char c : b.toCharArray()) {
             if (char_map.containsKey(c)) {
@@ -30,75 +35,66 @@ public class AnagramsInAString {
 
         for (int i = 0; i < a.length(); i++) {
             char c = a.charAt(i);
-            if (!char_map.containsKey(c)) {
-                continue;
-            }
 
             if (i >= b.length()) {
                 char c_old = a.charAt(i - b.length());
-                if (char_map.containsKey(c_old)) {
-                    char_map.put(c_old, char_map.get(c_old) + 1);
-                } else {
+                if (!char_map.containsKey(c_old)) {
                     char_map.put(c_old, 1);
                 }
+                char_map.put(c_old, char_map.get(c_old) + 1);
                 if (char_map.get(c_old) == 0) {
                     char_map.remove(c_old);
                 }
             }
-
-            if (char_map.containsKey(c)) {
-                char_map.put(c, char_map.get(c) - 1);
-            } else {
-                char_map.put(c, 0);
+            if (!char_map.containsKey(c)) {
+                char_map.put(c, 1);
             }
+            char_map.put(c, char_map.get(c) - 1);
             if (char_map.get(c) == 0) {
                 char_map.remove(c);
             }
 
-            if (char_map.size() == 0) {
-                result.add(i - b.length());
+            if (i + 1 >= b.length() && char_map.size() == 0) {
+                results.add(i - b.length() + 1);
             }
         }
-        return result;
+        return results;
     }
 
-    // ==============
-    public List<Integer> findAnagrams(String str, String anagram) {
 
-        List<String> anagrams = new ArrayList<>();
-        List<Character> anagramChars = new ArrayList<>();
-        for (int i = 0; i < anagram.length(); i++) {
-            anagramChars.add(anagram.charAt(i));
+    // O(n!) time | O(n!) space
+    public List<Integer> anagramLocations(String input, String s) {
+        List<String> permutation = new ArrayList<>();
+        List<Character> chars = new ArrayList<>();
+        for (char c : s.toCharArray()) {
+            chars.add(c);
         }
-        findAnagramsList(anagramChars, new ArrayList<>(), anagrams);
+
+        calcPermute(chars, "", permutation);
+
         List<Integer> result = new ArrayList<>();
-        for (String a : anagrams) {
-            if (str.contains(a)) {
-                result.add(str.indexOf(a));
+
+        for (String permute : permutation) {
+            if (input.contains(permute)) {
+                result.add(input.indexOf(permute));
             }
         }
-
         return result;
+
     }
 
-    private void findAnagramsList(List<Character> anagram, List<Character> curr, List<String> anagrams) {
-        if (anagram.isEmpty()) {
-            StringBuilder oneAnagram = new StringBuilder();
-            for (Character c : curr) {
-                oneAnagram.append(c);
-            }
-            anagrams.add(oneAnagram.toString());
+    private void calcPermute(List<Character> chars, String currentWord, List<String> result) {
+        if (chars.isEmpty()) {
+            result.add(currentWord);
         } else {
-            for (int i = 0; i < anagram.size(); i++) {
-                List<Character> newAnagram = new ArrayList<>(anagram);
-                Character removedElement = newAnagram.remove(i);
-                List<Character> newCurr = new ArrayList<>(curr);
-                newCurr.add(removedElement);
-                findAnagramsList(newAnagram, newCurr, anagrams);
+            for (int i = 0; i < chars.size(); i++) {
+                List<Character> newChars = new ArrayList<>(chars);
+                Character curr = newChars.remove(i);
+                String newWord = currentWord + curr;
+                calcPermute(newChars, newWord, result);
             }
         }
-        // abc
-
     }
+
 
 }

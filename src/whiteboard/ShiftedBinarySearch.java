@@ -11,11 +11,16 @@ public class ShiftedBinarySearch {
         System.out.println();
     }
 
+    // ********
+    //
+    // * STAR *
+    // ********
+
     // O(log(n)) time | O(1) space
     public static int shiftedBinarySearch(int[] array, int target) {
         int start = 0;
         int end = array.length - 1;
-        while (start < end) {
+        while (start <= end) {
             int mid = (end + start) / 2;
             if (array[mid] == target) {
                 return mid;

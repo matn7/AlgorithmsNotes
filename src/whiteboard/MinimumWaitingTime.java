@@ -12,7 +12,6 @@ public class MinimumWaitingTime {
     }
 
     // O(nlog(n)) time | O(1) space
-    // rand: 07/08/2022
     public int minimumWaitingTime(int[] queries) {
         Arrays.sort(queries);
         int totalTime = 0;

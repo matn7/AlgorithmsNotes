@@ -5,6 +5,10 @@ import java.util.Map;
 
 public class LRUCacheProgram {
 
+    // ********
+    // * STAR *
+    // ********
+
     static class LRUCache {
         int maxSize;
         Map<String, DoublyLinkedListNode> cache = new HashMap<>();
@@ -16,7 +20,6 @@ public class LRUCacheProgram {
         }
 
         // O(1) time | O(1) space
-        // rand: 07/08/2022
         public void insertKeyValuePair(String key, int value) {
             // Write your code here.
             if (!cache.containsKey(key)) {

@@ -13,7 +13,6 @@ public class LargestRange {
     }
 
     // O(n) time | O(n) space
-    // #2: 14/06/2022
     public static int[] largestRange(int[] array) {
         // Write your code here.
         if (array.length == 1) {

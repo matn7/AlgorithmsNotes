@@ -31,13 +31,18 @@ public class LowestCommonManager {
         getLowestCommonManager(A, E, I);
     }
 
+    // ********
+    // * STAR *
+    // ********
+
+    // O(n) time | O(n) space
     public static OrgChart getLowestCommonManager(
             OrgChart topManager, OrgChart reportOne, OrgChart reportTwo) {
         // Write your code here.
 
         OrgNode orgNode = getLowestCommonManagerHelper(topManager, reportOne, reportTwo);
 
-        return orgNode.lowestCommonMgr; // Replace this line.
+        return orgNode.lowestCommonMgr;
     }
 
     private static OrgNode getLowestCommonManagerHelper(OrgChart manager, OrgChart reportOne, OrgChart reportTwo) {
@@ -47,7 +52,7 @@ public class LowestCommonManager {
         for (OrgChart report : reports) {
             OrgNode reportNode = getLowestCommonManagerHelper(report, reportOne, reportTwo);
             if (reportNode.lowestCommonMgr != null) {
-                return new OrgNode(reportNode.lowestCommonMgr, 2);
+                return reportNode;
             }
             numReports += reportNode.numReports;
         }

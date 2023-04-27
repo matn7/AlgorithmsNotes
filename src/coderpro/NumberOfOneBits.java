@@ -9,6 +9,10 @@ public class NumberOfOneBits {
         System.out.println(result);
     }
 
+    // ********
+    // * STAR *
+    // ********
+
     // O(log(n)) time | O(1) space
     public int one_bits(int n) {
         int count = 0;

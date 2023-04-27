@@ -10,6 +10,8 @@ public class FactorsOfNumber {
         factorsOfNumber.factors2(20);
     }
 
+
+
     public void factors1(int n) {
         for (int i = 1; i <= n; i++) {
             if (n % i == 0) {

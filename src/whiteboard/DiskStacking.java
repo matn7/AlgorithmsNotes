@@ -73,4 +73,56 @@ public class DiskStacking {
     private static boolean areValidDimensions(Integer[] o, Integer[] c) {
         return o[0] < c[0] && o[1] < c[1] && o[2] < c[2];
     }
+
+    // O(n^2) time | O(n) space
+    public static List<Integer[]> diskStacking2(List<Integer[]> disks) {
+        // Write your code here.
+        if (disks.size() <= 1) {
+            return disks;
+        }
+        disks.sort(Comparator.comparingInt(a -> a[2]));
+        Integer[] sequence = new Integer[disks.size()];
+        Integer[] heights = new Integer[disks.size()];
+        Arrays.fill(sequence, null);
+        for (int i = 0; i < disks.size(); i++) {
+            heights[i] = disks.get(i)[2];
+        }
+
+        int max = 0;
+        int maxIdx = 0;
+
+        for (int i = 0; i < disks.size(); i++) {
+            Integer[] current = disks.get(i);
+            for (int j = i + 1; j < disks.size(); j++) {
+                Integer[] other = disks.get(j);
+                if (canPlace(current, other)) {
+                    if (heights[i] + other[2] > heights[j]) {
+                        heights[j] = heights[i] + other[2];
+                        sequence[j] = i;
+                    }
+                }
+                if (heights[j] > max) {
+                    max = heights[j];
+                    maxIdx = j;
+                }
+            }
+        }
+
+        return buildSequence(disks, sequence, maxIdx);
+    }
+
+    private static List<Integer[]> buildSequence(List<Integer[]> disks, Integer[] sequence, int maxIdx) {
+        List<Integer[]> result = new ArrayList<>();
+        Integer curr = maxIdx;
+        while (curr != null) {
+            result.add(disks.get(curr));
+            curr = sequence[curr];
+        }
+        Collections.reverse(result);
+        return result;
+    }
+
+    private static boolean canPlace(Integer[] c, Integer[] o) {
+        return c[0] < o[0] && c[1] < o[1] && c[2] < o[2];
+    }
 }

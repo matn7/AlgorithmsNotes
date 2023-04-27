@@ -11,8 +11,6 @@ public class MinRewards {
     }
 
     // O(n) time | O(n) space
-    // #2: 04/07/2022
-    // rand: 01/08/2022
     public static int minRewards(int[] scores) {
         // Write your code here.
         int[] rewards = new int[scores.length];

@@ -11,7 +11,13 @@ public class MakeTheLargestNumber {
         makeTheLargestNumber.largestNum(nums);
     }
 
-    // O(nlog(n)) time | O(n) space
+    // ********
+    // * STAR *
+    // ********
+
+    // Custom sorting !!!
+
+    // O(nlog(n)) time | O(n) space - O(log(n)) for quick sort on avg case, but in worst case O(n)
     public String largestNum(int[] nums) {
 
         String[] numsStr = new String[nums.length];
@@ -20,8 +26,9 @@ public class MakeTheLargestNumber {
         }
 
         Arrays.sort(numsStr, (a, b) -> {
-            String comp1 = a + b;
-            String comp2 = b + a;
+            String comp1 = a + b; // 772 - compare 7 with 72
+            String comp2 = b + a; // 727 - compare 72 with 7
+            // means 7 comes before 72
             return comp2.compareTo(comp1);
         });
 

@@ -14,6 +14,7 @@ public class ClimbingStairs {
     }
 
     // O(n) time | O(1) space
+    // fibonacci
     public int staircase2(int n) {
         int prev = 1;
         int prevprev = 1;

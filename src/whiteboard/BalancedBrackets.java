@@ -15,8 +15,6 @@ public class BalancedBrackets {
     }
 
     // O(n) time | O(n) space
-    // #2: 16/06/2022
-    // rand: 07/08/2022
     public static boolean balancedBrackets(String str) {
         // Write your code here.
         if (str.length() == 1) {

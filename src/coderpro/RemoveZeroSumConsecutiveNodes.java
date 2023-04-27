@@ -17,8 +17,9 @@ public class RemoveZeroSumConsecutiveNodes {
         removeZeroSumConsecutiveNodes.removeZeroSumSubList(root);
     }
 
+    // O(n) time | O(n) space
     public ListNode removeZeroSumSubList(ListNode node) {
-        Map<Integer, ListNode> sumToNode = new LinkedHashMap<>();
+        Map<Integer, ListNode> sumToNode = new LinkedHashMap<>(); // ordered hash map
         int sum = 0;
         ListNode dummy = new ListNode(0);
         dummy.next = node;

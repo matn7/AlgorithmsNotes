@@ -16,7 +16,9 @@ public class SortColor {
         int lowIndex = 0;
         int highIndex = colors.length - 1;
         int currIndex = 0;
-
+        //                         l        h
+        // 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2
+        //                                     c
         while (currIndex <= highIndex) {
             if (colors[currIndex] == 0) {
                 swap(colors, lowIndex, currIndex);

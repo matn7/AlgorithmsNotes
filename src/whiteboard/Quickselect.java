@@ -11,8 +11,11 @@ public class Quickselect {
         quickselect(array, 3);
     }
 
+    // ********
+    // * STAR *
+    // ********
+
     // O(nlog(n)) time | O(n) space
-    // #2: 06/07/2022
     public static int quickselect(int[] array, int k) {
         // Write your code here.
         PriorityQueue<Integer> queue = new PriorityQueue<>(Comparator.reverseOrder());
@@ -30,6 +33,56 @@ public class Quickselect {
         }
 
         return queue.peek();
+    }
+
+    // O(n) time | O(log(n)) space
+    public static int quickselect2(int[] array, int k) {
+        // Write your code here.
+        if (array.length == 0 || k > array.length) {
+            return -1;
+        }
+        quickSortHelper(array, 0, array.length - 1, k);
+        int i = array[k-1];
+        return i;
+    }
+
+    private static void quickSortHelper(int[] array, int start, int end, int k) {
+        System.out.println("*");
+        if (start > end) {
+            return;
+        }
+        int pivot = start;
+        int s = start + 1;
+        int e = end;
+
+        while (s <= e) {
+            if (array[s] > array[pivot] && array[e] < array[pivot]) {
+                swap(array, s, e);
+            }
+            if (array[s] <= array[pivot]) {
+                s++;
+            }
+            if (array[e] >= array[pivot]) {
+                e--;
+            }
+        }
+        swap(array, pivot, e);
+        if (e == k - 1) {
+            return;
+        }
+        if (e - 1 - start > end - (e + 1)) {
+            quickSortHelper(array, start, e - 1, k);
+            quickSortHelper(array, e + 1, end, k);
+        } else {
+            quickSortHelper(array, e + 1, end, k);
+            quickSortHelper(array, start, e - 1, k);
+        }
+    }
+
+    private static void swap(int[] array, int i, int j) {
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
     }
 
 }

@@ -24,6 +24,10 @@ public class TreeSerialization {
         treeSerialization.preOrder(deserialize);
     }
 
+    // ********
+    // * STAR *
+    // ********
+
     // O(n) time | O(n) space
     public String serialize(TreeNode node) {
         if (node == null) {

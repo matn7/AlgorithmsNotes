@@ -9,6 +9,8 @@ public class SortedSquareNumbers {
         sortedSquareNumbers.sortedSquared(nums);
     }
 
+    // talk about other alternative not optimal solutions
+
     // O(n) time | O(1) space
     public int[] sortedSquared(int[] nums) {
         int[] result = new int[nums.length];

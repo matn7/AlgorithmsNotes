@@ -24,8 +24,11 @@ public class PhoneNumberMnemonics {
         mnemonicMap.put("0", new ArrayList<>(Arrays.asList("0")));
     }
 
+    // ********
+    // * STAR *
+    // ********
+
     // O(4^n*n) time | O(4^n*n) space
-    // #2: 17/06/2022
     public ArrayList<String> phoneNumberMnemonics(String phoneNumber) {
         // Write your code here.
 

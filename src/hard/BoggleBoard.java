@@ -75,25 +75,25 @@ public class BoggleBoard {
     private static List<Coords> getNeighbors(int i, int j, char[][] board) {
         List<Coords> neighbors = new ArrayList<>();
         if (i > 0 && j > 0) {
-            neighbors.add(new Coords(i - 1, j - 1));
+            neighbors.add(new Coords(i - 1, j - 1)); //
         }
         if (i > 0 && j < board[0].length - 1) {
-            neighbors.add(new Coords(i - 1, j + 1));
+            neighbors.add(new Coords(i - 1, j + 1)); //
         }
         if (i < board.length - 1 && j < board[0].length - 1) {
-            neighbors.add(new Coords(i + 1, j + 1));
-        }
-        if (i < board.length - 1 && j > 0) {
-            neighbors.add(new Coords(i + 1, j - 1));
+            neighbors.add(new Coords(i + 1, j + 1)); //
         }
         if (i > 0) {
-            neighbors.add(new Coords(i - 1, j));
+            neighbors.add(new Coords(i - 1, j)); //
+        }
+        if (i < board.length - 1 && j > 0) {
+            neighbors.add(new Coords(i + 1, j - 1)); //
         }
         if (i < board.length - 1) {
-            neighbors.add(new Coords(i + 1, j));
+            neighbors.add(new Coords(i + 1, j)); //
         }
         if (j > 0) {
-            neighbors.add(new Coords(i, j - 1));
+            neighbors.add(new Coords(i, j - 1)); //
         }
         if (j < board[0].length - 1) {
             neighbors.add(new Coords(i, j + 1));

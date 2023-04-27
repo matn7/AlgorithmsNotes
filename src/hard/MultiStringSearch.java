@@ -61,7 +61,6 @@ public class MultiStringSearch {
             this.root = new TrieNode();
         }
 
-        // "this"
         private void insert(String word) {
             TrieNode current = root;
             for (Character letter : word.toCharArray()) {

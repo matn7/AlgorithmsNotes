@@ -30,10 +30,14 @@ public class MergeLinkedLists {
     }
 
     // O(n + m) time | O(1) space
-    // #2: 29/06/2022
-    // rand: 01/08/2022
     public static LinkedList mergeLinkedLists(LinkedList headOne, LinkedList headTwo) {
         // Write your code here.
+        if (headOne == null) {
+            return headTwo;
+        }
+        if (headTwo == null) {
+            return headOne;
+        }
         LinkedList first = headOne;
         LinkedList second = headTwo;
         LinkedList firstPrev = null;

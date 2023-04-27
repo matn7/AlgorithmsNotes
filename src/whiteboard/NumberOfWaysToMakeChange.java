@@ -10,8 +10,6 @@ public class NumberOfWaysToMakeChange {
     }
 
     // O(n*d) time (d denom) | O(n) space
-    // #2: 12/07/2022
-    // rand: 18/07/2022
     public static int numberOfWaysToMakeChange(int n, int[] denoms) {
         // Write your code here.
         int[] ways = new int[n + 1];

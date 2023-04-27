@@ -35,10 +35,7 @@ public class MergeLinkedLists {
         // Write your code here.
         recursiveMerge(headOne, headTwo, null);
 
-        if (headOne.value < headTwo.value) {
-            return headOne;
-        }
-        return headTwo;
+        return headOne.value < headTwo.value ? headOne : headTwo;
     }
 
     private static void recursiveMerge(LinkedList p1, LinkedList p2, LinkedList p1Prev) {
@@ -65,6 +62,12 @@ public class MergeLinkedLists {
     // O(n + m) time | O(1) space
     public static LinkedList mergeLinkedLists(LinkedList headOne, LinkedList headTwo) {
         // Write your code here.
+        if (headOne == null) {
+            return headTwo;
+        }
+        if (headTwo == null) {
+            return headOne;
+        }
         LinkedList p1 = headOne;
         LinkedList p1Prev = null;
         LinkedList p2 = headTwo;
@@ -85,9 +88,7 @@ public class MergeLinkedLists {
         if (p1 == null) {
             p1Prev.next = p2;
         }
-        if (headOne.value < headTwo.value) {
-            return headOne;
-        }
-        return headTwo;
+
+        return headOne.value < headTwo.value ? headOne : headTwo;
     }
 }

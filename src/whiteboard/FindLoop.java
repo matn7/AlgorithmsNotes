@@ -23,8 +23,6 @@ public class FindLoop {
     }
 
     // O(n) time | O(1) space
-    // #2: 18/06/2022
-    // rand: 03/08/2022
     public static LinkedList findLoop(LinkedList head) {
         // Write your code here.
         LinkedList first = head;

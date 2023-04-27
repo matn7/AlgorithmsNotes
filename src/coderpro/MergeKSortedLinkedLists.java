@@ -50,6 +50,7 @@ public class MergeKSortedLinkedLists {
         return head.next;
     }
 
+    // O(nlog(n)) time | O(n) space
     public ListNode mergeBruteForce(List<ListNode> lists) {
         List<Integer> arr = new ArrayList<>();
         for (ListNode node : lists) {

@@ -8,10 +8,10 @@ import java.util.PriorityQueue;
 public class MeetingRooms {
 
     public static void main(String[] args) {
-        Integer[][] meetings = {{20, 30}, {0, 50}, {10, 21}};
+        Integer[][] meetings = {{20, 30}, {0, 50}, {10, 21}, {52, 56}, {58, 90}};
 
         MeetingRooms meetingRooms = new MeetingRooms();
-        int result = meetingRooms.meeting_rooms(meetings);
+        int result = meetingRooms.meetingRooms(meetings);
         System.out.println(result);
     }
 

@@ -16,7 +16,7 @@ public class SubarrayWithTargetSum {
         int target = 14;
 
         SubarrayWithTargetSum subarrayWithTargetSum = new SubarrayWithTargetSum();
-        List<Integer> result = subarrayWithTargetSum.find_continuous_k(list, target);
+        List<Integer> result = subarrayWithTargetSum.find_continuous_k3(list, target);
         System.out.println();
     }
 
@@ -50,5 +50,30 @@ public class SubarrayWithTargetSum {
         }
         return null;
     }
+
+    // O(n) time | O(n) space
+    public List<Integer> find_continuous_k3(List<Integer> list, int target) {
+        int start = 0;
+        int end = 0;
+        int sum = 0;
+
+        //              e
+        // [1, 3, 2, 5, 7, 2], 14
+        //        s
+        while (end < list.size()) {
+            int curr = list.get(end); // 7
+            if (sum + curr == target) {
+                break;
+            } else if (sum + curr < target) {
+                sum += curr; // 7
+                end++;
+            } else {
+                sum -= list.get(start);
+                start++;
+            }
+        }
+        return list.subList(start, end + 1);
+    }
+
 
 }

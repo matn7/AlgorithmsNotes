@@ -10,7 +10,6 @@ public class MaxPathSum {
     }
 
     // O(n) time | O(log(n)) space
-    // #2: 06/07/2022
     private static TreeInfo maxPathSumHelper(BinaryTree tree) {
         if (tree == null) {
             return new TreeInfo(0, 0);

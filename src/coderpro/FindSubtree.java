@@ -23,6 +23,10 @@ public class FindSubtree {
         System.out.println(result);
     }
 
+    // ********
+    // * STAR *
+    // ********
+
     // O(n*m) time | O(n*m) space
     public boolean find_subtree2(TreeNode a, TreeNode b) {
         if (a == null) {
@@ -109,6 +113,51 @@ public class FindSubtree {
         builder.append(node.value);
         preOrderBuilder(node.left, builder);
         preOrderBuilder(node.right, builder);
+    }
+
+    // O(n + k*m) time | O(n + m) space
+    public boolean findSubtree3(TreeNode a, TreeNode b) {
+        if (b == null) {
+            return true;
+        }
+        List<TreeNode> candidates = new ArrayList<>();
+        findCandidates(a, b.value, candidates); // O(n)
+
+        for (TreeNode candidate : candidates) { // O(k)
+            boolean foundSubtree = findSubtreeHelper(candidate, b); // O(m)
+            if (foundSubtree) {
+                return foundSubtree;
+            }
+        }
+
+        return false;
+    }
+
+    private boolean findSubtreeHelper(TreeNode n, TreeNode b) {
+        if (b == null) {
+            return true;
+        }
+        if (n == null) {
+            return false;
+        }
+        if (n.value != b.value) {
+            return false;
+        }
+
+        boolean left = findSubtreeHelper(n.left, b.left);
+        boolean right = findSubtreeHelper(n.right, b.right);
+        return left && right;
+    }
+
+    private void findCandidates(TreeNode node, int rootVal, List<TreeNode> candidates) {
+        if (node == null) {
+            return;
+        }
+        if (node.value == rootVal) {
+            candidates.add(node);
+        }
+        findCandidates(node.left, rootVal, candidates);
+        findCandidates(node.right, rootVal, candidates);
     }
 
 }

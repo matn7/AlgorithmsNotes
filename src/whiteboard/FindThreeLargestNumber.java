@@ -3,7 +3,6 @@ package whiteboard;
 public class FindThreeLargestNumber {
 
     // O(n) time | O(1) space
-    // #1: 10/07/2022
     public static int[] findThreeLargestNumbers(int[] array) {
         // Write your code here.
         int[] result = {Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE};

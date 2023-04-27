@@ -77,4 +77,53 @@ public class ShortenPath {
         return resString.toString();
     }
 
+    // O(n) time | O(n) space
+    public static String shortenPath2(String path) {
+        // Write your code here;
+        if (path.equals("/")) {
+            return "/";
+        }
+        char firstChar = path.charAt(0);
+        boolean isAbsolutePath = false; // /../../../foo/bar/baz
+        if (firstChar == '/') {
+            isAbsolutePath = true;
+        }
+        String[] pathsElements = path.split("/");
+        List<String> pathsFilteredElements = new ArrayList<>();
+        for (String elem : pathsElements) {
+            if (elem.equals("") || elem.equals(".")) {
+                continue;
+            }
+            pathsFilteredElements.add(elem);
+        }
+        Stack<String> stack = new Stack<>();
+        if (isAbsolutePath) {
+            stack.push("");
+        }
+
+        for (String elem : pathsFilteredElements) {
+            if (elem.equals("..")) {
+                if (stack.isEmpty()) {
+                    stack.push(elem);
+                } else {
+                    if (!stack.peek().equals("")) {
+                        if (stack.peek().equals("..")) {
+                            stack.push(elem);
+                        } else {
+                            stack.pop();
+                        }
+                    }
+                }
+            } else {
+                stack.push(elem);
+            }
+        }
+        if (stack.size() == 1 && stack.get(0).equals("")) {
+            return "/";
+        }
+
+        String result = "".join("/", stack);
+        return result;
+    }
+
 }

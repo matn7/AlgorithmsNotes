@@ -3,8 +3,6 @@ package whiteboard;
 public class FirstDuplicateValue {
 
     // O(n) time | O(1) space
-    // #2: 27/06/2022
-    // rand: 24/08/2022
     public int firstDuplicateValue(int[] array) {
         // Write your code here.
         for (int element : array) {

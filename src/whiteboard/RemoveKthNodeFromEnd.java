@@ -3,7 +3,6 @@ package whiteboard;
 public class RemoveKthNodeFromEnd {
 
     // O(n) time | O(1) space
-    // #2: 29/06/2022
     public static void removeKthNodeFromEnd(LinkedList head, int k) {
         // Write your code here.
         LinkedList first = head;

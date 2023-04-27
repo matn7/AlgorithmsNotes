@@ -1,6 +1,9 @@
 package medium;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class ArrayOfProducts {
 
@@ -8,6 +11,14 @@ public class ArrayOfProducts {
         int[] array = {5, 1, 4, 2};
         ArrayOfProducts arrayOfProducts = new ArrayOfProducts();
         arrayOfProducts.arrayOfProducts(array);
+
+        int[] nums = {1, 2, 3, 4, 6, 12};
+        List<Integer> k = new ArrayList<>();
+        for (int n : nums) {
+            k.add(n);
+        }
+
+        arrayOfProducts.maxSubsetSum(k);
     }
 
 //    // OK - repeated 18/02/2022
@@ -31,6 +42,31 @@ public class ArrayOfProducts {
 //
 //        return products; // [8, 40, 10, 20]
 //    }
+
+    public static List<Long> maxSubsetSum(List<Integer> k) {
+        List<Long> result = new ArrayList<>();
+        long[] leftFactors = new long[k.size()];
+        long[] rightFactors = new long[k.size()];
+
+
+        long leftRunning = 0L;
+        for (int i = 0; i < k.size(); i++) {
+            leftRunning += k.get(i);
+            leftFactors[i] = leftRunning;
+        }
+
+        long rightRunning = 0L;
+        for (int i = k.size() - 1; i >= 0; i--) {
+            rightRunning += k.get(i);
+            rightFactors[i] = rightRunning;
+        }
+
+        for (int i = 0; i < k.size(); i++) {
+            result.add(leftFactors[i] + rightFactors[i]);
+        }
+
+        return result;
+    }
 
     // O(n) time | O(n) space
     public int[] arrayOfProducts(int[] array) {

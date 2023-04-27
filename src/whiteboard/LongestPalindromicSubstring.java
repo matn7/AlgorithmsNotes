@@ -56,4 +56,53 @@ public class LongestPalindromicSubstring {
         return str.charAt(first) == str.charAt(second);
     }
 
+    // O(n^2) time | O(n) space
+    public static String longestPalindromicSubstring2(String str) {
+        // Write your code here.
+        if (str.length() <= 1) {
+            return str;
+        }
+        int[] longest = {0, 0};
+        for (int i = 0; i < str.length() - 1; i++) {
+            int[] odd = validPalindrome(str, i, i);
+            int[] even = validPalindrome(str, i, i + 1);
+            int[] bigger;
+            if (odd[0] == -1) {
+                bigger = even;
+            } else if (even[0] == -1) {
+                bigger = odd;
+            } else {
+                if (even[1] - even[0] > odd[1] - odd[0]) {
+                    bigger = even;
+                } else {
+                    bigger = odd;
+                }
+            }
+            if (bigger[1] - bigger[0] > longest[1] - longest[0]) {
+                longest[1] = bigger[1];
+                longest[0] = bigger[0];
+            }
+        }
+        return str.substring(longest[0], longest[1]);
+    }
+
+    private static int[] validPalindrome(String str, int prev, int next) {
+        int[] res = new int[] {-1, -1};
+        if (str.charAt(prev) != str.charAt(next)) {
+            return res;
+        }
+        while (prev >= 0 && next < str.length()) {
+            char prevChar = str.charAt(prev);
+            char nextChar = str.charAt(next);
+            if (prevChar != nextChar) {
+                break;
+            }
+            prev--;
+            next++;
+        }
+        res[0] = prev + 1;
+        res[1] = next;
+        return res;
+    }
+
 }

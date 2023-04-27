@@ -11,7 +11,6 @@ public class SolveSudoku {
     }
 
     // O(1) time | O(1) space
-    // rand: 16/08/2022
     private boolean solvePartialSudoku(int row, int col, ArrayList<ArrayList<Integer>> board) {
         int currentRow = row;
         int currentCol = col;

@@ -128,7 +128,7 @@ class Grid2 {
         this.grid = grid;
     }
 
-    // O(n) time | O9n) space (n = w * h)
+    // O(n) time | O(n) space (n = w * h)
     public int maxConnectedColors() {
         int max_n = 0;
         Map<String, Boolean> visited = new HashMap<>();

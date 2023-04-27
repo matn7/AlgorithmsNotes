@@ -11,10 +11,14 @@ public class QuickSort {
         System.out.println();
     }
 
+
+    // ********
+    // * STAR *
+    // ********
+
     // Best: O(nlog(n)) time | O(log(n)) space
     // Aver: O(nlog(n)) time | O(log(n)) space
     // Wors: O(n^2) time | O(log(n)) space
-    // #2: 15/06/2022
     public static int[] quickSort(int[] array) {
         // Write your code here.
         quickSortHelper(array, 0, array.length - 1);

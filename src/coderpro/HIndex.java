@@ -22,7 +22,10 @@ public class HIndex {
                 freqs[pub] += 1;
             }
         }
-
+        //         [3, 5, 0, 1, 3]
+        //
+        //          0  1  2  3  4  5
+        // freqs = [1, 1, 0, 2, 0, 1] (there is one paper with 5 citation, there is 2 with 3 etc)
         int total = 0;
         int i = n;
         while (i >= 0) {

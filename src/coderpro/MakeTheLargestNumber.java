@@ -17,7 +17,7 @@ public class MakeTheLargestNumber {
 
     // Custom sorting !!!
 
-    // O(nlog(n)) time | O(n) space - O(log(n)) for quick sort on avg case, but in worst case O(n)
+    // O(nlog(n)) time | O(n) space - O(log(n)) for quick sort on avg case, but in worst case O(n^2)
     public String largestNum(int[] nums) {
 
         String[] numsStr = new String[nums.length];

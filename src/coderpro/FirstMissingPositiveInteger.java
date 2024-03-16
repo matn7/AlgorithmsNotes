@@ -51,4 +51,19 @@ public class FirstMissingPositiveInteger {
         return -1;
     }
 
+    // O(n) time | O(n) space
+    public int firstMissingPositiveInteger(int[] nums) {
+        Map<Integer, Boolean> hash = new HashMap<>();
+        for (int n : nums) {
+            hash.put(n, Boolean.TRUE);
+        }
+
+        for (int i = 1; i < nums.length; i++) {
+            if (!hash.containsKey(i)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
 }

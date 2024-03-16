@@ -30,7 +30,8 @@ public class BranchSums {
         root.right.left = new BinaryTree(6);
         root.right.right = new BinaryTree(7);
 
-        branchSums(root);
+        List<Integer> integers = branchSums(root);
+        System.out.println();
     }
 
     // O(n) time | O(n) space

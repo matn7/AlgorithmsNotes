@@ -8,11 +8,11 @@ public class PowerFullNumbers {
         List<Integer> result = findPowerfulNum(2, 100);
         System.out.println(result);
 
-        List<Integer> primes = sieveOfEratosthenes(100);
-        System.out.println();
-
-        PowerFullNumbers powerFullNumbers = new PowerFullNumbers();
-        powerFullNumbers.powerfulIntegers(2, 3, 10);
+//        List<Integer> primes = sieveOfEratosthenes(100);
+//        System.out.println();
+//
+//        PowerFullNumbers powerFullNumbers = new PowerFullNumbers();
+//        powerFullNumbers.powerfulIntegers(2, 3, 10);
     }
 
     public static List<Integer> findPowerfulNum(int start, int end) {
@@ -27,6 +27,9 @@ public class PowerFullNumbers {
 
         for (int m = start; m <= end; m++) {
             List<Integer> each = new ArrayList<>();
+            if (m == 100) {
+                System.out.println();
+            }
             for (int p = 0; p < primes.size(); p++) {
                 Integer prime = primes.get(p);
                 if (prime >= m) {

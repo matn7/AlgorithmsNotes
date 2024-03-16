@@ -16,8 +16,10 @@ public class ArithmeticBinaryTree {
         tree.right.right = new ArithmeticTree("5");
 
         ArithmeticBinaryTree arithmeticBinaryTree = new ArithmeticBinaryTree();
-        int result = arithmeticBinaryTree.evaluate2(tree);
-        System.out.println(result);
+        int result1 = arithmeticBinaryTree.evaluate(tree);
+        System.out.println(result1);
+        int result2 = arithmeticBinaryTree.evaluate2(tree);
+        System.out.println(result2);
     }
 
     // ********

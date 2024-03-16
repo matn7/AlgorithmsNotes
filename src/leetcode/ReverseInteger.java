@@ -4,11 +4,12 @@ public class ReverseInteger {
 
     public static void main(String[] args) {
         ReverseInteger reverseInteger = new ReverseInteger();
-        int result = reverseInteger.reverse(1534236469);
-        System.out.println(result);
-//        reverseInteger.reverse(120);
+//        int result = reverseInteger.reverse(1534236469);
+//        System.out.println(result);
+        reverseInteger.reverse(120);
     }
 
+    // O(n) ime | O(1) space
     public int reverse(int x) {
         boolean isNegative = x < 0;
         if (isNegative) {

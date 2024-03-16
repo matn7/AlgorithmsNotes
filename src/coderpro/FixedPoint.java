@@ -3,7 +3,8 @@ package coderpro;
 public class FixedPoint {
 
     public static void main(String[] args) {
-        int[] nums = {-5, 1, 3, 4, 5, 6, 7, 8, 9};
+//        int[] nums = {-5, 1, 3, 4, 5, 6, 7, 8, 9};
+        int[] nums = {1, 2, 3, 3, 99, 100, 102, 189, 286};
 
         FixedPoint fixedPoint = new FixedPoint();
         int result = fixedPoint.find_fixed_point(nums);
@@ -32,7 +33,7 @@ public class FixedPoint {
 
     // O(log(n)) time | O(log(n)) space
     public int find_fixed_point(int[] nums) {
-        return find_fixed_point_helper(0, nums.length, nums);
+        return find_fixed_point_helper(0, nums.length - 1, nums);
     }
 
     private int find_fixed_point_helper(int low, int high, int[] nums) {

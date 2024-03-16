@@ -7,8 +7,8 @@ import java.util.Stack;
 public class ShortenPathMy {
 
     public static void main(String[] args) {
-//        String path = "foo/../../../test/../test/../foo//bar/./baz"; // relative path ../../foo/bar/baz
-        String path = "/foo/../../../test/../test/../foo//bar/./baz"; // absolute path /foo/bar/baz
+        String path = "foo/../../../test/../test/../foo//bar/./baz"; // relative path ../../foo/bar/baz
+//        String path = "/foo/../../../test/../test/../foo//bar/./baz"; // absolute path /foo/bar/baz
 
         String result = shortenPath(path);
         System.out.println(result);

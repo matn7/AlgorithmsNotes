@@ -6,7 +6,8 @@ public class MaximizeExpression {
         int[] array = {3, 6, 1, -3, 2, 7};
 
         MaximizeExpression max = new MaximizeExpression();
-        max.maximizeExpression(array);
+        int result = max.maximizeExpression(array);
+        System.out.println(result);
     }
 
     // O(n) time | O(n) space

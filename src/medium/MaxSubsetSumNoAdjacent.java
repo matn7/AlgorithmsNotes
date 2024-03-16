@@ -9,7 +9,6 @@ public class MaxSubsetSumNoAdjacent {
     }
 
     // O(n) time | O(1) space
-    // OK - repeated 07/02/2022
     public static int maxSubsetSumNoAdjacent(int[] array) {
         // Write your code here.
         if (array.length == 0) {

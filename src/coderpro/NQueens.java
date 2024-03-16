@@ -12,7 +12,8 @@ public class NQueens {
         matrix = new int[5][5];
 
         NQueens nQueens = new NQueens();
-        nQueens.nQueens(5);
+        List<Integer[]> integers = nQueens.nQueens(5);
+        System.out.println();
     }
 
     // REPEAT

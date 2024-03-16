@@ -13,6 +13,10 @@ public class SortingThreeUniqueNumbers {
         sortingThreeUniqueNumbers.sortNums(nums);
     }
 
+    // ********
+    // * STAR *
+    // ********
+
     // O(n) time | O(1) space
     public int[] sortNums(int[] nums) {
         int one_index = 0;

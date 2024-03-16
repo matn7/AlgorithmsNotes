@@ -69,7 +69,7 @@ public class LinkedListConstruction {
                 setHead(nodeToInsert);
                 return;
             }
-            Node node = this.head;
+            Node node = head;
             int currentPosition = 1;
             while (node != null && currentPosition != position) {
                 node = node.next;

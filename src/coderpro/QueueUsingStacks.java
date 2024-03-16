@@ -16,12 +16,12 @@ public class QueueUsingStacks <T> {
         forward.push(value);
     }
 
-    public T dequeue() throws Exception {
+    public T dequeue() {
         while (!forward.isEmpty()) {
             reverse.push(forward.pop());
         }
         if (reverse.isEmpty()) {
-            throw new Exception("Queue is empty");
+            throw new RuntimeException("Queue is empty");
         }
         return reverse.pop();
     }

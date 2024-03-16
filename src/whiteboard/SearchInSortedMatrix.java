@@ -3,7 +3,6 @@ package whiteboard;
 public class SearchInSortedMatrix {
 
     // O(n + m) time | O(1) space
-    // #2: 30/06/2022
     public static int[] searchInSortedMatrix(int[][] matrix, int target) {
         // Write your code here.
         int row = 0;

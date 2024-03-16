@@ -24,6 +24,9 @@ public class MergeKSortedLinkedLists {
         merge.merge(lists);
     }
 
+    // ********
+    // * STAR *
+    // ********
 
     // O(klog(n)) time | O(n) space
     public ListNode merge(List<ListNode> lists) {

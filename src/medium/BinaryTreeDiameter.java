@@ -27,7 +27,8 @@ public class BinaryTreeDiameter {
     // O(n) time | O(h) space avg, O(n) worst
     public int binaryTreeDiameter(BinaryTree tree) {
         // Write your code here.
-        return inOrder(tree).diameter;
+        int diameter = inOrder(tree).diameter;
+        return diameter;
     }
 
     public TreeInfo inOrder(BinaryTree tree) {

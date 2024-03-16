@@ -9,7 +9,7 @@ public class WordSearch {
                 {'A', 'N', 'O', 'B'},
                 {'M', 'A', 'S', 'S'}
         };
-        String word = "MASS";
+        String word = "XYZ";
         Grid grid = new Grid(matrix);
         boolean result = grid.wordSearch(word);
         System.out.println(result);
@@ -37,7 +37,7 @@ class Grid {
                 return true;
             }
         }
-        return true;
+        return false;
     }
 
     private boolean wordSearchRight(int index, String word) {

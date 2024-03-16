@@ -26,11 +26,7 @@ public class AnagramsInAString {
         List<Integer> results = new ArrayList<>();
 
         for (char c : b.toCharArray()) {
-            if (char_map.containsKey(c)) {
-                char_map.put(c, char_map.get(c) + 1);
-            } else {
-                char_map.put(c, 1);
-            }
+            insertToMap(char_map, c);
         }
 
         for (int i = 0; i < a.length(); i++) {
@@ -38,18 +34,16 @@ public class AnagramsInAString {
 
             if (i >= b.length()) {
                 char c_old = a.charAt(i - b.length());
-                if (!char_map.containsKey(c_old)) {
-                    char_map.put(c_old, 1);
-                }
-                char_map.put(c_old, char_map.get(c_old) + 1);
+                insertToMap(char_map, c_old);
                 if (char_map.get(c_old) == 0) {
                     char_map.remove(c_old);
                 }
             }
             if (!char_map.containsKey(c)) {
-                char_map.put(c, 1);
+                char_map.put(c, -1);
+            } else {
+                char_map.put(c, char_map.get(c) - 1);
             }
-            char_map.put(c, char_map.get(c) - 1);
             if (char_map.get(c) == 0) {
                 char_map.remove(c);
             }
@@ -59,6 +53,14 @@ public class AnagramsInAString {
             }
         }
         return results;
+    }
+
+    private static void insertToMap(Map<Character, Integer> char_map, char c) {
+        if (char_map.containsKey(c)) {
+            char_map.put(c, char_map.get(c) + 1);
+        } else {
+            char_map.put(c, 1);
+        }
     }
 
 

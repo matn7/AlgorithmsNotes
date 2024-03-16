@@ -29,6 +29,8 @@ public class GenerateParentheses {
             genParensHelper(n, left + 1, right, str + "(", result);
         }
         if (right < left) {
+            // (() - there is a possibility to create valid example
+            // ()) - it is not right > left
             genParensHelper(n, left, right + 1, str + ")", result);
         }
     }

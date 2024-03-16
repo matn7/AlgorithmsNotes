@@ -4,8 +4,9 @@ public class IndexEqualsValue {
 
     public static void main(String[] args) {
         IndexEqualsValue indexEqualsValueREPEAT = new IndexEqualsValue();
-        int[] array = {-5, -3, 0, 3, 4, 5, 9};
-        indexEqualsValueREPEAT.indexEqualsValue(array);
+//        int[] array = {-5, -3, 0, 3, 4, 5, 9};
+        int[] array = {1, 2, 3, 3, 99, 100, 102, 189, 286};
+        System.out.println(indexEqualsValueREPEAT.indexEqualsValue(array));
     }
 
     // O(log(n)) time | O(1) space

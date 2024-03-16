@@ -7,7 +7,8 @@ public class NodeDepths {
 
     // O(n) time | O(h) space
     public static int nodeDepths(BinaryTree root) {
-        return nodeDepthsHelper(root, 0);
+        int result = nodeDepthsHelper(root, 0);
+        return result;
     }
 
     private static int nodeDepthsHelper(BinaryTree root, int depth) {

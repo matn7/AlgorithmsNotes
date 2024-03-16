@@ -25,7 +25,7 @@ public class InorderSuccessor {
         System.out.println(case1);
         TreeNodeParent case2 = inorderSuccessor.findSuccessor(node.right);
         System.out.println(case2);
-        TreeNodeParent case3 = inorderSuccessor.findSuccessor(node.right.left.right);
+        TreeNodeParent case3 = inorderSuccessor.findSuccessor(node.right.left.right.right);
         System.out.println(case3);
         TreeNodeParent case4 = inorderSuccessor.findSuccessor(node);
         System.out.println(case4);

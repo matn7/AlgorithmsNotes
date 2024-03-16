@@ -5,6 +5,7 @@ import java.util.List;
 
 public class PerfectNumber {
 
+    // O(n) time | O(n) space
     public boolean checkPerfectNumber(int num) {
         if (num < 0) {
             return false;
@@ -14,6 +15,7 @@ public class PerfectNumber {
             if (num % i == 0) {
                 factors.add(i);
                 factors.add(num / i);
+
             }
         }
         int sum = 0;

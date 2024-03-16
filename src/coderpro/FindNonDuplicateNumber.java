@@ -16,7 +16,7 @@ public class FindNonDuplicateNumber {
         int[] nums = {4, 3, 2, 4, 1, 3, 2};
         FindNonDuplicateNumber findNonDuplicateNumber = new FindNonDuplicateNumber();
         int result = findNonDuplicateNumber.singleNumber(nums);
-        System.out.println();
+        System.out.println(result);
     }
 
     // ********

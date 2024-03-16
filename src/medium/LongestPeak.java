@@ -3,13 +3,12 @@ package medium;
 public class LongestPeak {
 
     public static void main(String[] args) {
-//        int[] array = new int[] {1,2,3,3,4,0,10,6,5,-1,-3,2,3};
-        int[] array = new int[] {1, 2, 3, 4, 5, 1};
+        int[] array = new int[] {1,2,3,3,4,0,10,6,5,-1,-3,2,3};
+//        int[] array = new int[] {1, 2, 3, 4, 5, 1};
 
         longestPeak(array);
     }
 
-    // OK - repeated 17/02/2022
     // O(n) time | O(1) space
     public static int longestPeak(int[] array) {
         int longestPeakLength = 0;

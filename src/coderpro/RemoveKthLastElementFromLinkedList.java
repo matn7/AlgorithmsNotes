@@ -9,7 +9,7 @@ public class RemoveKthLastElementFromLinkedList {
         head.next.next.next = new ListNode(4);
         head.next.next.next.next = new ListNode(5);
 
-        int k = 5;
+        int k = 2;
 
         RemoveKthLastElementFromLinkedList removeKthLastElementFromLinkedList = new RemoveKthLastElementFromLinkedList();
         removeKthLastElementFromLinkedList.removeKthFromLinkedList(head, k);

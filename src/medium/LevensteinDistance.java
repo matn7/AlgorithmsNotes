@@ -12,13 +12,12 @@ public class LevensteinDistance {
         String str1 = "abc";
         String str2 = "yabd";
 
-        int result = levenshteinDistance(str1, str2);
+        int result = levenshteinDistance2(str1, str2);
         System.out.println(result);
 
     }
 
     // O(n*m) time | O(min(n,m)) space
-    // OK - repeated 15/02/2022
     public static int levenshteinDistance(String str1, String str2) {
         String small = str1.length() < str2.length() ? str1 : str2; // abc
         String big = str1.length() >= str2.length() ? str1 : str2; // yabd

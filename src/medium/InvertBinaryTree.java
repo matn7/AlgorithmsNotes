@@ -19,7 +19,9 @@ public class InvertBinaryTree {
         inOrder(tree);
         System.out.println();
 
-        invertBinaryTree(tree);
+        invertBinaryTree2(tree);
+
+        System.out.println();
     }
 
     public static void inOrder(BinaryTree tree) {

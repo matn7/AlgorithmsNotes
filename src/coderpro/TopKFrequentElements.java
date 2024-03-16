@@ -75,20 +75,19 @@ public class TopKFrequentElements {
     }
 
 
+    static class Element implements Comparable<Element> {
+        int num;
+        int freq;
 
-}
+        public Element(int num, int freq) {
+            this.num = num;
+            this.freq = freq;
+        }
 
-class Element implements Comparable<Element> {
-    int num;
-    int freq;
-
-    public Element(int num, int freq) {
-        this.num = num;
-        this.freq = freq;
+        @Override
+        public int compareTo(Element o) {
+            return this.freq - o.freq;
+        }
     }
 
-    @Override
-    public int compareTo(Element o) {
-        return this.freq - o.freq;
-    }
 }

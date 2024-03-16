@@ -9,9 +9,9 @@ public class RomanToInteger {
         RomanToInteger romanToInteger = new RomanToInteger();
 
 //        String roman = "MDCCCLXXXVIII";
-//        String roman = "MCMXCIV";
+        String roman = "MCMXCIV";
 //        String roman = "LVIII";
-        String roman = "III";
+//        String roman = "III";
         int result = romanToInteger.romanToInt(roman);
         System.out.println(result);
     }

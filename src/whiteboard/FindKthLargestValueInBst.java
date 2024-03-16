@@ -17,8 +17,6 @@ public class FindKthLargestValueInBst {
     }
 
     // O(h + k) time | O(h) space - h height of tree, k input parameter
-    // #2: 03/07/2022
-    // rand: 17/07/2022 | 15/09/2022
     public int findKthLargestValueInBst(BST tree, int k) {
         // Write your code here.
         TreeInfo treeInfo = new TreeInfo(0, -1);

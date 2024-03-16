@@ -6,7 +6,8 @@ import java.util.Map;
 public class LongestSubstringWithoutDuplication {
 
     public static void main(String[] args) {
-        longestSubstringWithoutDuplication("clementisacap");
+        String result = longestSubstringWithoutDuplication("clementisacap");
+        System.out.println(result);
     }
 
     // O(n) time | O(min(n, a)) space (a alphabet)

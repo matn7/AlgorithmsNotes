@@ -48,7 +48,8 @@ public class PhoneNumber {
         PhoneNumber phoneNumber = new PhoneNumber();
         phoneNumber.phoneNumber("364", listOfWords);
 
-        phoneNumber.makeWords("364");
+        List<String> result = phoneNumber.makeWords("364");
+        System.out.println();
     }
 
     public List<String> makeWords(String phone) {

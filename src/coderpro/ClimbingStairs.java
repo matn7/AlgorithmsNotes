@@ -37,7 +37,7 @@ public class ClimbingStairs {
         return staircaseHelper(n, cache);
     }
 
-    public int staircaseHelper(int n, Map<Integer, Integer> cache) {
+    private int staircaseHelper(int n, Map<Integer, Integer> cache) {
         if (cache.containsKey(n)) {
             return cache.get(n);
         }

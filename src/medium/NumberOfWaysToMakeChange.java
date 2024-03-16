@@ -10,7 +10,6 @@ public class NumberOfWaysToMakeChange {
     }
 
     // O(n*d) time (d denom) | O(n) space
-    // OK - repeated 11/02/2022
     public static int numberOfWaysToMakeChange(int n, int[] denoms) {
         // Write your code here.
         int[] ways = new int[n + 1];

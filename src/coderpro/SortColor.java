@@ -60,6 +60,34 @@ public class SortColor {
         return colors;
     }
 
+    // O(n) time | O(1) space
+    public int[] sortColorsMy(int[] colors) {
+        int left = 0;
+        int right = colors.length - 1;
+        int idx = 0;
+
+        while (idx <= right) {
+            while (colors[left] == 0) {
+                left++;
+                idx++;
+            }
+            while (colors[right] == 2) {
+                right--;
+            }
+            if (colors[idx] == 0) {
+                swap(colors, idx, left);
+                left++;
+                idx++;
+            } else if (colors[idx] == 2) {
+                swap(colors, idx, right);
+                right--;
+            } else {
+                idx++;
+            }
+        }
+        return colors;
+    }
+
     private void swap(int[] arr, int i, int j) {
         int temp = arr[i];
         arr[i] = arr[j];

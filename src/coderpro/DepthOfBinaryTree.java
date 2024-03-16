@@ -12,8 +12,9 @@ public class DepthOfBinaryTree {
 
         DepthOfBinaryTree depthOfBinaryTree = new DepthOfBinaryTree();
 
-        int result = depthOfBinaryTree.deepest(root);
-        System.out.println(result);
+        System.out.println(depthOfBinaryTree.deepest(root));
+        System.out.println(depthOfBinaryTree.depthOfBinaryTree(root));
+        System.out.println(depthOfBinaryTree.treeDepth(root));
     }
 
     // O(n) time | O(n) space
@@ -42,6 +43,16 @@ public class DepthOfBinaryTree {
         int rightDepth = depthOfBinaryTreeHelper(root.right, depth);
 
         return Math.max(leftDepth, rightDepth);
+    }
+
+    // O(n) time | O(n) space
+    public int treeDepth(TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+        int left = treeDepth(node.left);
+        int right = treeDepth(node.right);
+        return Math.max(left, right) + 1;
     }
 
 }

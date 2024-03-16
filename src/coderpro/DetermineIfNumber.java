@@ -34,7 +34,7 @@ public class DetermineIfNumber {
 
         // finite state machine
         DetermineIfNumber determineIfNumber = new DetermineIfNumber();
-        boolean result = determineIfNumber.parse_number("123e5");
+        boolean result = determineIfNumber.parse_number("123e-5");
         System.out.println(result);
         System.out.println(determineIfNumber.parse_number("123a"));
 
@@ -50,7 +50,6 @@ public class DetermineIfNumber {
 
         for (char c : str.toCharArray()) {
             boolean found = false;
-            List<DigitState> digitStates = PATHS.get(state);
             for (DigitState next_state : PATHS.get(state)) {
                 Boolean apply = STATE_VALIDATOR.get(next_state).apply(c);
                 if (apply) {
@@ -70,21 +69,21 @@ public class DetermineIfNumber {
         return endStates.contains(state);
     }
 
-}
+    enum DigitState {
+        BEGIN(0),
+        NEGATIVE1(1),
+        DIGIT1(2),
+        DOT(3),
+        DIGIT2(4),
+        E(5),
+        NEGATIVE2(6),
+        DIGIT3(7);
 
-enum DigitState {
-    BEGIN(0),
-    NEGATIVE1(1),
-    DIGIT1(2),
-    DOT(3),
-    DIGIT2(4),
-    E(5),
-    NEGATIVE2(6),
-    DIGIT3(7);
+        private final int value;
 
-    private final int value;
-
-    DigitState(int value) {
-        this.value = value;
+        DigitState(int value) {
+            this.value = value;
+        }
     }
+
 }

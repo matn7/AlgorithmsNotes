@@ -16,7 +16,7 @@ public class SubarrayWithTargetSum {
         int target = 14;
 
         SubarrayWithTargetSum subarrayWithTargetSum = new SubarrayWithTargetSum();
-        List<Integer> result = subarrayWithTargetSum.find_continuous_k3(list, target);
+        List<Integer> result = subarrayWithTargetSum.find_continuous_k(list, target);
         System.out.println();
     }
 

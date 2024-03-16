@@ -13,6 +13,7 @@ public class FloorOfNumber {
         System.out.println(answer);
     }
 
+    // O(n) time | O(1) space
     public int floor(int[] arr, int target) {
         int start = 0;
         int end = arr.length - 1;

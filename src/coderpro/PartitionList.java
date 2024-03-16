@@ -42,32 +42,6 @@ public class PartitionList {
         return nums;
     }
 
-    // O(n) time | O(1) space
-    public List<Integer> partition2(List<Integer> nums, int k) {
-//        arr.add(0, k);
-
-//        int pivotIdx = 0;
-        int left = 0;
-        int right = nums.size() - 1;
-
-        // [3, 8, 9, 2, 4, 1, 0]
-        //  p     l        r
-        while (left <= right) {
-            if (nums.get(left) >= k && nums.get(right) < k) {
-                swap(nums, left, right);
-                left++;
-                right--;
-            }
-            if (nums.get(left) < k) {
-                left++;
-            }
-            if (nums.get(right) > k) {
-                right--;
-            }
-        }
-        return nums;
-    }
-
     private void swap(List<Integer> arr, int i, int j) {
         int temp = arr.get(i);
         arr.set(i, arr.get(j));

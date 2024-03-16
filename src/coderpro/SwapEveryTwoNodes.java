@@ -14,6 +14,7 @@ public class SwapEveryTwoNodes {
     }
 
     // O(n) time | O(1) space
+    // swap a values or swap a nodes?
     public ListNode swap_every_two(ListNode node) {
         ListNode curr = node;
         while (curr != null && curr.next != null) {

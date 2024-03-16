@@ -6,8 +6,10 @@ import java.util.List;
 public class LongestCommonSubsequence {
 
     public static void main(String[] args) {
-        String str1 = "ZXVVYZW";
-        String str2 = "XKYKZPW";
+//        String str1 = "ZXVVYZW";
+//        String str2 = "XKYKZPW";
+        String str1 = "ABCDEFG";
+        String str2 = "APPLES";
         longestCommonSubsequence(str1, str2);
     }
 

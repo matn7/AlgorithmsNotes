@@ -15,13 +15,13 @@ public class RunningMedian {
     // O(nlog(n)) time | O(n) space
     public double[] running_median(int[] stream) {
         PriorityQueue<Integer> min_heap = new PriorityQueue<>();
-        PriorityQueue<Integer> max_head = new PriorityQueue<>(Comparator.reverseOrder());
+        PriorityQueue<Integer> max_heap = new PriorityQueue<>(Comparator.reverseOrder());
         double[] result = new double[stream.length];
         int counter = 0;
         for (int num : stream) {
-            add(num, min_heap, max_head);
-            rebalance(min_heap, max_head);
-            double median = get_median(min_heap, max_head);
+            add(num, min_heap, max_heap);
+            rebalance(min_heap, max_heap);
+            double median = get_median(min_heap, max_heap);
             result[counter] = median;
             counter++;
         }

@@ -5,7 +5,8 @@ public class BubbleSort {
     public static void main(String[] args) {
         int[] array = {8, 5, 2, 9, 5, 6, 3};
 
-        bubbleSort(array);
+        int[] ints = bubbleSort(array);
+        System.out.println(ints);
     }
 
     // O(n^2) time | O(1) space

@@ -6,7 +6,8 @@ KthLargestElement {
     public static void main(String[] args) {
         int[] array = {5, 3, 1, 6, 4, 2};
 
-        findKthLargestElement(array, 2);
+        int result = findKthLargestElement(array, 2);
+        System.out.println(result);
     }
 
     // O(nlog(n)) time | O(log(n)) space

@@ -15,11 +15,11 @@ public class WordConcatenation {
 
     // O(n * m^2) time | O(m) space
     public List<String> findAllConcatenatedWordsCache(List<String> words) {
-        Set<String> wordsDist = new HashSet<>(words);
+        Set<String> wordsDict = new HashSet<>(words);
         List<String> result = new ArrayList<>();
         Map<String, Boolean> cache = new HashMap<>();
         for (String word : words) {
-            if (canFormCache(word, wordsDist, cache)) {
+            if (canFormCache(word, wordsDict, cache)) {
                 result.add(word);
             }
         }

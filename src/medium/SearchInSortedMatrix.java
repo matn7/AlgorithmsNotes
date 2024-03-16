@@ -20,7 +20,6 @@ public class SearchInSortedMatrix {
 //    [99, 100,  103, 106, 128, 1004]
 
     // O(n + m) time | O(1) space
-    // OK - repeated 09/02/2022
     public static int[] searchInSortedMatrix(int[][] matrix, int target) {
         // Write your code here.
         int row = 0;

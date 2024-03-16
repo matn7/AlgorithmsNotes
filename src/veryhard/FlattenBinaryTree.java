@@ -15,9 +15,10 @@ public class FlattenBinaryTree {
         binaryTree.left.right.right = new BinaryTree(8);
         binaryTree.right.left = new BinaryTree(6);
 
+        flattenBinaryTree(binaryTree);
+
     }
 
-    // OK - repeated 21/02/2022
     // O(n) time | O(d) space
     public static BinaryTree flattenBinaryTreeOptimal(BinaryTree root) {
         // Write your code here.

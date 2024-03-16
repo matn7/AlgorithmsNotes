@@ -3,9 +3,10 @@ package whiteboard;
 public class FindKthLargestElement {
 
     public static void main(String[] args) {
-        int[] array = {5, 3, 1, 6, 4, 2};
+//        int[] array = {5, 3, 1, 6, 4, 2};
+        int[] array = {4, 4, 1, 1, 1, 3, 5, 2, 4, 6, 8, 1, 3};
         FindKthLargestElement findKthLargestElement = new FindKthLargestElement();
-        findKthLargestElement.findKthLargestElement(array, 2);
+        findKthLargestElement.findKthLargestElement(array, 3);
     }
 
     // Aver: O(nlog(n)) time | O(log(n)) space

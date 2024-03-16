@@ -7,8 +7,8 @@ public class RecurringCharacters {
 
     public static void main(String[] args) {
         // int[] input = {2, 5, 1, 2, 3, 5, 1, 2, 4};
-        // int[] input = {2, 1, 1, 2, 3, 5, 1, 2, 4};
-        int[] input = {2, 3, 4, 5};
+         int[] input = {2, 1, 1, 2, 3, 5, 1, 2, 4};
+//        int[] input = {2, 3, 4, 5};
 
         RecurringCharacters recurringCharacters = new RecurringCharacters();
         Integer result = recurringCharacters.firstRecurringCharacter(input);

@@ -28,7 +28,7 @@ public class QuickSort {
         int s = start + 1;
         int e = end;
         while (s <= e) {
-            if (array[s] > array[pivot] && array[e] < array[pivot]) {
+            if (array[s] >= array[pivot] && array[e] <= array[pivot]) {
                 swap(array, s, e);
             }
             if (array[s] <= array[pivot]) {

@@ -24,6 +24,10 @@ public class QueueReconstructionByHeight {
 
     }
 
+    // ********
+    // * STAR *
+    // ********
+
     // O(nlog(n)) time | O(log(n)) space
     public List<List<Integer>> reconstructQueue(List<List<Integer>> input) {
 

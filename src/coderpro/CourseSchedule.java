@@ -4,6 +4,10 @@ import java.util.*;
 
 public class CourseSchedule {
 
+    // ********
+    // * STAR *
+    // ********
+
     // O(n^2) time | O(n) space
     // with cache
     // O(n) time | O(n) space
@@ -11,9 +15,9 @@ public class CourseSchedule {
     public static void main(String[] args) {
         CourseSchedule courseSchedule = new CourseSchedule();
 //        int[][] prerequisites = {{1, 0}};
-        int[][] prerequisites = {{1, 0}, {0, 1}};
-        boolean result = courseSchedule.canFinish(2, prerequisites);
-        System.out.println();
+        int[][] prerequisites = {{1, 2}, {1, 3}, {3, 2}, {4, 2}, {4, 3}};
+        boolean result = courseSchedule.canFinish(4, prerequisites);
+        System.out.println(result);
     }
 
     // O(n) time | O(n) space
@@ -33,7 +37,7 @@ public class CourseSchedule {
 
         Set<Integer> seen = new HashSet<>();
         Map<Integer, Boolean> cache = new HashMap<>();
-        for (int course = 0; course < numCourses; course++) {
+        for (int course = 1; course <= numCourses; course++) {
             if (hasCycle(graph, course, seen, cache)) {
                 return false;
             }

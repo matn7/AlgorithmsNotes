@@ -1,6 +1,7 @@
 package coderpro;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.PriorityQueue;
 
 public class QuickSelect {
@@ -10,7 +11,7 @@ public class QuickSelect {
         int k = 3;
 
         QuickSelect quickSelect = new QuickSelect();
-        quickSelect.quickSelectMy(nums, k);
+        quickSelect.quickSelectMy2(nums, k);
 
         int result = quickSelect.quickSelect(nums, k);
         System.out.println(result);
@@ -62,11 +63,13 @@ public class QuickSelect {
         return arr[arr.length - k];
     }
 
+    // O(n + k * log(n))) time | O(n) space
     public int quickSelectMy(int[] nums, int k) {
         PriorityQueue<Integer> queue = new PriorityQueue<>();
         for (int num : nums) {
             if (queue.size() < k) {
                 queue.add(num);
+                System.out.println();
             } else {
                 Integer top = queue.peek();
                 if (top < num) {
@@ -81,6 +84,28 @@ public class QuickSelect {
         Integer result = queue.peek();
         return result;
     }
+
+    // O(n + k * log(n))) time | O(n) space
+    public int quickSelectMy2(int[] nums, int k) {
+        PriorityQueue<Integer> queue = new PriorityQueue<>(Collections.reverseOrder());
+        for (int num : nums) {
+            if (queue.size() < k) {
+                queue.add(num);
+            } else {
+                Integer top = queue.peek();
+                if (top > num) {
+                    queue.poll();
+                    queue.add(num);
+                }
+            }
+        }
+        if (queue.isEmpty()) {
+            return -1;
+        }
+        Integer result = queue.peek();
+        return result;
+    }
+
 
     //                  3
     //              4       5

@@ -7,7 +7,7 @@ public class FibonacciNumbers {
 
     public static void main(String[] args) {
         FibonacciNumbers fibonacciNumbers = new FibonacciNumbers();
-        int result = fibonacciNumbers.fib(6);
+        int result = fibonacciNumbers.fibonacci(6);
         System.out.println(result);
     }
 
@@ -36,7 +36,8 @@ public class FibonacciNumbers {
         cache.put(0, 0);
         cache.put(1, 1);
 
-        return fibHelper(n, cache);
+        int i = fibHelper(n, cache);
+        return i;
     }
 
     private int fibHelper(int n, Map<Integer, Integer> cache) {

@@ -6,7 +6,7 @@ public class MaximizeExpression {
         int[] array = {3, 6, 1, -3, 2, 7};
 
         MaximizeExpression max = new MaximizeExpression();
-        int result = max.maximizeExpression(array);
+        int result = max.maximizeExpressionNotOptimal(array);
         System.out.println(result);
     }
 

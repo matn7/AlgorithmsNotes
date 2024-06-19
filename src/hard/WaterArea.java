@@ -5,7 +5,8 @@ public class WaterArea {
     public static void main(String[] args) {
         int[] heights = {0, 8, 0, 0, 5, 0, 0, 10, 0, 0, 1, 1, 0, 3};
 
-        waterArea(heights);
+        int result = waterArea(heights);
+        System.out.println(result);
     }
 
     // O(n) time | O(n) space

@@ -7,7 +7,8 @@ public class LongestBalancedSubstring {
     public static void main(String[] args) {
         LongestBalancedSubstring lbs = new LongestBalancedSubstring();
         String string = ")(())()((()))";
-        lbs.longestBalancedSubstring(string);
+        int result = lbs.longestBalancedSubstring(string);
+        System.out.println(result);
     }
 
     // O(n) time | O(n) space

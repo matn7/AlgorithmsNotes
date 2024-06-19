@@ -29,9 +29,10 @@ public class AnagramsInAString {
             insertToMap(char_map, c);
         }
 
+        System.out.println();
+
         for (int i = 0; i < a.length(); i++) {
             char c = a.charAt(i);
-
             if (i >= b.length()) {
                 char c_old = a.charAt(i - b.length());
                 insertToMap(char_map, c_old);
@@ -47,6 +48,12 @@ public class AnagramsInAString {
             if (char_map.get(c) == 0) {
                 char_map.remove(c);
             }
+
+            System.out.println("#i: " + i);
+            char_map.entrySet().forEach(v -> {
+                System.out.println(v.getKey() + ":" + v.getValue());
+            });
+            System.out.println("-----");
 
             if (i + 1 >= b.length() && char_map.size() == 0) {
                 results.add(i - b.length() + 1);

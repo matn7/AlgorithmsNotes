@@ -8,10 +8,6 @@ public class HeapSort {
         heapSort(array);
     }
 
-    // ********
-    // * STAR *
-    // ********
-
     // O(nlog(n)) time | O(1) space
     public static int[] heapSort(int[] array) {
         // Write your code here.

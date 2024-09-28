@@ -8,7 +8,7 @@ public class MergeSort {
     }
 
     // ********
-    // * STAR *
+    // * STAR - G *
     // ********
 
     // O(nlog(n)) time | O(n) space

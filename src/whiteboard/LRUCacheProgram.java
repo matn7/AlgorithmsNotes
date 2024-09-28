@@ -6,7 +6,7 @@ import java.util.Map;
 public class LRUCacheProgram {
 
     // ********
-    // * STAR *
+    // * STAR - G *
     // ********
 
     static class LRUCache {

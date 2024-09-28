@@ -19,7 +19,7 @@ public class SortStack {
     }
 
     // ********
-    // * STAR *
+    // * STAR - G *
     // ********
 
     // O(n^2) time | O(n) space

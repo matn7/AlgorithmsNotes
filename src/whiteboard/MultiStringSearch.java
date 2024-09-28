@@ -15,10 +15,6 @@ public class MultiStringSearch {
         multiStringSearch(bigString2, smallStrings2);
     }
 
-    // ********
-    // * STAR *
-    // ********
-
     // O(ns + bs) time | O(ns) space -
     // (n: number of small string , s: longest length of small string)
     // (b: number of characters in big string)

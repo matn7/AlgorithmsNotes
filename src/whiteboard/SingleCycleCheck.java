@@ -3,12 +3,12 @@ package whiteboard;
 public class SingleCycleCheck {
 
     public static void main(String[] args) {
-//        int[] array = {2, 3, 1, -4, -4, 2};
+        int[] array = {2, 3, 1, -4, -4, 2};
 //        int[] array = {1, 1, 1, 1, 2};
-        int[] array = {2, 2, -1};
+//        int[] array = {2, 2, -1};
 
         boolean result = hasSingleCycle(array);
-        System.out.println();
+        System.out.println(result);
     }
 
     // O(n) time | O(1) space

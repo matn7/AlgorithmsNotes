@@ -14,6 +14,10 @@ public class Powerset {
         powersetRec(array);
     }
 
+    // ********
+    // * STAR - G *
+    // ********
+
     // O(n * 2^n) time | O(n * 2^n) space
     public static List<List<Integer>> powerset(List<Integer> array) {
         // Write your code here.

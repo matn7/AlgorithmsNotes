@@ -25,7 +25,7 @@ problem like handling emergency room cases etc.
     - **Ordered** requires finding the right position for the element based on priority - complexity `O(n)`.
 - **Access**:
     - **Unordered** accessing the highest priority element requires going through all elements in the list - complexity `O(n)`.
-    - **Ordered** accessing the highest priority element is then easy - `O(1)`.
+    - **Ordered** accessing the highest priority element is then problems.easy - `O(1)`.
 - **Remove**:
     - **Unordered** removing the highest priority element requires going through all elements in the list - complexity `O(n)`.
     - **Ordered** removing the highest priority element is straightforward - complexity `O(1)`.
@@ -49,7 +49,7 @@ problem like handling emergency room cases etc.
 | Remove | `O(n)` | `O(1)` | `O(log(n))` | `O(log(n))` |
 
 - This solution trades of by making **both insertion and access moderately fast** - list solution make one of these
-super fast while comparing heavily on the other.
+super fast while comparing heavily on the problems.other.
 
 **The binary heap**
 
@@ -105,12 +105,12 @@ the parent, left and right child of a node.
 
 **Sift down**
 
-- An element is in the wrong position with respect to other elements **below** it in the heap.
+- An element is in the wrong position with respect to problems.other elements **below** it in the heap.
 - It has to be moved **downwards** in the heap towards the leaf nodes to find it's right position.
 
 **Sift up**
 
-- An element is in the wrong position with respect to other elements **above** it in the heap.
+- An element is in the wrong position with respect to problems.other elements **above** it in the heap.
 - It has to be moved **upwards** in the heap towards the root node to find it's right position.
 
 **Insert**

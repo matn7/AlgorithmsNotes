@@ -41,8 +41,13 @@ public class ApartmentHunting {
         blocks.add(block4);
         blocks.add(block5);
 
-        apartmentHunting(blocks, reqs);
+        int result = apartmentHunting(blocks, reqs);
+        System.out.println(result);
     }
+
+    // ********
+    // * STAR - G *
+    // ********
 
     // O(b^2 * r) time | O(1) space
     public static int apartmentHunting(List<Map<String, Boolean>> blocks, String[] reqs) {

@@ -9,6 +9,10 @@ public class HeapSort {
         heapSort.heapSort(array);
     }
 
+    // ********
+    // * STAR - G *
+    // ********
+
     // O(nlog(n)) time | O(1) space
     public int[] heapSort(int[] array) {
 

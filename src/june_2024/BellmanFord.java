@@ -13,17 +13,21 @@ public class BellmanFord {
         System.out.println(result);
     }
 
+    // ********
+    // * STAR - G *
+    // ********
+
     // O(n * e) time | O(n) space
     public static int networkDelayTime(int[][] times, int n, int k) {
         int[] distances = new int[n];
-        Arrays.fill(distances, Integer.MAX_VALUE);
+        Arrays.fill(distances, 9999);
         distances[k - 1] = 0;
         for (int i = 0; i < n - 1; i++) {
             int count = 0;
-            for (int j = 0; j < times.length; j++) {
-                int source = times[j][0];
-                int target = times[j][1];
-                int weight = times[j][2];
+            for (int[] time : times) {
+                int source = time[0];
+                int target = time[1];
+                int weight = time[2];
                 if (distances[source - 1] + weight < distances[target - 1]) {
                     distances[target - 1] = distances[source - 1] + weight;
                     count++;

@@ -15,9 +15,9 @@ public class FindSubtree {
 
         Node b = new Node(4);
         b.left = new Node(3);
-        b.right = new Node(2);
+        b.right = new Node(12);
 
-        boolean result = findSubtree2(a, b);
+        boolean result = findSubtree(a, b);
         System.out.println(result);
     }
 

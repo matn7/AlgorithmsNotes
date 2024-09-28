@@ -40,7 +40,7 @@ public class ValidParentheses {
                     return false;
                 }
             }
-            // else other chars
+            // else problems.other chars
         }
 
 

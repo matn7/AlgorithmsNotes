@@ -19,8 +19,12 @@ public class TopologicalSort {
         deps.add(new Integer[]{4, 3});
 
         List<Integer> result = topologicalSort(jobs, deps);
-        System.out.println();
+        System.out.println(result);
     }
+
+    // ********
+    // * STAR - G *
+    // ********
 
     // O(j + d) time | O(j + d) space
     // #2: 23/06/2022
@@ -68,7 +72,7 @@ public class TopologicalSort {
         Map<Integer, JobNode> jobGraph = new HashMap<>();
 
         for (Integer job : jobs) {
-            jobGraph.put(job, new JobNode(job, new ArrayList<>(), 0));
+            jobGraph.put(job, new JobNode(job, 0));
         }
 
         updateDependencies(jobGraph, deps);
@@ -89,9 +93,9 @@ public class TopologicalSort {
         List<Integer> deps;
         int degree;
 
-        public JobNode(int id, List<Integer> deps, int degree) {
+        public JobNode(int id, int degree) {
             this.id = id;
-            this.deps = deps;
+            this.deps = new ArrayList<>();
             this.degree = degree;
         }
 

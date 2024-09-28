@@ -6,7 +6,7 @@ import java.util.Map;
 public class MinimumWindowSubstring {
 
     public static void main(String[] args) {
-        String s = "asawosdnodkiod";
+        String s = "asaaaaaawosdnsawodkiod";
         String t = "saw";
 
         String result = minWindow(s, t);

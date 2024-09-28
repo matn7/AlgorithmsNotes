@@ -14,7 +14,8 @@ public class AStarAlgorithmMy {
         };
 
         AStarAlgorithmMy aStarAlgorithm = new AStarAlgorithmMy();
-        aStarAlgorithm.aStarAlgorithm(0, 1, 4, 3, graph);
+        int[][] result = aStarAlgorithm.aStarAlgorithm(0, 1, 4, 3, graph);
+        System.out.println(result);
     }
 
     // O(w*h*log(w * h)) time | O(w * h) space
@@ -75,19 +76,21 @@ public class AStarAlgorithmMy {
         List<Node> neighbors = new ArrayList<>();
         int row = node.row;
         int col = node.col;
-        if (row > 0) {
-            addOneNode(adjList, neighbors, row - 1, col, graph);
+        int[][] directions = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
+
+        for (int[] direction : directions) {
+            int newRow = row + direction[0];
+            int newCol = col + direction[1];
+            if (isValidCoord(newRow, newCol, graph)) {
+                addOneNode(adjList, neighbors, newRow, newCol, graph);
+            }
         }
-        if (row < graph.length - 1) {
-            addOneNode(adjList, neighbors, row + 1, col, graph);
-        }
-        if (col > 0) {
-            addOneNode(adjList, neighbors, row, col - 1, graph);
-        }
-        if (col < graph[row].length - 1) {
-            addOneNode(adjList, neighbors, row, col + 1, graph);
-        }
+
         return neighbors;
+    }
+
+    private boolean isValidCoord(int row, int col, int[][] graph) {
+        return row >= 0 && row <= graph.length - 1 && col >= 0 && col <= graph[row].length - 1 ;
     }
 
     private void addOneNode(Map<String, Node> adjList, List<Node> neighbors, int row, int col, int[][] graph) {

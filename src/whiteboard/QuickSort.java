@@ -13,7 +13,7 @@ public class QuickSort {
 
 
     // ********
-    // * STAR *
+    // * STAR - G *
     // ********
 
     // Best: O(nlog(n)) time | O(log(n)) space

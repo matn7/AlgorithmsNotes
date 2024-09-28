@@ -50,7 +50,7 @@ public class ShortestPathUnweighted {
                     currentDistance = 1 + distanceTable.get(currentVertex).getDistance();
                     distanceTable.get(i).setDistance(currentDistance);
                     distanceTable.get(i).setLastVertex(currentVertex);
-                    // enqueue the neighbor only if it has other adjacent vertices
+                    // enqueue the neighbor only if it has problems.other adjacent vertices
                     if (!graph.getAdjacentVertices(i).isEmpty()) {
                         queue.addLast(i);
                     }

@@ -1,7 +1,5 @@
 package january_2024;
 
-import easy.NodeDepths;
-
 public class LinkedListIntersection {
 
     public static void main(String[] args) {

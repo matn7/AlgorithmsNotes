@@ -5,7 +5,7 @@ import java.util.*;
 public class RectangleMania {
 
     // ********
-    // * STAR *
+    // * STAR - G *
     // ********
 
     // O(n^2) time | O(n) space

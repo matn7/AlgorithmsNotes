@@ -17,7 +17,7 @@ public class LargestRectangleUnderSkyline {
     }
 
     // ********
-    // * STAR *
+    // * STAR - G *
     // ********
 
     // O(n) time | O(n) space

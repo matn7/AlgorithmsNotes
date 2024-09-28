@@ -2,6 +2,25 @@ package udemy.faang;
 
 public class CountNodes {
 
+    public static void main(String[] args) {
+        BinaryTree tree = new BinaryTree(1);
+        tree.left = new BinaryTree(2);
+        tree.right = new BinaryTree(3);
+        tree.left.left = new BinaryTree(4);
+        tree.left.right = new BinaryTree(5);
+        tree.right.left = new BinaryTree(6);
+        tree.right.right = new BinaryTree(7);
+        tree.left.left.left = new BinaryTree(8);
+        tree.left.left.right = new BinaryTree(9);
+        tree.left.right.left = new BinaryTree(10);
+        tree.left.right.right = new BinaryTree(11);
+        tree.right.left.left = new BinaryTree(12);
+
+        CountNodes countNodes = new CountNodes();
+        int result = countNodes.countNodes(tree);
+        System.out.println(result);
+    }
+
     // O(log^2(N)) time | O(1) space
     public int countNodes(BinaryTree root) {
         if (root == null) {

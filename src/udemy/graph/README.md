@@ -40,8 +40,8 @@ represented using graphs.
     - F is said to have a **DEGREE** of 3.
 - Series of edges is called a **PATH**.
 - **Undirected acyclic** graph, graph with no cycles.    
-    - Every node is **connected to every other node** via a series of edges.
-    - There is a **path** from every node to every other node.
+    - Every node is **connected to every problems.other node** via a series of edges.
+    - There is a **path** from every node to every problems.other node.
     - This is a **connected** graph.
 - A connected graph with no cycles is **a tree**.    
 - **Forest** - a disjoint **set of trees**.
@@ -99,7 +99,7 @@ class Graph {
 
 - Each vertex is a node.
 - Each vertex has a pointer to a linked list.
-- This linked list contains all the other nodes this vertex connects to directly.
+- This linked list contains all the problems.other nodes this vertex connects to directly.
 - If a vertex **V** has an edge leading to another vertex **U**.
 - The **U** is present in **V**'s linked list.
 
@@ -157,7 +157,7 @@ from all lists.
 
 **Adjacency matrix**
 
-- This works well when the graph is **well-connected** i.e. many nodes are connected with many other nodes.
+- This works well when the graph is **well-connected** i.e. many nodes are connected with many problems.other nodes.
 - The overhead of `V^2` space is worth when the number of connections are large.
 
 **Adjacency list/set**
@@ -270,7 +270,7 @@ A -> C -> E -> B -> D
 
 **Algorithm**
 
-- We initialize this table by setting `-1` in the distance column for all vertices other than the source vertex.
+- We initialize this table by setting `-1` in the distance column for all vertices problems.other than the source vertex.
 - The distance of `A` from itself id `0`.
 - Update the table as explore the graph using BFS.
 - Pop elements from stack to get path.
@@ -324,8 +324,8 @@ C -----------------> E
 - They do not operate on all the data, so they **may not see the big picture**.
 - Greedy algorithms are used for optimization problems.
 - Many algorithms have greedy solutions.
-- Greedy solutions are especially useful to find **approximate** solutions to **very hard problems** which are close to
-impossible to solve (technical term NP hard).
+- Greedy solutions are especially useful to find **approximate** solutions to **very problems.hard problems** which are close to
+impossible to solve (technical term NP problems.hard).
 - E.g. the traveling salesman problem.
 
 **Complexity**
@@ -456,7 +456,7 @@ C                    E -+
     - Generate the distance table using Dijkstra's like algorithm using any vertex as the source.
         - `DISTANCE[NEIGHBOR] = WEIGHT OF EDGE[VERTEX, NEIGHBOR]`
         - We only care about the weight of the edge not the cumulative distance from the source.
-    - Use this distance table to get paths to all other vertices from the arbitrarily chosen source.    
+    - Use this distance table to get paths to all problems.other vertices from the arbitrarily chosen source.    
 - We want to minimize **total distance** and not just distance from one specific vertex.
 - In dijkstra's algorithm, you specify one source vertex.
 - In Prim's algorithm start with any random vertex!

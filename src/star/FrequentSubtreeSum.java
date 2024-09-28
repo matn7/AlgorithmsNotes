@@ -21,6 +21,10 @@ public class FrequentSubtreeSum {
         System.out.println(result);
     }
 
+    // ********
+    // * STAR - G *
+    // ********
+
     // O(n) time | O(n) space
     public int frequentSubtree(Node node) {
         Map<Integer, Integer> freqMap = new HashMap<>();

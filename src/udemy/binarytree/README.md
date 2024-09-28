@@ -38,7 +38,7 @@ used as a data structure.
 
 - Breadth first traversal involves visiting nodes at **every level** before moving to the next level.
 - Start with the root node - it's at level 0 and is the **FIRST NODE TO VISIT**.
-- The next step is to check whether there are other nodes at the **SAME LEVEL AND VISIT THEM**.
+- The next step is to check whether there are problems.other nodes at the **SAME LEVEL AND VISIT THEM**.
 - Once a level is exhausted then we move to the next level.
 - We continue this till **every node** of the tree has been visited.
 

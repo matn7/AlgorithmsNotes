@@ -12,7 +12,7 @@ public class ShiftedBinarySearch {
     }
 
     // ********
-    // * STAR *
+    // * STAR - G *
     // ********
 
     // O(log(n)) time | O(1) space

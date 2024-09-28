@@ -25,7 +25,7 @@ public class PhoneNumberMnemonics {
     }
 
     // ********
-    // * STAR *
+    // * STAR - G *
     // ********
 
     // O(4^n*n) time | O(4^n*n) space

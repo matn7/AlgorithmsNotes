@@ -32,7 +32,7 @@ public class LowestCommonManager {
     }
 
     // ********
-    // * STAR *
+    // * STAR - G *
     // ********
 
     // O(n) time | O(n) space

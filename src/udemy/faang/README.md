@@ -318,7 +318,7 @@ int[][] graph = {
 - **Pros:**
     - Relationships
 - **Cons:**
-    - Scaling is hard
+    - Scaling is problems.hard
     
 **Production solutions**
 

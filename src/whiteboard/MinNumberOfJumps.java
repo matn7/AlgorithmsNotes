@@ -11,7 +11,7 @@ public class MinNumberOfJumps {
     }
 
     // ********
-    // * STAR *
+    // * STAR - G *
     // ********
 
     // O(n^2) time | O(n) space

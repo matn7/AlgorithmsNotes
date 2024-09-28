@@ -40,7 +40,7 @@ public class FindNodesDistanceK {
     }
 
     // ********
-    // * STAR *
+    // * STAR - G *
     // ********
 
     // Remember cases:

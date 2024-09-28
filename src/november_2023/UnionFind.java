@@ -5,6 +5,10 @@ import java.util.Map;
 
 public class UnionFind {
 
+    // ********
+    // * STAR - G *
+    // ********
+
     Map<Integer, Integer> parents = new HashMap<>();
 
     // O(1) time | O(1) space

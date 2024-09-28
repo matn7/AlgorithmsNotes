@@ -12,7 +12,7 @@ public class PrimeNumbers {
     }
 
     // ********
-    // * STAR *
+    // * STAR - G *
     // ********
     public boolean checkPrime(int n) {
 

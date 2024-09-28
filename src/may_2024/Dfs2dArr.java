@@ -21,7 +21,7 @@ public class Dfs2dArr {
     public static List<Integer> dfs2dArr(int[][] nums) {
         List<Integer> result = new ArrayList<>();
         boolean[][] visited = new boolean[nums.length][nums[0].length];
-        dfs(0, 0, nums, visited, result);
+        dfs(2, 2, nums, visited, result);
         return result;
     }
 

@@ -9,7 +9,7 @@ public class SeiveOfEratosthenes {
     }
 
     // ********
-    // * STAR *
+    // * STAR - G *
     // ********
     public void seive(int n, boolean[] primes) {
         for (int i = 2; i*i <= n; i++) {

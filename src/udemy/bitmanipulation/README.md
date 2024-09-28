@@ -20,7 +20,7 @@ just the binary representation of a number.
 
 **Bit value**
 
-- There are easy ways to access and manipulate individual bits.
+- There are problems.easy ways to access and manipulate individual bits.
 
 **flip operator**
 

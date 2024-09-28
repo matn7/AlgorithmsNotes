@@ -11,7 +11,7 @@
 - Time: The amount of processing or number of operations code has to perform to accomplish it's objective.
 - Space: This is both memory needed by code to store information at run-time as well as disk space needed by code for
 persistent storage.
-- Network: The bandwidth code uses to pass information to clients or other machines.
+- Network: The bandwidth code uses to pass information to clients or problems.other machines.
 
 **Measures of performance - continue**
 
@@ -180,7 +180,7 @@ public static void twoForLoop(int n) {
 
 ***
 
-- There are 2 loops here, one length `n` and the other of length `m`, where both `n` and `m` can be very large.
+- There are 2 loops here, one length `n` and the problems.other of length `m`, where both `n` and `m` can be very large.
 - The complexity of this operation is `O(n + m)`.
 - Each complexity is independent and takes a different input, so the complexity is additive.
 
@@ -322,7 +322,7 @@ public static void halvingLoopVariable(int n) {
 
 ### Selection Sort
 
-- At each iteration 1 element is selected and compared with every other element in the list to find the smallest one.
+- At each iteration 1 element is selected and compared with every problems.other element in the list to find the smallest one.
 - First we find the smallest element, get it into the first position, next we find the second smallest till the entire
 list is sorted.
 
@@ -339,7 +339,7 @@ list is sorted.
 | `1` | `2` | `3` | `4` | `5` | `6` | `7` | `8` | `9` | 10 |
 | `1` | `2` | `3` | `4` | `5` | `6` | `7` | `8` | `9` | `10` |
 
-- Selection sort selects one element at a time, compares it to all other elements in the list.
+- Selection sort selects one element at a time, compares it to all problems.other elements in the list.
 - The correct position for that selected element is found before moving on to the next element.
 
 **Selection sort characteristics**
@@ -446,7 +446,7 @@ cache misses so has greater overhead than insertion sort.
 **Shell sort characteristics**
 
 - Shell sort uses insertion sort, the entire list is divided, and those sub-lists are sorted.
-- Getting the exact complexity of shell sort is hard because it depends on the increment values chosen.
+- Getting the exact complexity of shell sort is problems.hard because it depends on the increment values chosen.
 - Also it's not clear what the best increment value is.
 - The complexity of shell sort is better than insertion sort as the final iteration with increment = `1` has to work with
 a nearly sorted list.
@@ -489,7 +489,7 @@ of two lists of `n/2` length.
 - This is a divide and conquer algorithm which partitions the list at every step.
 - The partition is not based on the length, or an artificial index, it's based on a pivot.
 - The pivot is an element from the list.
-- The list is partitioned with all elements smaller than the pivot on one side and larger than the pivot on the other.
+- The list is partitioned with all elements smaller than the pivot on one side and larger than the pivot on the problems.other.
 - This pivot partition is applied to all sub-lists till the list is sorted.
 - In the very first iteration the sublist which we partition is the entire list.
 - First we choose a pivot to partition the list.
@@ -508,7 +508,7 @@ of two lists of `n/2` length.
 **Quick sort characteristics**
 
 - Quick sort uses divide and conquer to create smaller problems which are easier to tackle.
-- Just as in the case of other divide and conquer algorithms the complexity has to be derived.
+- Just as in the case of problems.other divide and conquer algorithms the complexity has to be derived.
 - The avarage case complexity of quick sort is `O(nlog(n))`.
 - It takes `O(n)` extra space when we use arrays (all the smaller lists we create in the divide phase).
 - **Not a stable sort** - does not resolve the relative order of equal elements.

@@ -16,7 +16,7 @@ public class Palindrome {
         int left = 0;
         int right = testString.length() - 1;
 
-        // the while loop continues till the indices meet or pass each other
+        // the while loop continues till the indices meet or pass each problems.other
         while (left < right) {
             // ignore whitespaces
             while (testString.charAt(left) == ' ') {

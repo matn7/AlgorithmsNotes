@@ -4,6 +4,10 @@ import java.util.*;
 
 public class AStarAlgorithm {
 
+    // ********
+    // * STAR - G *
+    // ********
+
     // O(w*h*low(w*h)) time | O(w*h) space
     // rand: 28/08/2022
     // rand: 14/09/2022

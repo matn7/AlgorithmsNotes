@@ -14,11 +14,6 @@ public class RearrangeLinkedList {
         rearrangeLinkedList(head, 3);
     }
 
-    // ********
-    //
-    // * STAR *
-    // ********
-
     // O(n) time | O(1) space
     public static LinkedList rearrangeLinkedList(LinkedList head, int k) {
         // Write your code here.

@@ -11,7 +11,8 @@ public class Powerset {
         array.add(2);
         array.add(3);
 
-        powersetRec(array);
+        List<List<Integer>> result = powersetRec(array);
+        System.out.println(result);
     }
 
     // ********

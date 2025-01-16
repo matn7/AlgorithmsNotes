@@ -1,6 +1,6 @@
-package october_2024;
+package january_2025;
 
-public class MedianOfTwoSortedArrays {
+public class MedianInSortedArrays {
 
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         int[] A = nums1;

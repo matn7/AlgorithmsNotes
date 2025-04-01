@@ -5,7 +5,9 @@ import java.util.Stack;
 public class LargestRectangle {
 
     public static void main(String[] args) {
-        int[] heights = {2, 1, 5, 6, 2, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+//        int[] heights = {2, 1, 5, 6, 2, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+
+        int[] heights = {1, 2, 2};
 
         LargestRectangle largestRectangle = new LargestRectangle();
         int result = largestRectangle.largestRectangleArea(heights);

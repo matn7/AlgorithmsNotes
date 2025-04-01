@@ -14,6 +14,7 @@ public class PacificAtlantic {
         };
     }
 
+    // O(n*m) time | O(n*m) space
     int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
     public List<List<Integer>> pacificAtlantic(int[][] heights) {
         List<List<Integer>> result = new ArrayList<>();

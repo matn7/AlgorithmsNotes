@@ -5,13 +5,13 @@ public class SimpleCalculator {
     public static void main(String[] args) {
         String expression = "3 + 2 + 7";
         SimpleCalculator simpleCalculator = new SimpleCalculator();
-        int eval = simpleCalculator.eval(expression);
+        int eval = simpleCalculator.calculate(expression);
         System.out.println(eval);
 
     }
 
     // O(n) time | O(n) space
-    public int eval(String expression) {
+    public int calculate(String expression) {
         return eval_helper(expression, 0)[0];
     }
 

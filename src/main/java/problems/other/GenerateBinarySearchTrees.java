@@ -9,11 +9,11 @@ public class GenerateBinarySearchTrees {
         int input = 3;
 
         GenerateBinarySearchTrees generate = new GenerateBinarySearchTrees();
-        generate.generate_bst(input);
+        generate.generateTrees(input);
     }
 
     // O(n*2^n) time | O(n*2^n) space
-    public List<TreeNode> generate_bst(int n) {
+    public List<TreeNode> generateTrees(int n) {
         List<Integer> nums = new ArrayList<>();
         for (int i = 1; i <= n; i++) {
             nums.add(i);

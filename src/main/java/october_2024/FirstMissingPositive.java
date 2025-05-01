@@ -6,7 +6,7 @@ import java.util.Set;
 public class FirstMissingPositive {
 
     public static void main(String[] args) {
-        int[] nums = {1};
+        int[] nums = {3, 4, -1, 1};
 
         FirstMissingPositive firstMissingPositive = new FirstMissingPositive();
         int result = firstMissingPositive.firstMissingPositive(nums);

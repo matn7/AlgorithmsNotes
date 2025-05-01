@@ -22,10 +22,10 @@ public class RegularExpressionMatching {
         boolean match = i < m && (s.charAt(i) == p.charAt(j) || p.charAt(j) == '.');
 
         if (j + 1 < n && p.charAt(j + 1) == '*') {
-            dp[i][j] = dfs(i, j + 2, s, p, m, n) ||
-                        (match && dfs(i + 1, j, s, p, m, n));
+            dp[i][j] = dfs(i, j + 2, s, p, m, n) || // not use * move j 2 pos
+                        (match && dfs(i + 1, j, s, p, m, n)); // use * leave j
         } else {
-            dp[i][j] = match && dfs(i + 1, j + 1, s, p, m, n);
+            dp[i][j] = match && dfs(i + 1, j + 1, s, p, m, n); // i and j match
         }
         return dp[i][j];
     }

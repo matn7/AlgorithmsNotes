@@ -8,7 +8,13 @@ public class SumOfSquares {
     public static void main(String[] args) {
         int num = 13;
 
-        squareSums(num);
+        // 0 1 2 3 1 2 3 4 2 1 2 3 3 2
+        // 0 1 2 3 1 2 3 4 2 1 2 3 3 2
+
+        int result = squareSums(num);
+        for (int i = 0; i <= num; i++) {
+            System.out.print(squareSums(i) + " ");
+        }
     }
 
     // O(n*sqrt(n)) time | O(n) space
@@ -31,7 +37,6 @@ public class SumOfSquares {
                     minSums.set(k + s, Math.min(minSums.get(k + s), minSums.get(k) + 1));
                 }
             }
-            System.out.println();
         }
         return minSums.get(minSums.size() - 1);
     }

@@ -16,6 +16,7 @@ public class MedianInSortedArrays {
 
         int l = 0;
         int r = A.length;
+
         while (l <= r) {
             int i = (l + r) / 2;
             int j = half - i;

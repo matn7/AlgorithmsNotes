@@ -23,12 +23,12 @@ public class MultiplyStrings {
 
         StringBuilder builder = new StringBuilder();
         for (int num : res) {
-            if (!(builder.length() == 0 && num == 0)) { // Skip leading zeros
+            if (!(builder.isEmpty() && num == 0)) { // Skip leading zeros
                 builder.append(num);
             }
         }
 
-        return builder.length() == 0 ? "0" : builder.toString();
+        return builder.isEmpty() ? "0" : builder.toString();
     }
 
 

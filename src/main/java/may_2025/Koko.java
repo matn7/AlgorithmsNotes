@@ -20,10 +20,10 @@ public class Koko {
         int l = 1;
         int r = max;
         int minSpeed = max;
-        while (l <= r) {
+        while (l <= r) { // log(m)
             int m = (l + r) / 2;
             int time = 0;
-            for (int pile : piles) {
+            for (int pile : piles) { // n
                 time += Math.ceil(1.0 * pile / m);
             }
             if (time <= h) {

@@ -52,7 +52,6 @@ public class LRUCache2 {
             remove(nodeToReplace);
             cache.remove(nodeToReplace.key);
         }
-
         cache.put(key, newNode);
         addFront(newNode);
 
@@ -62,6 +61,21 @@ public class LRUCache2 {
             cache.remove(tailNode.key);
         }
     }
+
+    private void remove(Node node) {
+        if (isEmpty()) {
+            return;
+        }
+        Node next = node.next;
+        Node prev = node.prev;
+
+        prev.next = next;
+        next.prev = prev;
+    }
+    private boolean isEmpty() {
+        return head.prev == tail && tail.next == head;
+    }
+
 
     private void addFront(Node node) {
         if (isEmpty()) {
@@ -77,20 +91,6 @@ public class LRUCache2 {
             node.prev = prev;
         }
 
-    }
-
-    private boolean isEmpty() {
-        return head.prev == tail && tail.next == head;
-    }
-
-    private void remove(Node node) {
-        if (isEmpty()) {
-            return;
-        }
-        Node next = node.next;
-        Node prev = node.prev;
-        prev.next = next;
-        next.prev = prev;
     }
 
     static class Node {

@@ -8,8 +8,8 @@ public class ForeignDictionary2 {
 //        String[] words = {"hrn","hrf","er","enn","rfnn"};
 //        String[] words = {"z","o"};
 //        String[] words = {"abc","bcd","cde"}; // edabc
-//        String[] words = {"wrtkj","wrt"};
-        String[] words = {"wrt","wrf","er","ett","rftt","te"};
+        String[] words = {"wrtkj","wrt"};
+//        String[] words = {"wrt","wrf","er","ett","rftt","te"};
         ForeignDictionary2 foreignDictionary2 = new ForeignDictionary2();
         String result = foreignDictionary2.foreignDictionary(words);
         System.out.println(result);

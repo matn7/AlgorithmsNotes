@@ -5,11 +5,11 @@ import java.util.Arrays;
 public class CoinChange2 {
 
     public static void main(String[] args) {
-//        int[] coins = {1, 2, 5};
-//        int amount = 11;
+        int[] coins = {1, 2, 5};
+        int amount = 5;
 
-        int[] coins = {2};
-        int amount = 3;
+//        int[] coins = {2};
+//        int amount = 3;
 
         CoinChange2 coinChange2 = new CoinChange2();
         int result = coinChange2.coinChange(coins, amount);

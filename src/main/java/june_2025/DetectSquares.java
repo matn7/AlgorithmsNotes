@@ -34,7 +34,8 @@ public class DetectSquares {
                 continue;
             }
 
-            res += ptsCount.getOrDefault(x + ":" + py, 0) * ptsCount.getOrDefault(px + ":" + y, 0);
+            res += ptsCount.getOrDefault(x + ":" + py, 0) *
+                    ptsCount.getOrDefault(px + ":" + y, 0);
         }
         return res;
     }

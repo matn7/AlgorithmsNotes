@@ -1,20 +1,17 @@
 package november_2025;
 
-public class LinkedListCycle {
+public class MiddleOfTheLinkedList {
 
     // O(n) time | O(1) space
-    public boolean hasCycle(ListNode head) {
+    public ListNode middleNode(ListNode head) {
         ListNode slow = head;
         ListNode fast = head;
 
         while (fast != null && fast.next != null) {
-            slow = slow.next;
             fast = fast.next.next;
-            if (slow == fast) {
-                return true;
-            }
+            slow = slow.next;
         }
-        return false;
+        return slow;
     }
 
     static class ListNode {

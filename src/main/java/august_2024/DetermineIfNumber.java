@@ -8,7 +8,9 @@ public class DetermineIfNumber {
     public static void main(String[] args) {
         String str = "123a-5";
 
-        boolean result = checkNumber(str);
+        DetermineIfNumber determineIfNumber = new DetermineIfNumber();
+
+        boolean result = determineIfNumber.isNumber(str);
         System.out.println(result);
     }
 
@@ -17,53 +19,57 @@ public class DetermineIfNumber {
 
     static {
         states.put(State.BEGIN, a -> true);
-        states.put(State.NUM1, a -> Character.isDigit(a));
+        states.put(State.NUM1, Character::isDigit);
         states.put(State.NUM2, a -> Character.isDigit(a));
-        states.put(State.NUM3, a -> Character.isDigit(a));
+        states.put(State.NUM3, Character::isDigit);
         states.put(State.DOT, a -> a == '.');
-        states.put(State.E, a -> a == 'e');
-        states.put(State.NEGATIVE1, a -> a == '-');
-        states.put(State.NEGATIVE2, a -> a == '-');
-        
-        nextStates.put(State.BEGIN, Arrays.asList(State.NEGATIVE1, State.NUM1));
+        states.put(State.E, a -> a == 'e' || a == 'E');
+        states.put(State.NEGATIVE1, a -> a == '-' || a == '+');
+        states.put(State.NEGATIVE2, a -> a == '-' || a == '+');
+
+        nextStates.put(State.BEGIN, Arrays.asList(State.NEGATIVE1, State.NUM1, State.DOT));
         nextStates.put(State.NEGATIVE1, Arrays.asList(State.NUM1, State.DOT));
         nextStates.put(State.NUM1, Arrays.asList(State.NUM1, State.DOT, State.E));
-        nextStates.put(State.DOT, Arrays.asList(State.NUM2));
+        nextStates.put(State.DOT, Arrays.asList(State.NUM2, State.E));
         nextStates.put(State.NUM2, Arrays.asList(State.NUM2, State.E));
+        nextStates.put(State.E, Arrays.asList(State.NEGATIVE2, State.NUM3));
         nextStates.put(State.NEGATIVE2, Arrays.asList(State.NUM3));
         nextStates.put(State.NUM3, Arrays.asList(State.NUM3));
-        nextStates.put(State.E, Arrays.asList(State.NUM3, State.NEGATIVE2));
     }
 
-
-    public static boolean checkNumber(String str) {
+    public boolean isNumber(String str) {
         State state = State.BEGIN;
+        boolean seenDigit = false;
 
         for (int i = 0; i < str.length(); i++) {
-            char c = str.charAt(i); // '1'
-            List<State> nextStates = DetermineIfNumber.nextStates.get(state); // ['NEGATIVE1', 'NUM1']
-            boolean validPart = false;
+            char c = str.charAt(i);
+            List<State> next = nextStates.get(state);
+            boolean valid = false;
 
-            for (State next : nextStates) {
-                Predicate<Character> fn = states.get(next);
-                if (fn.test(c)) {
-                    validPart = true;
-                    state = next;
+            for (State n : next) {
+                if (states.get(n).test(c)) {
+                    if ((n == State.E) && !seenDigit) {
+                        return false;
+                    }
+
+                    if (Character.isDigit(c)) {
+                        seenDigit = true;
+                    }
+                    state = n;
+                    valid = true;
                     break;
                 }
             }
 
-            if (!validPart) {
-                return false;
-            }
+            if (!valid) return false;
         }
 
-        Set<State> endStates = new HashSet<>();
-        endStates.add(State.NUM1);
-        endStates.add(State.NUM2);
-        endStates.add(State.NUM3);
-
-        return endStates.contains(state);
+        return seenDigit && (
+                state == State.NUM1 ||
+                        state == State.NUM2 ||
+                        state == State.NUM3 ||
+                        state == State.DOT
+        );
     }
 
     enum State {
